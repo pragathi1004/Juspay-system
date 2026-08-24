@@ -346,16 +346,19 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                   type="submit"
                   style={{
                     width: '100%',
-                    padding: '16px',
-                    borderRadius: '12px',
-                    background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)', // Warn orange-yellow gradient from Image 3
+                    maxWidth: '300px',
+                    margin: '0 auto',
+                    display: 'block',
+                    padding: '11px 18px',
+                    borderRadius: '10px',
+                    background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)',
                     color: '#ffffff',
-                    fontWeight: 800,
-                    fontSize: '1.1rem',
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
                     border: 'none',
                     cursor: 'pointer',
-                    letterSpacing: '0.5px',
-                    boxShadow: '0 4px 14px rgba(245, 158, 11, 0.3)',
+                    letterSpacing: '0.4px',
+                    boxShadow: '0 2px 8px rgba(245, 158, 11, 0.25)',
                     transition: 'all 0.15s ease'
                   }}
                 >
@@ -526,16 +529,18 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                   disabled={isVerifying || verifiedSuccess}
                   style={{
                     width: '100%',
-                    padding: '16px',
-                    borderRadius: '12px',
-                    background: verifiedSuccess ? '#16a34a' : 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)', // Gradient color matching CONTINUE button
+                    maxWidth: '300px',
+                    margin: '0 auto',
+                    padding: '11px 18px',
+                    borderRadius: '10px',
+                    background: verifiedSuccess ? '#16a34a' : 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)',
                     color: '#ffffff',
-                    fontWeight: 800,
-                    fontSize: '1.1rem',
+                    fontWeight: 700,
+                    fontSize: '0.86rem',
                     border: 'none',
                     cursor: 'pointer',
-                    letterSpacing: '0.5px',
-                    boxShadow: '0 4px 14px rgba(245, 158, 11, 0.3)',
+                    letterSpacing: '0.4px',
+                    boxShadow: '0 2px 8px rgba(245, 158, 11, 0.25)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -545,11 +550,11 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                 >
                   {isVerifying ? (
                     <>
-                      <RefreshCw size={20} className="animate-spin" /> Verifying OTP...
+                      <RefreshCw size={16} className="animate-spin" /> Verifying OTP...
                     </>
                   ) : verifiedSuccess ? (
                     <>
-                      <CheckCircle2 size={20} /> Verified! Opening Plans...
+                      <CheckCircle2 size={16} /> Verified! Opening Plans...
                     </>
                   ) : (
                     'VERIFY & CONTINUE TO PLANS'
