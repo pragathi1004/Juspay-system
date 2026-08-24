@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { PLAN_SPECS } from '../../data/planSpecs';
-import { Check, X, ChevronDown, Sparkles, Globe, Search, ArrowRight, ShieldCheck } from 'lucide-react';
+import { DailyYogaAuthModal } from './DailyYogaAuthModal';
+import { Check, X, ChevronDown, Sparkles, Globe, Search, ArrowRight, ShieldCheck, User } from 'lucide-react';
 
 export const PublicLandingPage = () => {
   const { setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, selectedLanguage, setSelectedLanguage } = useApp();
 
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [openLangCard, setOpenLangCard] = useState(null); // plan code for open dropdown
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(true); // Open OTP login on entry
 
   const handleSelectPlanForLead = (plan) => {
     setSelectedPlanForCheckout(plan);
@@ -16,8 +18,7 @@ export const PublicLandingPage = () => {
   };
 
   const handleAlreadySubscribed = () => {
-    setUserFlow('EXISTING_MEMBER');
-    setCustomerScreen('DASHBOARD');
+    setIsAuthModalOpen(true);
   };
 
   const scrollToPlans = () => {
@@ -32,6 +33,12 @@ export const PublicLandingPage = () => {
   return (
     <div style={{ background: '#FFF8E8', minHeight: '100vh', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       
+      {/* AUTH & REGISTRATION MODAL */}
+      <DailyYogaAuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
+
       {/* 1. TOP GLOBAL NAVIGATION BAR (MATCHING SCREENSHOT 1 & 2) */}
       <nav style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0', position: 'sticky', top: 0, zIndex: 50 }}>
         {/* Top utility row */}
@@ -77,38 +84,60 @@ export const PublicLandingPage = () => {
             <a href="#meditation" style={{ color: '#334155', textDecoration: 'none' }}>Meditation</a>
             <a href="#wisdom" style={{ color: '#334155', textDecoration: 'none' }}>Wisdom</a>
             <a href="#events" style={{ color: '#334155', textDecoration: 'none' }}>Events</a>
+
+            {/* Subscriber Login Link */}
+            <button
+              type="button"
+              onClick={() => setIsAuthModalOpen(true)}
+              style={{
+                background: '#f1f5f9',
+                border: '1px solid #cbd5e1',
+                padding: '6px 14px',
+                borderRadius: '9999px',
+                color: '#1e293b',
+                fontWeight: 700,
+                fontSize: '0.85rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <User size={14} color="#ea580c" /> Login / OTP
+            </button>
           </div>
         </div>
       </nav>
 
-      {/* 2. HERO SECTION (MATCHING SCREENSHOT 2) */}
-      <section style={{ background: 'linear-gradient(to right, #e6f4ea, #f0fdf4)', padding: '60px 40px', borderBottom: '1px solid #d1fae5' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '40px' }}>
+      {/* 2. HERO SECTION */}
+      <section style={{ background: '#eaf7ee', padding: '60px 40px', borderBottom: '1px solid #d1fae5' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', alignItems: 'center', gap: '40px' }}>
           <div>
-            <h1 style={{ fontSize: '3rem', fontWeight: 900, color: '#14532d', lineHeight: 1.15, marginBottom: '20px' }}>
-              Transform Your Life with Daily Sri Sri Yoga
+            <h1 style={{ fontSize: '2.85rem', fontWeight: 900, color: '#14532d', lineHeight: 1.15, marginBottom: '20px' }}>
+              Transform Your Life with<br />Daily Sri Sri Yoga
             </h1>
-            <p style={{ fontSize: '1.2rem', color: '#166534', marginBottom: '36px' }}>
+            <p style={{ fontSize: '1.15rem', color: '#166534', marginBottom: '36px', lineHeight: 1.5 }}>
               Join the world's largest yoga community and experience authentic wellness
             </p>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <button
                 type="button"
                 onClick={scrollToPlans}
                 style={{
-                  padding: '16px 40px',
+                  padding: '16px 36px',
                   borderRadius: '9999px',
                   background: '#f97316',
                   color: '#ffffff',
                   fontWeight: 800,
-                  fontSize: '1.15rem',
+                  fontSize: '1.1rem',
                   border: 'none',
                   cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(249, 115, 22, 0.4)'
+                  boxShadow: '0 4px 14px rgba(249, 115, 22, 0.4)',
+                  transition: 'transform 0.15s ease'
                 }}
               >
-                Sign me up!
+                Explore Membership Plans ↓
               </button>
 
               <button
@@ -131,9 +160,9 @@ export const PublicLandingPage = () => {
 
           <div style={{ textAlign: 'center' }}>
             <img 
-              src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600" 
-              alt="Trainers Mayur & Eesha" 
-              style={{ width: '100%', maxWidth: '480px', borderRadius: '24px', boxShadow: '0 12px 30px rgba(0,0,0,0.1)' }}
+              src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80&w=700" 
+              alt="Sri Sri Yoga Sunset Silhouette" 
+              style={{ width: '100%', maxWidth: '480px', borderRadius: '24px', boxShadow: '0 12px 30px rgba(0,0,0,0.12)', objectFit: 'cover' }}
             />
           </div>
         </div>

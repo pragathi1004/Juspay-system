@@ -130,6 +130,7 @@ export const DemoControlBar = () => {
                 }
               }}
             >
+              <option value="PUBLIC_LANDING">0. Public Landing Page (OTP Lead Capture)</option>
               <option value="CRM_FORM">1. Registration & Consent (₹1,499)</option>
               <option value="JUSPAY">2. Juspay Payment Gateway (Mock)</option>
               <option value="PREPARATION">3. Payment Success & Dashboard Prep</option>
@@ -180,10 +181,10 @@ export const DemoControlBar = () => {
           type="button"
           style={{ background: '#334155', color: '#f8fafc', padding: '6px 12px', borderRadius: '6px', border: 'none', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
           onClick={() => {
-            setCustomerScreen('CRM_FORM');
+            setCustomerScreen('PUBLIC_LANDING');
             setActiveApp('CUSTOMER');
           }}
-          title="Reset to registration screen"
+          title="Reset to public landing page"
         >
           <RotateCcw size={13} />
           Reset Flow

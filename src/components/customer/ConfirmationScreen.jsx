@@ -198,7 +198,7 @@ export const ConfirmationScreen = () => {
             <div style={{ background: '#e5ddd5', padding: '16px', color: '#111827', minHeight: '300px' }}>
               <div style={{ background: '#ffffff', padding: '14px', borderRadius: '12px', fontSize: '0.85rem', lineHeight: 1.5, boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
                 <p style={{ fontWeight: 700, color: '#075e54', marginBottom: '8px' }}>🎉 Payment Successful!</p>
-                <p>Dear {regForm.firstName || 'Manchit'},</p>
+                <p>Dear {regForm.firstName || 'Pragathi'},</p>
                 <p>Your Sri Sri Yoga subscription has been activated successfully!</p>
                 <div style={{ background: '#f8fafc', padding: '8px 12px', borderRadius: '6px', margin: '8px 0', fontSize: '0.8rem' }}>
                   • <strong>Plan:</strong> 3 Months Sri Sri Yoga<br />

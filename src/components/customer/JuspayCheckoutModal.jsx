@@ -22,7 +22,7 @@ export const JuspayCheckoutModal = () => {
   const [cvv, setCvv] = useState('');
 
   // UPI fields
-  const [upiId, setUpiId] = useState('manchitd@upi');
+  const [upiId, setUpiId] = useState('pragathi@upi');
   const [showQrCode, setShowQrCode] = useState(false);
   const [qrTimer, setQrTimer] = useState(180);
 

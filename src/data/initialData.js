@@ -1,8 +1,8 @@
 export const INITIAL_CUSTOMER = {
   id: 'CUST_6688891',
-  name: 'MANCHIT DESHPANDE',
+  name: 'PRAGATHI',
   phone: '+91 99206 56992',
-  email: 'manchitd@gmail.com',
+  email: 'pragathi@gmail.com',
   city: 'Bengaluru',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
   subscription: {

@@ -35,13 +35,13 @@ export const AppProvider = ({ children }) => {
   const [paymentHistory, setPaymentHistory] = useState(MOCK_PAYMENT_HISTORY);
   const [webhookLogs, setWebhookLogs] = useState(MOCK_WEBHOOK_LOGS);
 
-  // Registration Form State (Manchit Deshpande)
+  // Registration Form State (Pragathi)
   const [regForm, setRegForm] = useState({
-    firstName: 'MANCHIT',
-    lastName: 'DESHPANDE',
-    name: 'MANCHIT DESHPANDE',
+    firstName: 'PRAGATHI',
+    lastName: '',
+    name: 'PRAGATHI',
     phone: '9920656992',
-    email: 'manchitd@gmail.com',
+    email: 'pragathi@gmail.com',
     age: '38',
     postalCode: '560082',
     cityState: 'Bengaluru Urban, Karnataka',
@@ -60,6 +60,9 @@ export const AppProvider = ({ children }) => {
     let updatedSub = { ...customer.subscription };
 
     switch (stateKey) {
+      case 'PUBLIC_LANDING':
+        setCustomerScreen('PUBLIC_LANDING');
+        return;
       case 'CRM_FORM':
         setCustomerScreen('CRM_FORM');
         return;
