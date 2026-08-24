@@ -236,11 +236,11 @@ export const ManageSubscriptionHub = () => {
               </div>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: '4px' }}>Update Payment Method</h3>
               <p style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '20px', lineHeight: 1.4 }}>
-                Change payment method (UPI / Card / NetBanking). Revokes current mandate and creates a new Juspay mandate.
+                Change payment method (UPI / Card / NetBanking). Replaces current payment method with a new payment setup.
               </p>
             </div>
             <div style={{ color: '#10b981', fontWeight: 700, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              Update Mandate <ChevronRight size={16} />
+              Update Payment Method <ChevronRight size={16} />
             </div>
           </div>
 
