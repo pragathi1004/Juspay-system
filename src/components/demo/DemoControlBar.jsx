@@ -168,7 +168,7 @@ export const DemoControlBar = () => {
               <option value="DASHBOARD">Dashboard Overview (KPIs & Growth Charts)</option>
               <option value="SUBSCRIPTIONS">Subscriptions Management (Filters & Table)</option>
               <option value="RENEWALS">Renewals & Failure Console</option>
-              <option value="PLANS">Configurable Subscription Plans</option>
+              <option value="PLANS">CRM Courses & Juspay Mapping</option>
               <option value="PAYMENTS">Payments & Mandates History</option>
               <option value="COMMUNICATIONS">Communications Log (WhatsApp / Email)</option>
               <option value="EVENTS">Juspay Webhook Events Log</option>
