@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { ShieldCheck, Calendar, PhoneCall, Check, ArrowLeft, RefreshCw, AlertCircle, X } from 'lucide-react';
+import { ShieldCheck, Calendar, PhoneCall, Check, ArrowLeft, RefreshCw, AlertCircle } from 'lucide-react';
 
 export const CrmRegistrationFormV2 = () => {
   const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout, setIsJuspayModalOpen } = useApp();
 
-  const [isHealthModalOpen, setIsHealthModalOpen] = useState(false);
-  const [healthDeclAgreed, setHealthDeclAgreed] = useState(false);
   const [optOutAgreed, setOptOutAgreed] = useState(regForm.optOutAgreed);
   const [showError, setShowError] = useState(false);
 
@@ -16,10 +14,6 @@ export const CrmRegistrationFormV2 = () => {
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    if (!healthDeclAgreed) {
-      alert('Please agree to the Health Declaration to continue.');
-      return;
-    }
     setShowError(false);
     setIsJuspayModalOpen(true);
   };
@@ -197,24 +191,8 @@ export const CrmRegistrationFormV2 = () => {
                 </div>
               </div>
 
-              {/* EXISTING CONSENT CHECKBOXES */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '8px', paddingTop: '16px', borderTop: '1px solid #f1f5f9' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                  <input
-                    type="checkbox"
-                    id="healthCheck"
-                    checked={healthDeclAgreed}
-                    onChange={(e) => setHealthDeclAgreed(e.target.checked)}
-                    style={{ width: '18px', height: '18px', accentColor: '#ea580c', cursor: 'pointer', marginTop: '2px' }}
-                  />
-                  <label htmlFor="healthCheck" style={{ fontSize: '0.85rem', color: '#374151', lineHeight: 1.4 }}>
-                    I agree to the <a href="#health" onClick={(e) => { e.preventDefault(); setIsHealthModalOpen(true); }} style={{ color: '#2563eb', textDecoration: 'underline' }}>Health Declaration</a>.
-                  </label>
-                </div>
-              </div>
-
               {/* Concise Payment Redirect Notice */}
-              <p style={{ fontSize: '0.85rem', color: '#4b5563', fontStyle: 'italic', margin: '16px 0 8px 0' }}>
+              <p style={{ fontSize: '0.85rem', color: '#4b5563', fontStyle: 'italic', margin: '4px 0 8px 0' }}>
                 By continuing, you agree to the <a href="#tos" onClick={(e) => { e.preventDefault(); alert('Terms of Service'); }} style={{ color: '#2563eb', textDecoration: 'underline' }}>Terms of Service</a> and <a href="#privacy" onClick={(e) => { e.preventDefault(); alert('Privacy Policy'); }} style={{ color: '#2563eb', textDecoration: 'underline' }}>Privacy Policy</a>.
                 You will be redirected to the secure payment gateway to complete your payment of ₹{currentPrice.toLocaleString('en-IN')} and authorize automatic renewal.
               </p>
@@ -223,17 +201,16 @@ export const CrmRegistrationFormV2 = () => {
               <div style={{ textAlign: 'right', marginTop: '8px' }}>
                 <button
                   type="submit"
-                  disabled={!healthDeclAgreed}
                   style={{
-                    background: healthDeclAgreed ? '#facc15' : '#e5e7eb',
-                    color: healthDeclAgreed ? '#111827' : '#9ca3af',
+                    background: '#facc15',
+                    color: '#111827',
                     fontWeight: 800,
                     fontSize: '1.05rem',
                     padding: '14px 44px',
                     borderRadius: '6px',
                     border: 'none',
-                    cursor: healthDeclAgreed ? 'pointer' : 'not-allowed',
-                    boxShadow: healthDeclAgreed ? '0 4px 12px rgba(250, 204, 21, 0.4)' : 'none',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 12px rgba(250, 204, 21, 0.4)',
                     transition: 'all 0.2s'
                   }}
                 >
@@ -258,43 +235,6 @@ export const CrmRegistrationFormV2 = () => {
         </div>
 
       </div>
-
-      {/* HEALTH DECLARATION MODAL */}
-      {isHealthModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.5)', padding: '20px' }}>
-          <div style={{ background: '#ffffff', borderRadius: '16px', width: '100%', maxWidth: '600px', maxHeight: '85vh', display: 'flex', flexDirection: 'column', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
-            
-            {/* Modal Header */}
-            <div style={{ padding: '20px 24px', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#111827', margin: 0 }}>Health Declaration</h2>
-              <button onClick={() => setIsHealthModalOpen(false)} style={{ background: '#f3f4f6', border: 'none', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#4b5563' }}>
-                <X size={18} />
-              </button>
-            </div>
-            
-            {/* Modal Body (Scrollable) */}
-            <div style={{ padding: '24px', overflowY: 'auto', flex: 1, fontSize: '0.9rem', color: '#374151', lineHeight: 1.6 }}>
-              <p style={{ marginBottom: '16px' }}>
-                I declare that I am voluntarily participating in the Yoga program and take full responsibility for my health and safety.
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                I understand that Yoga involves physical exertion, which may be strenuous and may cause physical injury, and I am fully aware of the risks and hazards involved. I represent and warrant that I am physically fit and I have no medical condition that would prevent my full participation.
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                In consideration of being permitted to participate, I agree to assume full responsibility for any risks, injuries or damages, known or unknown, which I might incur as a result of participating in the program.
-              </p>
-            </div>
-            
-            {/* Modal Footer */}
-            <div style={{ padding: '16px 24px', borderTop: '1px solid #e5e7eb', display: 'flex', justifyContent: 'flex-end', background: '#f9fafb', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', flexShrink: 0 }}>
-              <button onClick={() => setIsHealthModalOpen(false)} style={{ background: '#facc15', color: '#111827', fontWeight: 700, padding: '10px 24px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}>
-                Close
-              </button>
-            </div>
-            
-          </div>
-        </div>
-      )}
     </div>
   );
 };
