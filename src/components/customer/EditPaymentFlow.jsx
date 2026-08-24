@@ -89,15 +89,12 @@ export const EditPaymentFlow = () => {
               }}
             >
               <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '4px' }}>
-                Current Active Mandate
+                CURRENT ACTIVE PAYMENT METHOD
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#1e293b' }}>
                     {sub.maskedPaymentDetail}
-                  </div>
-                  <div style={{ fontSize: '0.8rem', color: '#64748b' }}>
-                    Mandate ID: {sub.mandateId}
                   </div>
                 </div>
                 <span className="badge badge-active">Active</span>
@@ -106,7 +103,7 @@ export const EditPaymentFlow = () => {
 
             {/* SELECT NEW PAYMENT METHOD */}
             <h2 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '14px', color: '#1e293b' }}>
-              Select New Payment & Mandate Method
+              Select New Payment Method
             </h2>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '24px' }}>
@@ -335,7 +332,7 @@ export const EditPaymentFlow = () => {
             {/* TECHNICAL RE-AUTHORIZATION DISCLOSURE */}
             <div style={{ background: '#fff9f0', border: '1px solid #fed7aa', padding: '14px 18px', borderRadius: '12px', fontSize: '0.8rem', color: '#7c2d12', marginBottom: '24px' }}>
               <ShieldCheck size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
-              Updating payment method creates a new ₹1 authorization mandate with Juspay. Once verified, your old mandate <strong>{sub.mandateId}</strong> will be revoked automatically.
+              Updating payment method creates a new ₹1 verification authorization with Juspay. Once verified, your new payment method will be saved automatically.
             </div>
 
             <button
@@ -344,7 +341,7 @@ export const EditPaymentFlow = () => {
               className="btn-primary"
               style={{ width: '100%', padding: '14px', borderRadius: '14px', fontSize: '1rem', position: 'sticky', bottom: '0', background: '#fdfbf7', zIndex: 10 }}
             >
-              {isProcessing ? 'Authorizing New Mandate with Juspay...' : 'Authorize New Payment Method'}
+              {isProcessing ? 'Verifying New Payment Method...' : 'Authorize New Payment Method'}
             </button>
           </div>
         ) : (
@@ -358,7 +355,7 @@ export const EditPaymentFlow = () => {
               Payment Method Updated!
             </h2>
             <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '24px' }}>
-              Your future automatic renewals will be processed using your new authorized mandate.
+              Your future automatic renewals will be processed using your new authorized payment method.
             </p>
 
             <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '14px', textAlign: 'left', marginBottom: '28px', fontSize: '0.85rem' }}>
@@ -367,7 +364,7 @@ export const EditPaymentFlow = () => {
                 <strong style={{ color: '#1e293b' }}>{sub.maskedPaymentDetail}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: '#64748b' }}>Mandate Status:</span>
+                <span style={{ color: '#64748b' }}>Payment Status:</span>
                 <span className="badge badge-active">Active</span>
               </div>
             </div>

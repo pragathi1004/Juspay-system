@@ -103,8 +103,8 @@ export const ConfirmationScreenV2 = () => {
               <div style={{ fontWeight: 700, color: '#1e293b' }}>{sub.id || 'SUB_6688891'}</div>
             </div>
             <div>
-              <div style={{ color: '#78350f', fontSize: '0.75rem', fontWeight: 600 }}>Juspay Mandate ID</div>
-              <div style={{ fontWeight: 700, color: '#1e293b' }}>{sub.mandateId || 'MND_JSP_991823'}</div>
+              <div style={{ color: '#78350f', fontSize: '0.75rem', fontWeight: 600 }}>Payment Reference ID</div>
+              <div style={{ fontWeight: 700, color: '#1e293b' }}>{sub.mandateId || 'REF_JSP_991823'}</div>
             </div>
             <div>
               <div style={{ color: '#78350f', fontSize: '0.75rem', fontWeight: 600 }}>Subscription Validity</div>
