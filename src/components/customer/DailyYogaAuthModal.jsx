@@ -18,8 +18,26 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
   const [isVerifying, setIsVerifying] = useState(false);
   const [verifiedSuccess, setVerifiedSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [pendingAuth, setPendingAuth] = useState(null); // { type: string, extraDetails: object }
 
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+
+  const getOtpDestinationText = () => {
+    const type = pendingAuth?.type;
+    if (type === 'Google') {
+      return `your Google account (${pendingAuth.extraDetails?.email || 'pragathi@gmail.com'})`;
+    }
+    if (type === 'Facebook') {
+      return `your Facebook connected device`;
+    }
+    if (type === 'Email OTP') {
+      return `your email address (${emailInput})`;
+    }
+    if (type === 'WhatsApp') {
+      return `your WhatsApp number (${whatsAppNumber})`;
+    }
+    return `${countryCode} ${phoneNumber}`;
+  };
 
   useEffect(() => {
     let interval;
@@ -37,6 +55,10 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
       alert('Please enter a valid 10-digit mobile number');
       return;
     }
+    setPendingAuth({
+      type: 'Mobile OTP',
+      extraDetails: { phone: phoneNumber }
+    });
     setTimer(30);
     setStep('OTP');
   };
@@ -105,35 +127,62 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
 
   const handleVerifyOtp = (e) => {
     e?.preventDefault();
-    finishAuth('Mobile OTP', { phone: phoneNumber });
+    const currentOtp = otp.join('');
+    if (currentOtp !== '4829') {
+      alert('Invalid OTP. Please enter the test OTP: 4829');
+      return;
+    }
+    const authType = pendingAuth?.type || 'Mobile OTP';
+    const details = pendingAuth?.extraDetails || { phone: phoneNumber };
+    finishAuth(authType, details);
   };
 
   const handleGoogleAccountSelect = (account) => {
-    finishAuth('Google', {
-      name: account.name,
-      firstName: account.firstName,
-      lastName: account.lastName,
-      email: account.email
+    setPendingAuth({
+      type: 'Google',
+      extraDetails: {
+        name: account.name,
+        firstName: account.firstName,
+        lastName: account.lastName,
+        email: account.email
+      }
     });
+    setTimer(30);
+    setStep('OTP');
   };
 
   const handleFacebookLoginSubmit = () => {
-    finishAuth('Facebook', {
-      name: 'PRAGATHI',
-      firstName: 'PRAGATHI',
-      lastName: '',
-      email: 'pragathi@gmail.com'
+    setPendingAuth({
+      type: 'Facebook',
+      extraDetails: {
+        name: 'PRAGATHI',
+        firstName: 'PRAGATHI',
+        lastName: '',
+        email: 'pragathi@gmail.com'
+      }
     });
+    setTimer(30);
+    setStep('OTP');
   };
 
   const handleWhatsAppVerify = (e) => {
     e?.preventDefault();
-    finishAuth('WhatsApp', { phone: whatsAppNumber });
+    setPendingAuth({
+      type: 'WhatsApp',
+      extraDetails: { phone: whatsAppNumber }
+    });
+    setTimer(30);
+    setStep('OTP');
   };
 
   const handleEmailVerify = (e) => {
     e?.preventDefault();
-    finishAuth('Email OTP', { email: emailInput });
+    setPendingAuth({
+      type: 'Email OTP',
+      extraDetails: { email: emailInput }
+    });
+    setTimer(30);
+    setStep('OTP');
   };
 
   const handleAlreadySubscribedClick = () => {
@@ -145,6 +194,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
   const handleModalClose = () => {
     setStep('PHONE');
     setVerifiedSuccess(false);
+    setPendingAuth(null);
     onClose();
   };
 
@@ -167,19 +217,20 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
       <div 
         style={{
           position: 'relative',
-          width: '375px',
-          height: '812px',
+          width: '100%',
+          maxWidth: '430px',
+          height: '690px',
           maxHeight: '92vh',
           background: '#ffffff',
-          borderRadius: '36px',
-          border: '10px solid #1e293b', // Premium mobile phone bezel frame
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.4)',
+          borderRadius: '24px',
+          boxShadow: '0 16px 48px rgba(0, 0, 0, 0.12)',
           overflowY: 'auto',
           display: 'flex',
           flexDirection: 'column',
           fontFamily: 'system-ui, -apple-system, sans-serif',
           margin: 'auto',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          border: '1px solid #f1f5f9'
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -436,7 +487,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                   </button>
                 </div>
                 <div style={{ fontSize: '0.85rem', color: '#475569' }}>
-                  We sent a 4-digit code to <strong style={{ color: '#0f172a' }}>{countryCode} {phoneNumber}</strong>
+                  We sent a 4-digit code to <strong style={{ color: '#0f172a' }}>{getOtpDestinationText()}</strong>
                 </div>
               </div>
 
