@@ -492,7 +492,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
               </div>
 
               <form onSubmit={handleVerifyOtp}>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', marginBottom: '24px' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
                   {otp.map((digit, idx) => (
                     <input
                       key={idx}
@@ -504,17 +504,17 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                       onChange={(e) => handleOtpChange(idx, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(idx, e)}
                       style={{
-                        width: '56px',
-                        height: '60px',
-                        fontSize: '1.75rem',
-                        fontWeight: 800,
+                        width: '44px',
+                        height: '48px',
+                        fontSize: '1.25rem',
+                        fontWeight: 700,
                         textAlign: 'center',
-                        borderRadius: '12px',
-                        border: '2px solid #eab308', // Amber-500 matching brand color combination
-                        background: '#fffbeb', // Amber-50
-                        color: '#d97706', // Amber-600
+                        borderRadius: '8px',
+                        border: '1.5px solid #d97706',
+                        background: '#ffffff',
+                        color: '#d97706',
                         outline: 'none',
-                        boxShadow: '0 2px 6px rgba(234, 88, 12, 0.1)'
+                        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
                       }}
                       required
                     />
@@ -694,7 +694,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                   <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
                     Enter 4-digit code received on WhatsApp:
                   </label>
-                  <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
                     {otp.map((digit, idx) => (
                       <input
                         key={idx}
@@ -702,7 +702,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                         maxLength={1}
                         value={digit}
                         onChange={(e) => handleOtpChange(idx, e.target.value)}
-                        style={{ width: '52px', height: '54px', fontSize: '1.6rem', fontWeight: 800, textAlign: 'center', borderRadius: '10px', border: '2px solid #86efac', background: '#f0fdf4', color: '#15803d', outline: 'none' }}
+                        style={{ width: '44px', height: '48px', fontSize: '1.25rem', fontWeight: 700, textAlign: 'center', borderRadius: '8px', border: '1.5px solid #d97706', background: '#ffffff', color: '#d97706', outline: 'none', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)' }}
                       />
                     ))}
                   </div>
@@ -749,7 +749,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                   <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: '#334155', marginBottom: '6px' }}>
                     Enter 4-digit Email OTP:
                   </label>
-                  <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
                     {otp.map((digit, idx) => (
                       <input
                         key={idx}
@@ -757,7 +757,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                         maxLength={1}
                         value={digit}
                         onChange={(e) => handleOtpChange(idx, e.target.value)}
-                        style={{ width: '52px', height: '54px', fontSize: '1.6rem', fontWeight: 800, textAlign: 'center', borderRadius: '10px', border: '2px solid #fed7aa', background: '#fffaf5', color: '#ea580c', outline: 'none' }}
+                        style={{ width: '44px', height: '48px', fontSize: '1.25rem', fontWeight: 700, textAlign: 'center', borderRadius: '8px', border: '1.5px solid #d97706', background: '#ffffff', color: '#d97706', outline: 'none', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)' }}
                       />
                     ))}
                   </div>
