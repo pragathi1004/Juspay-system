@@ -4,9 +4,7 @@ import { ArrowLeft, CreditCard, QrCode, Building, Percent, ShieldCheck, Lock, Ch
 
 export const JuspayCheckoutModal = () => {
   const {
-    isJuspayModalOpen,
     setIsJuspayModalOpen,
-    customerScreen,
     setCustomerScreen,
     selectedPlanForCheckout,
     handleJuspayPaymentSuccess,
@@ -45,9 +43,6 @@ export const JuspayCheckoutModal = () => {
     return () => clearInterval(interval);
   }, [showQrCode, qrTimer]);
 
-  // Render as a full-page screen when customerScreen === 'PAYMENT', or as legacy modal
-  const isFullPage = customerScreen === 'PAYMENT';
-  if (!isFullPage && !isJuspayModalOpen) return null;
 
   const handleSubmitPayment = () => {
     setIsProcessing(true);
@@ -431,13 +426,5 @@ export const JuspayCheckoutModal = () => {
     </div>
   );
 
-  // Render as full page
-  if (isFullPage) return pageContent;
-
-  // Legacy: render as overlay modal (for backward compatibility from old flow)
-  return (
-    <div className="modal-overlay" style={{ overflowY: 'auto', alignItems: 'flex-start', justifyContent: 'center', padding: '0' }}>
-      {pageContent}
-    </div>
-  );
+  return pageContent;
 };

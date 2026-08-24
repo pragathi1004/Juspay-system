@@ -48,9 +48,6 @@ export default function App() {
           {customerScreen === 'CANCEL_WIZARD' && <CancelSubscriptionFlow />}
           {customerScreen === 'CHANGE_PLAN_WIZARD' && <ChangePlanFlow />}
           {customerScreen === 'EDIT_PAYMENT_WIZARD' && <EditPaymentFlow />}
-
-          {/* Legacy popup modal for V1 / other flows */}
-          {customerScreen !== 'PAYMENT' && <JuspayCheckoutModal />}
         </div>
       ) : (
         /* EXPERIENCE B: ADMIN / OPERATIONS CONSOLE */
