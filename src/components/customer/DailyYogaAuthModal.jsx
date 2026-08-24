@@ -154,11 +154,12 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
         inset: 0,
         zIndex: 9999,
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         background: 'rgba(0, 0, 0, 0.65)',
         backdropFilter: 'blur(4px)',
-        padding: '16px'
+        padding: '16px',
+        overflowY: 'auto'
       }}
       onClick={handleModalClose}
     >
@@ -173,7 +174,8 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
-          fontFamily: 'system-ui, -apple-system, sans-serif'
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+          margin: 'auto'
         }}
         onClick={(e) => e.stopPropagation()}
       >
