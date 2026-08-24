@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { X, ChevronDown, User, ChevronRight, Mail, ArrowLeft, CheckCircle2, RefreshCw, KeyRound, Check } from 'lucide-react';
+import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
   const { regForm, setRegForm, setCustomerScreen, setUserFlow } = useApp();
@@ -166,16 +167,19 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
       <div 
         style={{
           position: 'relative',
-          width: '100%',
-          maxWidth: '440px',
+          width: '375px',
+          height: '812px',
+          maxHeight: '92vh',
           background: '#ffffff',
-          borderRadius: '24px',
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.3)',
-          overflow: 'hidden',
+          borderRadius: '36px',
+          border: '10px solid #1e293b', // Premium mobile phone bezel frame
+          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.4)',
+          overflowY: 'auto',
           display: 'flex',
           flexDirection: 'column',
           fontFamily: 'system-ui, -apple-system, sans-serif',
-          margin: 'auto'
+          margin: 'auto',
+          boxSizing: 'border-box'
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -225,47 +229,12 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
         <div style={{ padding: '36px 32px 24px 32px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
           
           {/* THE ART OF LIVING EMBLEM LOGO */}
-          <div style={{ marginBottom: '14px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <svg width="190" height="68" viewBox="0 0 240 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="sunGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor="#f59e0b" />
-                  <stop offset="100%" stopColor="#f97316" />
-                </linearGradient>
-              </defs>
-              
-              {/* Sun Rays */}
-              <g stroke="#ea580c" strokeWidth="2.5" strokeLinecap="round">
-                <line x1="120" y1="52" x2="120" y2="10" />
-                <line x1="120" y1="52" x2="106" y2="14" />
-                <line x1="120" y1="52" x2="134" y2="14" />
-                <line x1="120" y1="52" x2="94" y2="20" />
-                <line x1="120" y1="52" x2="146" y2="20" />
-                <line x1="120" y1="52" x2="84" y2="30" />
-                <line x1="120" y1="52" x2="156" y2="30" />
-                <line x1="120" y1="52" x2="78" y2="42" />
-                <line x1="120" y1="52" x2="162" y2="42" />
-              </g>
-
-              {/* Sun Semi-circle */}
-              <path d="M 88 56 A 32 32 0 0 1 152 56 Z" fill="url(#sunGrad)" />
-
-              {/* Left Swan */}
-              <path d="M 86 54 C 80 44, 70 42, 60 48 C 54 53, 50 48, 52 44 C 54 39, 62 38, 70 42 C 78 46, 84 50, 92 56 Z" fill="#ffffff" stroke="#1e293b" strokeWidth="1.5" />
-              <path d="M 58 48 C 50 56, 42 60, 36 58 C 42 63, 55 64, 68 58 Z" fill="#ffffff" stroke="#1e293b" strokeWidth="1.2" />
-
-              {/* Right Swan */}
-              <path d="M 154 54 C 160 44, 170 42, 180 48 C 186 53, 190 48, 188 44 C 186 39, 178 38, 170 42 C 162 46, 156 50, 148 56 Z" fill="#ffffff" stroke="#1e293b" strokeWidth="1.5" />
-              <path d="M 182 48 C 190 56, 198 60, 204 58 C 198 63, 185 64, 172 58 Z" fill="#ffffff" stroke="#1e293b" strokeWidth="1.2" />
-
-              {/* Base Line Box */}
-              <rect x="42" y="60" width="156" height="24" rx="2" fill="#ffffff" stroke="#1e293b" strokeWidth="2" />
-              <text x="120" y="77" textAnchor="middle" fill="#0f172a" fontSize="13.5" fontWeight="900" fontFamily="serif" letterSpacing="1.2">
-                THE ART OF LIVING
-              </text>
-              <circle cx="204" cy="62" r="5" fill="none" stroke="#1e293b" strokeWidth="1" />
-              <text x="204" y="65" textAnchor="middle" fill="#1e293b" fontSize="7" fontWeight="bold">R</text>
-            </svg>
+          <div style={{ marginBottom: '14px', marginTop: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img 
+              src={aolLogoSwans} 
+              alt="The Art of Living" 
+              style={{ height: '54px', width: 'auto', objectFit: 'contain' }} 
+            />
           </div>
 
           {/* MAIN HEADING */}
@@ -328,14 +297,14 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                     width: '100%',
                     padding: '16px',
                     borderRadius: '12px',
-                    background: '#ea580c',
+                    background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)', // Warn orange-yellow gradient from Image 3
                     color: '#ffffff',
                     fontWeight: 800,
                     fontSize: '1.1rem',
                     border: 'none',
                     cursor: 'pointer',
                     letterSpacing: '0.5px',
-                    boxShadow: '0 4px 14px rgba(234, 88, 12, 0.3)',
+                    boxShadow: '0 4px 14px rgba(245, 158, 11, 0.3)',
                     transition: 'all 0.15s ease'
                   }}
                 >
@@ -490,9 +459,9 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                         fontWeight: 800,
                         textAlign: 'center',
                         borderRadius: '12px',
-                        border: '2px solid #fdba74',
-                        background: '#fffaf5',
-                        color: '#ea580c',
+                        border: '2px solid #eab308', // Amber-500 matching brand color combination
+                        background: '#fffbeb', // Amber-50
+                        color: '#d97706', // Amber-600
                         outline: 'none',
                         boxShadow: '0 2px 6px rgba(234, 88, 12, 0.1)'
                       }}
@@ -508,14 +477,14 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                     width: '100%',
                     padding: '16px',
                     borderRadius: '12px',
-                    background: verifiedSuccess ? '#16a34a' : '#ea580c',
+                    background: verifiedSuccess ? '#16a34a' : 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)', // Gradient color matching CONTINUE button
                     color: '#ffffff',
                     fontWeight: 800,
                     fontSize: '1.1rem',
                     border: 'none',
                     cursor: 'pointer',
                     letterSpacing: '0.5px',
-                    boxShadow: '0 4px 14px rgba(234, 88, 12, 0.3)',
+                    boxShadow: '0 4px 14px rgba(245, 158, 11, 0.3)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

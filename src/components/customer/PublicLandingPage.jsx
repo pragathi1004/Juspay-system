@@ -3,6 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { PLAN_SPECS } from '../../data/planSpecs';
 import { DailyYogaAuthModal } from './DailyYogaAuthModal';
 import { Check, X, ChevronDown, Sparkles, Globe, Search, ArrowRight, ShieldCheck, User } from 'lucide-react';
+import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const PublicLandingPage = () => {
   const { setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, selectedLanguage, setSelectedLanguage } = useApp();
@@ -54,7 +55,7 @@ export const PublicLandingPage = () => {
         {/* Main Logo & Navigation menu */}
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '12px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <img 
-            src="https://srisrischoolofyoga.org/in/app/uploads-yoga/2024/06/SSSYLogo_Orange.png" 
+            src={aolLogoSwans} 
             alt="The Art of Living" 
             style={{ height: '48px', width: 'auto', cursor: 'pointer' }} 
           />

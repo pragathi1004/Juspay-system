@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { ShieldCheck, Calendar, PhoneCall, Check, ArrowLeft, RefreshCw, AlertCircle } from 'lucide-react';
+import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const CrmRegistrationFormV2 = () => {
   const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout } = useApp();
@@ -44,7 +45,7 @@ export const CrmRegistrationFormV2 = () => {
           {/* AOL Sun Logo */}
           <div>
             <img 
-              src="https://srisrischoolofyoga.org/in/app/uploads-yoga/2024/06/SSSYLogo_Orange.png" 
+              src={aolLogoSwans} 
               alt="Sri Sri School of Yoga" 
               style={{ height: '56px', width: 'auto', marginBottom: '20px' }} 
             />

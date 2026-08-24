@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { PlayCircle, Play, ChevronRight, Award, Lock, Target, History, BookOpen, MessageCircle, Calendar, Sparkles, ChevronDown, CheckCircle2 } from 'lucide-react';
+import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const LandingPage = () => {
   const { customer, setCustomerScreen, setIsRegisterModalOpen } = useApp();
@@ -35,7 +36,7 @@ export const LandingPage = () => {
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img 
-              src="https://srisrischoolofyoga.org/in/app/uploads-yoga/2024/06/SSSYLogo_Orange.png" 
+              src={aolLogoSwans} 
               alt="Sri Sri School of Yoga" 
               style={{ height: '48px', width: 'auto' }} 
             />

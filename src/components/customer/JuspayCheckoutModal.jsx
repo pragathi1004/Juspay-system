@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { ArrowLeft, ChevronRight, Search } from 'lucide-react';
+import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const JuspayCheckoutModal = () => {
   const {
@@ -155,7 +156,7 @@ export const JuspayCheckoutModal = () => {
             <ArrowLeft size={18} />
           </button>
           <img
-            src="https://srisrischoolofyoga.org/in/app/uploads-yoga/2024/06/SSSYLogo_Orange.png"
+            src={aolLogoSwans}
             alt="The Art of Living"
             style={{ height: '44px', width: 'auto' }}
           />
