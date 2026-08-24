@@ -40,6 +40,7 @@ export default function App() {
           {customerScreen === 'LANDING' && <LandingPage />}
           {customerScreen === 'MANAGE_SUB' && <RegistrationModal />}
           {customerScreen === 'CRM_FORM' && (appVersion === 'v2' ? <CrmRegistrationFormV2 /> : <CrmRegistrationForm />)}
+          {customerScreen === 'PAYMENT' && <JuspayCheckoutModal />}
           {customerScreen === 'CONFIRMATION' && <ConfirmationScreen />}
           {customerScreen === 'CONFIRMATION_V2' && <ConfirmationScreenV2 />}
           {customerScreen === 'DASHBOARD' && <CustomerDashboard />}
@@ -48,8 +49,8 @@ export default function App() {
           {customerScreen === 'CHANGE_PLAN_WIZARD' && <ChangePlanFlow />}
           {customerScreen === 'EDIT_PAYMENT_WIZARD' && <EditPaymentFlow />}
 
-          {/* Customer Modals */}
-          <JuspayCheckoutModal />
+          {/* Legacy popup modal for V1 / other flows */}
+          {customerScreen !== 'PAYMENT' && <JuspayCheckoutModal />}
         </div>
       ) : (
         /* EXPERIENCE B: ADMIN / OPERATIONS CONSOLE */

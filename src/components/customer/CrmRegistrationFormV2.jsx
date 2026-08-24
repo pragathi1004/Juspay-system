@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { ShieldCheck, Calendar, PhoneCall, Check, ArrowLeft, RefreshCw, AlertCircle } from 'lucide-react';
 
 export const CrmRegistrationFormV2 = () => {
-  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout, setIsJuspayModalOpen } = useApp();
+  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout } = useApp();
 
   const [optOutAgreed, setOptOutAgreed] = useState(regForm.optOutAgreed);
   const [showError, setShowError] = useState(false);
@@ -15,7 +15,7 @@ export const CrmRegistrationFormV2 = () => {
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     setShowError(false);
-    setIsJuspayModalOpen(true);
+    setCustomerScreen('PAYMENT');
   };
 
   return (
