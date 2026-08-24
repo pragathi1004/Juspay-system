@@ -4,7 +4,7 @@ import { X, ChevronDown, User, ChevronRight, Mail, ArrowLeft, CheckCircle2, Refr
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
-  const { regForm, setRegForm, setCustomerScreen, setUserFlow } = useApp();
+  const { regForm, setRegForm, setCustomerScreen, setUserFlow, setIsTermsModalOpen } = useApp();
   
   const [phoneNumber, setPhoneNumber] = useState(regForm?.phone || '9920656992');
   const [countryCode, setCountryCode] = useState('+91');
@@ -813,13 +813,13 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
           {/* TERMS & PRIVACY FOOTER NOTE */}
           <p style={{ fontSize: '0.78rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
             By continuing, you are agreeing to our<br />
-            <a href="#terms" onClick={(e) => { e.preventDefault(); alert('Terms & Conditions'); }} style={{ color: '#ea580c', fontWeight: 700, textDecoration: 'none' }}>
+            <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#ea580c', fontWeight: 700, textDecoration: 'none', cursor: 'pointer', fontSize: 'inherit' }}>
               Terms & Conditions
-            </a>
+            </button>
             {' '}and{' '}
-            <a href="#privacy" onClick={(e) => { e.preventDefault(); alert('Privacy Policy'); }} style={{ color: '#ea580c', fontWeight: 700, textDecoration: 'none' }}>
+            <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#ea580c', fontWeight: 700, textDecoration: 'none', cursor: 'pointer', fontSize: 'inherit' }}>
               Privacy Policy
-            </a>
+            </button>
           </p>
 
         </div>

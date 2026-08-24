@@ -4,7 +4,7 @@ import { ShieldCheck, Calendar, PhoneCall, Check, ArrowLeft, RefreshCw, AlertCir
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const CrmRegistrationFormV2 = () => {
-  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout } = useApp();
+  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout, setIsTermsModalOpen } = useApp();
 
   const [optOutAgreed, setOptOutAgreed] = useState(regForm.optOutAgreed);
   const [showError, setShowError] = useState(false);
@@ -194,7 +194,7 @@ export const CrmRegistrationFormV2 = () => {
 
               {/* Concise Payment Redirect Notice */}
               <p style={{ fontSize: '0.85rem', color: '#4b5563', fontStyle: 'italic', margin: '4px 0 8px 0' }}>
-                By continuing, you agree to the <a href="#tos" onClick={(e) => { e.preventDefault(); alert('Terms of Service'); }} style={{ color: '#2563eb', textDecoration: 'underline' }}>Terms of Service</a> and <a href="#privacy" onClick={(e) => { e.preventDefault(); alert('Privacy Policy'); }} style={{ color: '#2563eb', textDecoration: 'underline' }}>Privacy Policy</a>.
+                By continuing, you agree to the <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#2563eb', textDecoration: 'underline', cursor: 'pointer', fontSize: 'inherit' }}>Terms of Service</button> and <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#2563eb', textDecoration: 'underline', cursor: 'pointer', fontSize: 'inherit' }}>Privacy Policy</button>.
                 You will be redirected to the secure payment gateway to complete your payment of ₹{currentPrice.toLocaleString('en-IN')} and authorize automatic renewal.
               </p>
 
@@ -229,7 +229,7 @@ export const CrmRegistrationFormV2 = () => {
             </div>
             <div style={{ fontSize: '0.75rem', color: '#9ca3af' }}>
               © 2026 | The Art of Living | v6.0.1<br />
-              Privacy statement | Terms of Use | Subscription Refund Policy
+              <button type="button" onClick={() => setIsTermsModalOpen(true)} style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', textDecoration: 'underline', fontSize: 'inherit' }}>Privacy statement | Terms of Use | Subscription Refund Policy</button>
             </div>
           </div>
 

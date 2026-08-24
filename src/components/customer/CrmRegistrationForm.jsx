@@ -3,9 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { ShieldCheck, Calendar, PhoneCall, Check, ArrowLeft, RefreshCw, AlertCircle, X } from 'lucide-react';
 
 export const CrmRegistrationForm = () => {
-  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout, setIsJuspayModalOpen } = useApp();
-
-  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout, setIsJuspayModalOpen, setIsTermsModalOpen } = useApp();
 
   const [termsAgreed, setTermsAgreed] = useState(regForm.termsAgreed);
   const [optOutAgreed, setOptOutAgreed] = useState(regForm.optOutAgreed);
@@ -271,52 +269,6 @@ export const CrmRegistrationForm = () => {
         </div>
 
       </div>
-
-      {/* TERMS AND CONDITIONS MODAL */}
-      {isTermsModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0, 0, 0, 0.5)', padding: '20px' }}>
-          <div style={{ background: '#ffffff', borderRadius: '16px', width: '100%', maxWidth: '600px', maxHeight: '85vh', display: 'flex', flexDirection: 'column', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
-            
-            {/* Modal Header */}
-            <div style={{ padding: '20px 24px', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#111827', margin: 0 }}>Terms & Conditions</h2>
-              <button onClick={() => setIsTermsModalOpen(false)} style={{ background: '#f3f4f6', border: 'none', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#4b5563' }}>
-                <X size={18} />
-              </button>
-            </div>
-            
-            {/* Modal Body (Scrollable) */}
-            <div style={{ padding: '24px', overflowY: 'auto', flex: 1, fontSize: '0.9rem', color: '#374151', lineHeight: 1.6 }}>
-              <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#111827', marginBottom: '12px' }}>1. Subscription Terms</h3>
-              <p style={{ marginBottom: '16px' }}>
-                <strong>1.1. Billing Cycle and Payment Terms.</strong> Your Sri Sri Yoga subscription will continue until terminated. To purchase a subscription, you will need to add one or more Payment Methods to your account. "Payment Method" means a current, valid, accepted method of payment, as may be updated from time to time.
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                Unless you cancel your subscription before your billing date, you authorize us to charge the subscription fee for the next billing cycle to your Payment Method (see "Cancellation" below). The subscription fee and any other charges you may incur in connection with your use of the service, such as taxes and possible transaction fees, will be charged to your Payment Method on the specific payment date indicated on your dashboard.
-              </p>
-              <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#111827', marginBottom: '12px', marginTop: '24px' }}>2. Cancellation</h3>
-              <p style={{ marginBottom: '16px' }}>
-                <strong>2.1. Cancellation.</strong> You can cancel your Sri Sri Yoga subscription at any time. To cancel, go to your Participant Dashboard and follow the instructions for cancellation ("Turn Off Future Renewal"). The cancellation will take effect at the end of the current billing period.
-              </p>
-              <p style={{ marginBottom: '16px' }}>
-                To the extent permitted by the applicable law, payments are non-refundable and we do not provide refunds or credits for any partial subscription periods or unused content. You can see when your subscription will end on your dashboard.
-              </p>
-              <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#111827', marginBottom: '12px', marginTop: '24px' }}>3. E-Mandate / Autopay</h3>
-              <p style={{ marginBottom: '16px' }}>
-                By checking the agreement box on the registration form, you authorize Sri Sri School of Yoga and our payment partner (Juspay) to automatically debit your chosen payment method (Credit/Debit Card, UPI, or NetBanking) upon subscription expiry according to RBI E-Mandate / Standing Instruction guidelines. Pre-debit notifications will be sent via SMS & Email 3 days prior to the debit date.
-              </p>
-            </div>
-            
-            {/* Modal Footer */}
-            <div style={{ padding: '16px 24px', borderTop: '1px solid #e5e7eb', display: 'flex', justifyContent: 'flex-end', background: '#f9fafb', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', flexShrink: 0 }}>
-              <button onClick={() => setIsTermsModalOpen(false)} style={{ background: '#facc15', color: '#111827', fontWeight: 700, padding: '10px 24px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}>
-                I Understand
-              </button>
-            </div>
-            
-          </div>
-        </div>
-      )}
     </div>
   );
 };
