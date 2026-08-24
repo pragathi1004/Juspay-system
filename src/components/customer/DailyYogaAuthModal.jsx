@@ -4,7 +4,7 @@ import { X, ChevronDown, User, ChevronRight, Mail, ArrowLeft, CheckCircle2, Refr
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
-  const { regForm, setRegForm, setCustomerScreen, setUserFlow, setIsTermsModalOpen } = useApp();
+  const { regForm, setRegForm, setCustomerScreen, setUserFlow, setIsTermsModalOpen, setIsPrivacyModalOpen } = useApp();
   
   const [phoneNumber, setPhoneNumber] = useState(regForm?.phone || '9920656992');
   const [countryCode, setCountryCode] = useState('+91');
@@ -817,7 +817,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
               Terms & Conditions
             </button>
             {' '}and{' '}
-            <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#ea580c', fontWeight: 700, textDecoration: 'none', cursor: 'pointer', fontSize: 'inherit' }}>
+            <button type="button" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#ea580c', fontWeight: 700, textDecoration: 'none', cursor: 'pointer', fontSize: 'inherit' }}>
               Privacy Policy
             </button>
           </p>

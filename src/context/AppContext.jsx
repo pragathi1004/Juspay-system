@@ -24,6 +24,7 @@ export const AppProvider = ({ children }) => {
   const [isJuspayModalOpen, setIsJuspayModalOpen] = useState(false);
   const [isPaymentHistoryOpen, setIsPaymentHistoryOpen] = useState(false);
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [selectedPaymentDetail, setSelectedPaymentDetail] = useState(null);
   const [isTurnOffRenewalModalOpen, setIsTurnOffRenewalModalOpen] = useState(false);
   const [selectedPlanForCheckout, setSelectedPlanForCheckout] = useState(PLAN_SPECS[0]); // 3 Months default ₹1,499
@@ -436,6 +437,8 @@ export const AppProvider = ({ children }) => {
         setIsPaymentHistoryOpen,
         isTermsModalOpen,
         setIsTermsModalOpen,
+        isPrivacyModalOpen,
+        setIsPrivacyModalOpen,
         selectedPaymentDetail,
         setSelectedPaymentDetail,
         isTurnOffRenewalModalOpen,

@@ -15,6 +15,7 @@ import { CancelSubscriptionFlow } from './components/customer/CancelSubscription
 import { ChangePlanFlow } from './components/customer/ChangePlanFlow';
 import { EditPaymentFlow } from './components/customer/EditPaymentFlow';
 import { TermsAndConditionsModal } from './components/customer/TermsAndConditionsModal';
+import { PrivacyPolicyModal } from './components/customer/PrivacyPolicyModal';
 
 import { AdminLayout } from './components/admin/AdminLayout';
 import { AdminDashboard } from './components/admin/AdminDashboard';
@@ -66,8 +67,9 @@ export default function App() {
         </AdminLayout>
       )}
 
-      {/* Global Terms and Conditions Modal */}
+      {/* Global Terms and Privacy Modals */}
       <TermsAndConditionsModal />
+      <PrivacyPolicyModal />
     </div>
   );
 }

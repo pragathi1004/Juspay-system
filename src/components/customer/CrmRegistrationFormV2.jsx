@@ -4,7 +4,7 @@ import { ShieldCheck, Calendar, PhoneCall, Check, ArrowLeft, RefreshCw, AlertCir
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const CrmRegistrationFormV2 = () => {
-  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout, setIsTermsModalOpen } = useApp();
+  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout, setIsTermsModalOpen, setIsPrivacyModalOpen } = useApp();
 
   const [optOutAgreed, setOptOutAgreed] = useState(regForm.optOutAgreed);
   const [showError, setShowError] = useState(false);
@@ -194,7 +194,7 @@ export const CrmRegistrationFormV2 = () => {
 
               {/* Concise Payment Redirect Notice */}
               <p style={{ fontSize: '0.85rem', color: '#4b5563', fontStyle: 'italic', margin: '4px 0 8px 0' }}>
-                By continuing, you agree to the <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#2563eb', textDecoration: 'underline', cursor: 'pointer', fontSize: 'inherit' }}>Terms of Service</button> and <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#2563eb', textDecoration: 'underline', cursor: 'pointer', fontSize: 'inherit' }}>Privacy Policy</button>.
+                By continuing, you agree to the <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#2563eb', textDecoration: 'underline', cursor: 'pointer', fontSize: 'inherit' }}>Terms of Service</button> and <button type="button" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#2563eb', textDecoration: 'underline', cursor: 'pointer', fontSize: 'inherit' }}>Privacy Policy</button>.
                 You will be redirected to the secure payment gateway to complete your payment of ₹{currentPrice.toLocaleString('en-IN')} and authorize automatic renewal.
               </p>
 
