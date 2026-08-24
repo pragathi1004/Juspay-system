@@ -234,7 +234,7 @@ export const PublicLandingPage = () => {
 
               <button
                 type="button"
-                onClick={() => handleSelectPlanForLead(PLAN_SPECS[0])}
+                onClick={() => handleSelectPlanForLead(PLAN_SPECS.find(p => p.code === 'YOGA_12M'))}
                 style={{ width: '100%', padding: '14px', borderRadius: '9999px', background: '#ffffff', color: '#64748b', fontWeight: 700, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: '1rem' }}
               >
                 Get started now
@@ -280,7 +280,7 @@ export const PublicLandingPage = () => {
 
               <button
                 type="button"
-                onClick={() => handleSelectPlanForLead(PLAN_SPECS[1])}
+                onClick={() => handleSelectPlanForLead(PLAN_SPECS.find(p => p.code === 'YOGA_6M'))}
                 style={{ width: '100%', padding: '14px', borderRadius: '9999px', background: '#ffffff', color: '#ea580c', fontWeight: 700, border: '1px solid #fed7aa', cursor: 'pointer', fontSize: '1rem' }}
               >
                 Choose this plan
@@ -326,7 +326,7 @@ export const PublicLandingPage = () => {
 
               <button
                 type="button"
-                onClick={() => handleSelectPlanForLead(PLAN_SPECS[2])}
+                onClick={() => handleSelectPlanForLead(PLAN_SPECS.find(p => p.code === 'YOGA_3M'))}
                 style={{ width: '100%', padding: '14px', borderRadius: '9999px', background: '#ffffff', color: '#ea580c', fontWeight: 700, border: '1px solid #fed7aa', cursor: 'pointer', fontSize: '1rem' }}
               >
                 Choose this plan
