@@ -3,11 +3,31 @@ import { useApp } from '../../context/AppContext';
 import { CheckCircle, Clock, MessageSquare, Mail, Sparkles, ArrowRight, ShieldCheck, PhoneCall, ChevronRight } from 'lucide-react';
 
 export const ConfirmationScreenV2 = () => {
-  const { customer, setCustomerScreen, regForm } = useApp();
+  const { customer, setCustomerScreen, regForm, selectedPlanForCheckout } = useApp();
   const sub = customer.subscription;
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
 
   const amountStr = sub.amount ? sub.amount.toLocaleString('en-IN') : '1,499';
+
+  // Calculate validity dates based on durationMonths
+  const durationMonths = selectedPlanForCheckout?.durationMonths || 3;
+  const planName = selectedPlanForCheckout?.name || '3 Months Plan';
+
+  const startDay = 14;
+  const startMonth = 9; // October (0-indexed)
+  const startYear = 2026;
+  
+  const startDate = new Date(startYear, startMonth, startDay);
+  const endDate = new Date(startYear, startMonth + durationMonths, startDay - 1);
+  const renewalDate = new Date(startYear, startMonth + durationMonths, startDay);
+  
+  const formatDate = (date) => {
+    const monthsNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return `${date.getDate()} ${monthsNames[date.getMonth()]} ${date.getFullYear()}`;
+  };
+
+  const validityText = `${formatDate(startDate)} – ${formatDate(endDate)}`;
+  const renewalText = formatDate(renewalDate);
 
   return (
     <div style={{ background: '#fdfbf7', minHeight: '90vh', padding: '40px 20px 80px 20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -88,11 +108,11 @@ export const ConfirmationScreenV2 = () => {
             </div>
             <div>
               <div style={{ color: '#78350f', fontSize: '0.75rem', fontWeight: 600 }}>Subscription Validity</div>
-              <div style={{ fontWeight: 700, color: '#1e293b' }}>14 Oct 2026 – 13 Jan 2027</div>
+              <div style={{ fontWeight: 700, color: '#1e293b' }}>{validityText}</div>
             </div>
             <div>
               <div style={{ color: '#78350f', fontSize: '0.75rem', fontWeight: 600 }}>Next Renewal Date</div>
-              <div style={{ fontWeight: 700, color: '#ea580c' }}>14 Jan 2027 (₹{amountStr})</div>
+              <div style={{ fontWeight: 700, color: '#ea580c' }}>{renewalText} (₹{amountStr})</div>
             </div>
           </div>
         </div>

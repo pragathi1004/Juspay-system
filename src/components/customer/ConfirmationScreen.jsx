@@ -3,11 +3,31 @@ import { useApp } from '../../context/AppContext';
 import { CheckCircle, Clock, MessageSquare, Mail, Sparkles, ArrowRight, ShieldCheck, PhoneCall, ChevronRight } from 'lucide-react';
 
 export const ConfirmationScreen = () => {
-  const { customer, setCustomerScreen, regForm } = useApp();
+  const { customer, setCustomerScreen, regForm, selectedPlanForCheckout } = useApp();
   const sub = customer.subscription;
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
 
   const amountStr = sub.amount ? sub.amount.toLocaleString('en-IN') : '1,499';
+
+  // Calculate validity dates based on durationMonths
+  const durationMonths = selectedPlanForCheckout?.durationMonths || 3;
+  const planName = selectedPlanForCheckout?.name || '3 Months Plan';
+
+  const startDay = 14;
+  const startMonth = 9; // October (0-indexed)
+  const startYear = 2026;
+  
+  const startDate = new Date(startYear, startMonth, startDay);
+  const endDate = new Date(startYear, startMonth + durationMonths, startDay - 1);
+  const renewalDate = new Date(startYear, startMonth + durationMonths, startDay);
+  
+  const formatDate = (date) => {
+    const monthsNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return `${date.getDate()} ${monthsNames[date.getMonth()]} ${date.getFullYear()}`;
+  };
+
+  const validityText = `${formatDate(startDate)} – ${formatDate(endDate)}`;
+  const renewalText = formatDate(renewalDate);
 
   return (
     <div style={{ background: '#fdfbf7', minHeight: '90vh', padding: '40px 20px 80px 20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -88,11 +108,11 @@ export const ConfirmationScreen = () => {
             </div>
             <div>
               <div style={{ color: '#78350f', fontSize: '0.75rem', fontWeight: 600 }}>Subscription Validity</div>
-              <div style={{ fontWeight: 700, color: '#1e293b' }}>14 Oct 2026 – 13 Jan 2027</div>
+              <div style={{ fontWeight: 700, color: '#1e293b' }}>{validityText}</div>
             </div>
             <div>
               <div style={{ color: '#78350f', fontSize: '0.75rem', fontWeight: 600 }}>Next Renewal Date</div>
-              <div style={{ fontWeight: 700, color: '#ea580c' }}>14 Jan 2027 (₹{amountStr})</div>
+              <div style={{ fontWeight: 700, color: '#ea580c' }}>{renewalText} (₹{amountStr})</div>
             </div>
           </div>
         </div>
@@ -201,10 +221,10 @@ export const ConfirmationScreen = () => {
                 <p>Dear {regForm.firstName || 'Pragathi'},</p>
                 <p>Your Sri Sri Yoga subscription has been activated successfully!</p>
                 <div style={{ background: '#f8fafc', padding: '8px 12px', borderRadius: '6px', margin: '8px 0', fontSize: '0.8rem' }}>
-                  • <strong>Plan:</strong> 3 Months Sri Sri Yoga<br />
-                  • <strong>Amount Paid:</strong> ₹1,499<br />
-                  • <strong>Validity:</strong> 14 Oct 2026 – 13 Jan 2027<br />
-                  • <strong>Auto-Renewal Date:</strong> 14 Jan 2027 (₹1,499)
+                  • <strong>Plan:</strong> {planName}<br />
+                  • <strong>Amount Paid:</strong> ₹{amountStr}<br />
+                  • <strong>Validity:</strong> {validityText}<br />
+                  • <strong>Auto-Renewal Date:</strong> {renewalText} (₹{amountStr})
                 </div>
                 <p style={{ fontSize: '0.8rem', color: '#475569' }}>
                   ⏳ <strong>Dashboard Preparation:</strong> Your personalized Yoga Dashboard will be ready in 2–3 hours. Your live classes start tomorrow!
