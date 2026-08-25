@@ -276,6 +276,20 @@ export const PublicLandingPage = () => {
                 >
                   Select Language: <strong>{selectedLanguage}</strong> <ChevronDown size={16} />
                 </button>
+
+                {openLangCard === 'YOGA_6M' && (
+                  <div style={{ position: 'absolute', bottom: '100%', left: 0, right: 0, background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', overflow: 'hidden', zIndex: 20 }}>
+                    {languages.map((lang) => (
+                      <div
+                        key={lang}
+                        onClick={() => { setSelectedLanguage(lang); setOpenLangCard(null); }}
+                        style={{ padding: '10px 16px', fontSize: '0.9rem', fontWeight: selectedLanguage === lang ? 700 : 500, color: selectedLanguage === lang ? '#2563eb' : '#334155', background: selectedLanguage === lang ? '#eff6ff' : '#ffffff', cursor: 'pointer' }}
+                      >
+                        {lang}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <button
@@ -322,6 +336,20 @@ export const PublicLandingPage = () => {
                 >
                   Select Language: <strong>{selectedLanguage}</strong> <ChevronDown size={16} />
                 </button>
+
+                {openLangCard === 'YOGA_3M' && (
+                  <div style={{ position: 'absolute', bottom: '100%', left: 0, right: 0, background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', overflow: 'hidden', zIndex: 20 }}>
+                    {languages.map((lang) => (
+                      <div
+                        key={lang}
+                        onClick={() => { setSelectedLanguage(lang); setOpenLangCard(null); }}
+                        style={{ padding: '10px 16px', fontSize: '0.9rem', fontWeight: selectedLanguage === lang ? 700 : 500, color: selectedLanguage === lang ? '#2563eb' : '#334155', background: selectedLanguage === lang ? '#eff6ff' : '#ffffff', cursor: 'pointer' }}
+                      >
+                        {lang}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <button
