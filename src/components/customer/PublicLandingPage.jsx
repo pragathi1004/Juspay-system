@@ -252,7 +252,6 @@ export const PublicLandingPage = () => {
 
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '20px' }}>
                 <span style={{ fontSize: '2.5rem', fontWeight: 900, color: '#1e293b' }}>₹3,999</span>
-                <span style={{ fontSize: '0.85rem', color: '#64748b' }}>(₹666/month)</span>
                 <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '9999px' }}>50% off</span>
               </div>
 
@@ -312,7 +311,6 @@ export const PublicLandingPage = () => {
 
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '20px' }}>
                 <span style={{ fontSize: '2.5rem', fontWeight: 900, color: '#1e293b' }}>₹1,499</span>
-                <span style={{ fontSize: '0.85rem', color: '#64748b' }}>(₹500/month)</span>
                 <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '9999px' }}>Best Value</span>
               </div>
 
