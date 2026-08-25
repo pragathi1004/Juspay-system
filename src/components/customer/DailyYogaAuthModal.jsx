@@ -11,7 +11,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
   const [emailInput, setEmailInput] = useState(regForm?.email || 'pragathi@gmail.com');
   const [whatsAppNumber, setWhatsAppNumber] = useState(regForm?.phone || '9920656992');
   
-  // Modal Steps: 'PHONE' | 'OTP' | 'GOOGLE' | 'WHATSAPP' | 'EMAIL' | 'FACEBOOK'
+  // Modal Steps: 'PHONE' | 'OTP' | 'GOOGLE' | 'WHATSAPP' | 'EMAIL' | 'FACEBOOK' | 'GET_LINK'
   const [step, setStep] = useState('PHONE');
   const [otp, setOtp] = useState(['4', '8', '2', '9']);
   const [timer, setTimer] = useState(30);
@@ -19,6 +19,10 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
   const [verifiedSuccess, setVerifiedSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [pendingAuth, setPendingAuth] = useState(null); // { type: string, extraDetails: object }
+
+  // GET_LINK step state
+  const [getLinkName, setGetLinkName] = useState('');
+  const [getLinkPhone, setGetLinkPhone] = useState('');
 
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
 
@@ -212,10 +216,44 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
     setStep('OTP');
   };
 
-  const handleAlreadySubscribedClick = () => {
+  const handleGetLinkSubmit = () => {
+    // Here you could call backend to generate daily link if needed
+    // For now just navigate to dashboard
     setUserFlow('EXISTING_MEMBER');
     onClose();
     setCustomerScreen('DASHBOARD');
+  };
+
+  // Render GET_LINK step when user clicks Already Subscribed
+  const renderGetLinkStep = () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px', background: '#ffffff', borderRadius: '12px' }}>
+      <h3 style={{ margin: '0 0 8px 0', fontSize: '1.2rem', fontWeight: 700, color: '#0f172a' }}>Get Daily Yoga Link</h3>
+      <input
+        type="text"
+        placeholder="Registered Name"
+        value={getLinkName}
+        onChange={(e) => setGetLinkName(e.target.value)}
+        style={{ padding: '10px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '0.95rem' }}
+      />
+      <input
+        type="tel"
+        placeholder="WhatsApp Number"
+        value={getLinkPhone}
+        onChange={(e) => setGetLinkPhone(e.target.value)}
+        style={{ padding: '10px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '0.95rem' }}
+      />
+      <button
+        type="button"
+        onClick={handleGetLinkSubmit}
+        style={{ padding: '12px', background: '#2563eb', color: '#ffffff', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}
+      >
+        Get Link
+      </button>
+    </div>
+  );
+
+  const handleAlreadySubscribedClick = () => {
+    setStep('GET_LINK');
   };
 
   const handleModalClose = () => {

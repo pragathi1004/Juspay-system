@@ -1,22 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sri Sri Yoga — Juspay AutoPay Subscription Prototype</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script>
-      window.addEventListener('error', function(e) {
-        document.body.innerHTML += '<div style="position:fixed;top:0;left:0;background:red;color:white;z-index:99999;padding:20px;width:100%;">' + e.error.message + '<br>' + e.error.stack + '</div>';
-      });
-    </script>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juspay Premium Dashboard</title>
+  <meta name="description" content="A premium, glassmorphic dashboard for Juspay with vibrant gradients and smooth animations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1 class="logo">Juspay</h1>
+    <nav class="nav">
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Transactions</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="main-content">
+    <section class="card">
+      <h2>Today's Sales</h2>
+      <p class="metric">$12,345</p>
+    </section>
+    <section class="card">
+      <h2>Active Users</h2>
+      <p class="metric">1,234</p>
+    </section>
+    <section class="card chart">
+      <h2>Revenue Trend</h2>
+      <canvas id="revenueChart"></canvas>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>© 2026 Juspay. All rights reserved.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
 </html>
