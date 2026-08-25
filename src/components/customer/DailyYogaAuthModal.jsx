@@ -108,11 +108,11 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
         setRegForm(prev => ({
           ...prev,
           firstName: extraDetails.firstName || 'PRAGATHI',
-          lastName: extraDetails.lastName || '',
+          lastName: extraDetails.lastName || 'M',
           name: extraDetails.name || 'PRAGATHI',
           phone: '9920656992',
           email: extraDetails.email || 'pragathi@gmail.com',
-          age: '38',
+          age: '23',
           postalCode: '560082',
           cityState: 'Bengaluru Urban, Karnataka',
           phoneVerified: true
