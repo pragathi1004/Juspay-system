@@ -40,11 +40,11 @@ export const AppProvider = ({ children }) => {
   // Registration Form State (empty by default for new leads; populated for test account)
   const [regForm, setRegForm] = useState({
     firstName: '',
-    lastName: '',
+    lastName: 'M',
     name: '',
     phone: '',
     email: '',
-    age: '',
+    age: '23',
     postalCode: '',
     cityState: '',
     termsAgreed: true,
