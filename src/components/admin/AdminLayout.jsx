@@ -143,7 +143,7 @@ export const AdminLayout = ({ children }) => {
             <span className="badge badge-active" style={{ fontSize: '0.7rem' }}>
               Juspay Webhook Connected (Live)
             </span>
-            <div style={{ position: 'relative', cursor: 'pointer' }}>
+            <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => setAdminTab('EVENTS')}>
               <Bell size={20} color="#64748b" />
               <span style={{ position: 'absolute', top: '-4px', right: '-4px', background: '#ef4444', color: '#ffffff', fontSize: '0.6rem', fontWeight: 700, borderRadius: '50%', width: '14px', height: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 3
