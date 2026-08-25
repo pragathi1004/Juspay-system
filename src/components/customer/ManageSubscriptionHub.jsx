@@ -15,6 +15,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { PaymentHistoryModal } from './PaymentHistoryModal';
+import { CancelSubscriptionFlow } from './CancelSubscriptionFlow';
 
 export const ManageSubscriptionHub = () => {
   const {
@@ -23,7 +24,8 @@ export const ManageSubscriptionHub = () => {
     paymentHistory,
     setIsPaymentHistoryOpen,
     handleTurnOffAutoRenewalSubmit,
-    handleTurnOnAutoRenewalSubmit
+    handleTurnOnAutoRenewalSubmit,
+    setIsTurnOffRenewalModalOpen
   } = useApp();
 
   const sub = customer.subscription;
@@ -269,8 +271,9 @@ export const ManageSubscriptionHub = () => {
 
       </div>
 
-      {/* PAYMENT HISTORY MODAL */}
+      {/* PAYMENT HISTORY & CANCELLATION MODALS */}
       <PaymentHistoryModal />
+      <CancelSubscriptionFlow />
     </div>
   );
 };
