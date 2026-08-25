@@ -12,7 +12,7 @@ export const SubscriptionDetailDrawer = () => {
 
   return (
     <div className="drawer-overlay">
-      <div className="drawer-content">
+      <div className="drawer-content" style={{ overflowY: 'auto', maxHeight: '100vh' }}>
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid #e2e8f0', paddingBottom: '16px' }}>
           <div>
