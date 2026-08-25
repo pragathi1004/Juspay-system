@@ -148,11 +148,19 @@ export const AdminDashboard = () => {
         {/* Chart 2: Renewal Success vs Failure Trend */}
         <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #e2e8f0', padding: '24px' }}>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '4px', color: '#0f172a' }}>
-            Auto-Renewal Performance (Last 4 Months)
+            Auto-Renewal Performance
           </h3>
-          <p style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '20px' }}>
-            Juspay mandate auto-debit success vs retry recovery rates
+          <p style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '12px' }}>
+            Monthly auto-debit success rate for Juspay mandates
           </p>
+          <div style={{ display: 'flex', gap: '16px', marginBottom: '20px', fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ width: '12px', height: '12px', background: '#10b981', borderRadius: '3px' }} /> Past Months
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ width: '12px', height: '12px', background: 'var(--aol-orange)', borderRadius: '3px' }} /> Current Month
+            </div>
+          </div>
 
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', height: '140px', padding: '0 20px', borderBottom: '1px solid #e2e8f0' }}>
             <div style={{ textAlign: 'center' }}>
