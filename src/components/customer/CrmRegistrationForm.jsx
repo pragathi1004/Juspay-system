@@ -186,8 +186,18 @@ export const CrmRegistrationForm = () => {
                   <input
                     type="text"
                     value={regForm.postalCode}
-                    onChange={(e) => setRegForm({ ...regForm, postalCode: e.target.value })}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      let computedCityState = regForm.cityState;
+                      if (val === '560082') computedCityState = 'Bengaluru Urban, Karnataka';
+                      else if (val === '110001') computedCityState = 'New Delhi, Delhi';
+                      else if (val === '400001') computedCityState = 'Mumbai, Maharashtra';
+                      else if (val.length === 6) computedCityState = 'India';
+                      else if (val.length === 0) computedCityState = '';
+                      setRegForm({ ...regForm, postalCode: val, cityState: computedCityState });
+                    }}
                     style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '0.95rem' }}
+                    placeholder="e.g. 560082"
                     required
                   />
                   <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '4px' }}>

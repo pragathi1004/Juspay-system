@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { X, History, FileText, CheckCircle, ShieldCheck, ChevronRight, CreditCard, Lock } from 'lucide-react';
+import { X, History, FileText, CheckCircle, ShieldCheck, ChevronRight, CreditCard, Lock, ArrowLeft } from 'lucide-react';
 
 export const PaymentHistoryModal = () => {
   const {
@@ -17,41 +17,83 @@ export const PaymentHistoryModal = () => {
   const sub = customer.subscription;
 
   return (
-    <div className="modal-overlay" style={{ background: 'rgba(0,0,0,0.5)', zIndex: 90, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+    <div 
+      className="modal-overlay" 
+      style={{ 
+        position: 'fixed', 
+        inset: 0, 
+        background: 'rgba(15, 23, 42, 0.65)', 
+        backdropFilter: 'blur(4px)',
+        zIndex: 9990, 
+        display: 'flex', 
+        alignItems: 'flex-start', 
+        justifyContent: 'center', 
+        padding: '24px 16px',
+        overflowY: 'auto'
+      }}
+    >
       <div
         style={{
           background: '#ffffff',
           borderRadius: '20px',
-          maxWidth: '780px',
+          maxWidth: '800px',
           width: '100%',
-          maxHeight: '90vh',
+          maxHeight: '92vh',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.2)',
-          border: '1px solid #e2e8f0'
+          boxShadow: '0 25px 60px rgba(0,0,0,0.3)',
+          border: '1px solid #e2e8f0',
+          margin: 'auto 0'
         }}
       >
-        {/* HEADER */}
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#fdfbf7' }}>
+        {/* STICKY ACCESSIBLE HEADER */}
+        <div style={{ padding: '16px 24px', borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#fdfbf7' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#ffedd5', color: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <History size={20} />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#1e293b' }}>Payment History</h2>
-              <p style={{ fontSize: '0.75rem', color: '#64748b' }}>Complete log of initial payment and automatic renewals via Juspay</p>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#1e293b', margin: 0 }}>Payment History</h2>
+              <p style={{ fontSize: '0.75rem', color: '#64748b', margin: 0 }}>Complete log of initial payment and automatic renewals via Juspay</p>
             </div>
           </div>
-          <button
-            onClick={() => setIsPaymentHistoryOpen(false)}
-            style={{ background: '#f1f5f9', border: 'none', color: '#64748b', cursor: 'pointer', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            <X size={18} />
-          </button>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {/* PROMINENT BACK TO DASHBOARD BUTTON IN HEADER */}
+            <button
+              onClick={() => setIsPaymentHistoryOpen(false)}
+              style={{
+                background: '#ea580c',
+                color: '#ffffff',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '10px',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: '0 2px 8px rgba(234, 88, 12, 0.25)'
+              }}
+            >
+              <ArrowLeft size={16} /> Back to Dashboard
+            </button>
+
+            <button
+              onClick={() => setIsPaymentHistoryOpen(false)}
+              style={{ background: '#f1f5f9', border: 'none', color: '#64748b', cursor: 'pointer', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              title="Close"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
 
+        {/* SCROLLABLE BODY CONTENT */}
         <div style={{ padding: '24px', overflowY: 'auto', flex: 1 }}>
+          
           {/* TOP SUMMARY CARD */}
           <div
             style={{
@@ -84,7 +126,7 @@ export const PaymentHistoryModal = () => {
           </div>
 
           {/* PAYMENT HISTORY TABLE */}
-          <div style={{ border: '1px solid #e2e8f0', borderRadius: '12px', overflow: 'hidden' }}>
+          <div style={{ border: '1px solid #e2e8f0', borderRadius: '12px', overflow: 'hidden', marginBottom: '20px' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
               <thead>
                 <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0', color: '#475569', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
@@ -132,7 +174,7 @@ export const PaymentHistoryModal = () => {
                         {item.paymentType}
                       </span>
                     </td>
-                    <td style={{ padding: '14px 16px', fontWeight: 700, color: '#059669' }}>
+                    <td style={{ padding: '14px 16px', fontWeight: 700, color: item.status?.includes('Failed') ? '#ef4444' : '#059669' }}>
                       {item.status || '✓ Paid'}
                     </td>
                     <td style={{ padding: '14px 16px', textAlign: 'right' }}>
@@ -147,12 +189,49 @@ export const PaymentHistoryModal = () => {
               </tbody>
             </table>
           </div>
+
+          {/* BOTTOM BACK TO DASHBOARD ACTION BUTTON */}
+          <button
+            onClick={() => setIsPaymentHistoryOpen(false)}
+            style={{
+              width: '100%',
+              padding: '14px',
+              background: '#ea580c',
+              color: '#ffffff',
+              fontWeight: 800,
+              border: 'none',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              fontSize: '0.925rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              boxShadow: '0 4px 12px rgba(234, 88, 12, 0.25)'
+            }}
+          >
+            <ArrowLeft size={18} /> Back to Dashboard
+          </button>
+
         </div>
       </div>
 
       {/* PAYMENT DETAIL DRAWER / MODAL */}
       {selectedPaymentDetail && (
-        <div className="modal-overlay" style={{ background: 'rgba(0,0,0,0.6)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+        <div 
+          className="modal-overlay" 
+          style={{ 
+            position: 'fixed', 
+            inset: 0, 
+            background: 'rgba(0,0,0,0.65)', 
+            zIndex: 9999, 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            padding: '20px',
+            overflowY: 'auto'
+          }}
+        >
           <div
             style={{
               background: '#ffffff',
@@ -192,14 +271,6 @@ export const PaymentHistoryModal = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#64748b' }}>Subscription ID</span>
                   <span style={{ fontWeight: 700, color: '#1e293b' }}>{selectedPaymentDetail.subscriptionId || sub.id}</span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#64748b' }}>Mandate ID</span>
-                  <span style={{ fontWeight: 700, color: '#1e293b' }}>{selectedPaymentDetail.mandateId || sub.mandateId}</span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#64748b' }}>Date & Time</span>
-                  <span style={{ fontWeight: 600, color: '#334155' }}>{selectedPaymentDetail.date}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#64748b' }}>Payment Type</span>

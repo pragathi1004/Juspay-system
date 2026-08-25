@@ -37,16 +37,16 @@ export const AppProvider = ({ children }) => {
   const [paymentHistory, setPaymentHistory] = useState(MOCK_PAYMENT_HISTORY);
   const [webhookLogs, setWebhookLogs] = useState(MOCK_WEBHOOK_LOGS);
 
-  // Registration Form State (Pragathi)
+  // Registration Form State (empty by default for new leads; populated for test account)
   const [regForm, setRegForm] = useState({
-    firstName: 'PRAGATHI',
+    firstName: '',
     lastName: '',
-    name: 'PRAGATHI',
-    phone: '9920656992',
-    email: 'pragathi@gmail.com',
-    age: '38',
-    postalCode: '560082',
-    cityState: 'Bengaluru Urban, Karnataka',
+    name: '',
+    phone: '',
+    email: '',
+    age: '',
+    postalCode: '',
+    cityState: '',
     termsAgreed: true,
     optOutAgreed: true,
     autoRenewalAgreed: true,

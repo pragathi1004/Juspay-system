@@ -91,21 +91,48 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
   const finishAuth = (authType, extraDetails = {}) => {
     setIsVerifying(true);
 
+    const enteredPhone = extraDetails.phone || phoneNumber || '';
+    const cleanPhone = enteredPhone.replace(/\D/g, '');
+    const enteredEmail = (extraDetails.email || '').toLowerCase();
+
+    // Check if the login matches the test Pragathi account (9920656992 / pragathi@gmail.com)
+    const isPragathiTestAccount = cleanPhone.includes('9920656992') || enteredEmail.includes('pragathi');
+
     setTimeout(() => {
       setIsVerifying(false);
       setVerifiedSuccess(true);
       setSuccessMessage(`Authenticated via ${authType}!`);
 
-      // Update registration details
-      setRegForm(prev => ({
-        ...prev,
-        phone: extraDetails.phone || phoneNumber,
-        email: extraDetails.email || prev.email,
-        name: extraDetails.name || prev.name,
-        firstName: extraDetails.firstName || prev.firstName,
-        lastName: extraDetails.lastName || prev.lastName,
-        phoneVerified: true
-      }));
+      if (isPragathiTestAccount) {
+        // Pre-fill test details ONLY for test Pragathi account
+        setRegForm(prev => ({
+          ...prev,
+          firstName: extraDetails.firstName || 'PRAGATHI',
+          lastName: extraDetails.lastName || '',
+          name: extraDetails.name || 'PRAGATHI',
+          phone: '9920656992',
+          email: extraDetails.email || 'pragathi@gmail.com',
+          age: '38',
+          postalCode: '560082',
+          cityState: 'Bengaluru Urban, Karnataka',
+          phoneVerified: true
+        }));
+      } else {
+        // NEW LEAD WITH ANY OTHER NUMBER: Leave registration fields EMPTY for manual entry
+        setRegForm(prev => ({
+          ...prev,
+          firstName: extraDetails.firstName || '',
+          lastName: extraDetails.lastName || '',
+          name: extraDetails.name || (extraDetails.firstName ? `${extraDetails.firstName} ${extraDetails.lastName || ''}`.trim() : ''),
+          phone: enteredPhone,
+          email: extraDetails.email || '',
+          age: '',
+          postalCode: '',
+          cityState: '',
+          phoneVerified: true
+        }));
+      }
+
       setUserFlow('NEW_LEAD');
 
       setTimeout(() => {
