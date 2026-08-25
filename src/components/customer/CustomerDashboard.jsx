@@ -107,10 +107,10 @@ export const CustomerDashboard = () => {
                   Manage Subscription
                 </button>
                 <button
-                  onClick={() => setCustomerScreen('MANAGE_HUB')}
-                  style={{ background: '#ffffff', border: '1px solid #d97706', color: '#b45309', padding: '10px 16px', borderRadius: '8px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
+                  onClick={() => setIsTurnOffRenewalModalOpen(true)}
+                  style={{ background: '#ffffff', border: '1px solid #dc2626', color: '#dc2626', padding: '10px 16px', borderRadius: '8px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
                 >
-                  Turn Off Future Renewal
+                  Cancel Subscription
                 </button>
               </div>
             </div>

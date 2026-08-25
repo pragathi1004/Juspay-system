@@ -147,18 +147,12 @@ export const ManageSubscriptionHub = () => {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '44px' }}>
           
-          {/* ACTION 1: TURN OFF FUTURE RENEWAL (PREFERRED LANGUAGE SPEC) */}
+          {/* ACTION 1: CANCEL SUBSCRIPTION */}
           <div
-            onClick={() => {
-              if (isAutoPayActive) {
-                handleTurnOffAutoRenewalSubmit();
-              } else {
-                handleTurnOnAutoRenewalSubmit();
-              }
-            }}
+            onClick={() => setIsTurnOffRenewalModalOpen(true)}
             style={{
               background: '#ffffff',
-              border: isAutoPayActive ? '1.5px solid #fca5a5' : '1.5px solid #6ee7b7',
+              border: '1.5px solid #fca5a5',
               borderRadius: '20px',
               padding: '24px',
               cursor: 'pointer',
@@ -169,20 +163,18 @@ export const ManageSubscriptionHub = () => {
             }}
           >
             <div>
-              <div style={{ background: isAutoPayActive ? '#fef2f2' : '#ecfdf5', width: '44px', height: '44px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: isAutoPayActive ? '#ef4444' : '#059669', marginBottom: '16px' }}>
-                <RefreshCw size={22} />
+              <div style={{ background: '#fef2f2', width: '44px', height: '44px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#dc2626', marginBottom: '16px' }}>
+                <XCircle size={22} />
               </div>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: '4px', color: isAutoPayActive ? '#991b1b' : '#065f46' }}>
-                {isAutoPayActive ? 'Turn Off Future Renewal' : 'Turn Auto-Renewal Back On'}
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: '4px', color: '#991b1b' }}>
+                Cancel Subscription
               </h3>
               <p style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '20px', lineHeight: 1.4 }}>
-                {isAutoPayActive
-                  ? 'Stop automatic charge of ₹' + amountStr + ' on next renewal date. Current access continues until ' + (sub.endDate || '13 Jan 2027') + '.'
-                  : 'Re-enable automatic renewal so your daily yoga access continues without interruption.'}
+                Cancel your Sri Sri Yoga subscription. Must be requested at least 24 hours prior to next renewal date ({sub.endDate || '13 Jan 2027'}).
               </p>
             </div>
-            <div style={{ color: isAutoPayActive ? '#dc2626' : '#059669', fontWeight: 700, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              {isAutoPayActive ? 'Turn Off Renewal' : 'Enable Renewal'} <ChevronRight size={16} />
+            <div style={{ color: '#dc2626', fontWeight: 700, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              Cancel Subscription <ChevronRight size={16} />
             </div>
           </div>
 

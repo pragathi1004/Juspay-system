@@ -29,7 +29,7 @@ export const CancelSubscriptionFlow = () => {
             background: '#ffffff',
             borderRadius: '24px',
             padding: '32px',
-            maxWidth: '540px',
+            maxWidth: '560px',
             width: '100%',
             boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
             border: '1px solid #e2e8f0',
@@ -38,26 +38,30 @@ export const CancelSubscriptionFlow = () => {
         >
           {step === 1 ? (
             <div>
-              <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#fff7ed', color: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto', border: '2px solid #ffedd5' }}>
-                <RefreshCw size={28} />
+              <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#fef2f2', color: '#dc2626', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto', border: '2px solid #fca5a5' }}>
+                <AlertCircle size={28} />
               </div>
 
-              <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#1e293b', marginBottom: '12px' }}>
-                Turn off automatic renewal?
+              <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#1e293b', marginBottom: '8px' }}>
+                Cancel your subscription?
               </h2>
 
-              <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '18px', textAlign: 'left', marginBottom: '24px', fontSize: '0.9rem', color: '#334155', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <p style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '20px' }}>
+                Please review our cancellation terms before confirming.
+              </p>
+
+              <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '18px', textAlign: 'left', marginBottom: '24px', fontSize: '0.875rem', color: '#334155', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
                   <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>
-                  <span>Your current subscription will remain active until <strong>{sub.endDate || '13 Jan 2027'}</strong>.</span>
+                  <span><strong>24-Hour Notice Rule:</strong> Subscriptions can be cancelled at least 24 hours prior to your scheduled renewal date (<strong>{sub.endDate || '13 Jan 2027'}</strong>).</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
                   <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>
-                  <span>You will not be charged <strong>₹{amountStr}</strong> on the next renewal date.</span>
+                  <span>Your current access will continue uninterrupted until <strong>{sub.endDate || '13 Jan 2027'}</strong>.</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                  <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>
-                  <span>You can turn automatic renewal back on anytime before your subscription expires.</span>
+                  <span style={{ color: '#dc2626', fontWeight: 800 }}>•</span>
+                  <span>Cancellation requests within 24 hours of renewal or after renewal date are non-refundable as per terms.</span>
                 </div>
               </div>
 
@@ -66,13 +70,13 @@ export const CancelSubscriptionFlow = () => {
                   onClick={() => setIsTurnOffRenewalModalOpen(false)}
                   style={{ flex: 1, padding: '12px', background: '#facc15', color: '#111827', fontWeight: 800, borderRadius: '10px', border: 'none', cursor: 'pointer', fontSize: '0.95rem' }}
                 >
-                  Keep Auto-Renewal
+                  Keep Subscription
                 </button>
                 <button
                   onClick={handleConfirmTurnOff}
                   style={{ flex: 1, padding: '12px', background: '#ffffff', border: '1.5px solid #dc2626', color: '#dc2626', fontWeight: 700, borderRadius: '10px', cursor: 'pointer', fontSize: '0.95rem' }}
                 >
-                  Turn Off Renewal
+                  Confirm Cancellation
                 </button>
               </div>
             </div>
@@ -83,28 +87,24 @@ export const CancelSubscriptionFlow = () => {
               </div>
 
               <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e293b', marginBottom: '8px' }}>
-                Automatic Renewal Turned Off
+                Subscription Cancelled
               </h2>
               <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '20px' }}>
-                Your Juspay recurring debit mandate has been cancelled.
+                Your Juspay recurring mandate has been successfully revoked.
               </p>
 
               <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '16px', textAlign: 'left', marginBottom: '24px', fontSize: '0.875rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span style={{ color: '#64748b' }}>Subscription Remains Active Until:</span>
+                  <span style={{ color: '#64748b' }}>Active Access Until:</span>
                   <strong style={{ color: '#047857' }}>{sub.endDate || '13 Jan 2027'}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                   <span style={{ color: '#64748b' }}>Next Renewal:</span>
                   <strong style={{ color: '#dc2626' }}>Cancelled</strong>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span style={{ color: '#64748b' }}>Next Charge:</span>
-                  <strong style={{ color: '#1e293b' }}>₹0</strong>
-                </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#64748b' }}>Auto-Renewal Status:</span>
-                  <strong style={{ color: '#dc2626' }}>🔴 Off</strong>
+                  <span style={{ color: '#64748b' }}>Subscription Status:</span>
+                  <strong style={{ color: '#dc2626' }}>🔴 Cancelled</strong>
                 </div>
               </div>
 
@@ -136,26 +136,26 @@ export const CancelSubscriptionFlow = () => {
           textAlign: 'center'
         }}
       >
-        <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#fff7ed', color: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto', border: '2px solid #ffedd5' }}>
-          <RefreshCw size={28} />
+        <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#fef2f2', color: '#dc2626', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px auto', border: '2px solid #fca5a5' }}>
+          <AlertCircle size={28} />
         </div>
 
         <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#1e293b', marginBottom: '12px' }}>
-          Turn off automatic renewal?
+          Cancel your subscription?
         </h2>
 
         <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '20px', textAlign: 'left', marginBottom: '28px', fontSize: '0.925rem', color: '#334155', display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
             <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>
-            <span>Your current subscription will remain active until <strong>{sub.endDate || '13 Jan 2027'}</strong>.</span>
+            <span><strong>24-Hour Notice Rule:</strong> Subscriptions can be cancelled at least 24 hours prior to your scheduled renewal date (<strong>{sub.endDate || '13 Jan 2027'}</strong>).</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
             <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>
-            <span>You will not be charged <strong>₹{amountStr}</strong> on the next renewal date.</span>
+            <span>Your current access will continue uninterrupted until <strong>{sub.endDate || '13 Jan 2027'}</strong>.</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-            <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>
-            <span>You can turn automatic renewal back on anytime before your subscription expires.</span>
+            <span style={{ color: '#dc2626', fontWeight: 800 }}>•</span>
+            <span>Cancellation requests within 24 hours of renewal date or after renewal are non-refundable as per terms.</span>
           </div>
         </div>
 
@@ -164,13 +164,13 @@ export const CancelSubscriptionFlow = () => {
             onClick={() => setCustomerScreen('MANAGE_HUB')}
             style={{ flex: 1, padding: '14px', background: '#facc15', color: '#111827', fontWeight: 800, borderRadius: '10px', border: 'none', cursor: 'pointer', fontSize: '1rem' }}
           >
-            Keep Auto-Renewal
+            Keep Subscription
           </button>
           <button
             onClick={handleConfirmTurnOff}
             style={{ flex: 1, padding: '14px', background: '#ffffff', border: '1.5px solid #dc2626', color: '#dc2626', fontWeight: 700, borderRadius: '10px', cursor: 'pointer', fontSize: '1rem' }}
           >
-            Turn Off Renewal
+            Confirm Cancellation
           </button>
         </div>
       </div>
