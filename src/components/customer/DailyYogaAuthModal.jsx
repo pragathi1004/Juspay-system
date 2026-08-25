@@ -246,8 +246,8 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
           position: 'relative',
           width: '100%',
           maxWidth: '430px',
-          height: '690px',
-          maxHeight: '92vh',
+          height: 'auto',
+          maxHeight: '94vh',
           background: '#ffffff',
           borderRadius: '24px',
           boxShadow: '0 16px 48px rgba(0, 0, 0, 0.12)',
@@ -304,26 +304,21 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* MODAL CONTENT */}
-        <div style={{ padding: '36px 32px 24px 32px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+        <div style={{ padding: '24px 28px 16px 28px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
           
           {/* THE ART OF LIVING EMBLEM LOGO */}
-          <div style={{ marginBottom: '14px', marginTop: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ marginBottom: '8px', marginTop: '4px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <img 
               src={aolLogoSwans} 
               alt="The Art of Living" 
-              style={{ height: '54px', width: 'auto', objectFit: 'contain' }} 
+              style={{ height: '48px', width: 'auto', objectFit: 'contain' }} 
             />
           </div>
 
-          {/* MAIN HEADING */}
-          <h2 style={{ fontSize: '1.9rem', fontWeight: 900, color: '#0f172a', margin: '0 0 10px 0', letterSpacing: '-0.5px' }}>
-            Daily Sri Sri Yoga
-          </h2>
-
           {/* LOTUS DECORATIVE DIVIDER */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', width: '100%', marginBottom: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', width: '100%', marginBottom: '10px' }}>
             <div style={{ flex: 1, height: '1.5px', background: '#eab308' }}></div>
-            <svg width="28" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="26" height="18" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M16 2C14 8 10 14 6 18C11 18 14 16 16 12C18 16 21 18 26 18C22 14 18 8 16 2Z" stroke="#eab308" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M16 8C13 13 8 18 2 20C7 21 12 19 16 16C20 19 25 21 30 20C24 18 19 13 16 8Z" stroke="#eab308" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -336,7 +331,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
           {step === 'PHONE' && (
             <>
               {/* SUBTITLE */}
-              <p style={{ fontSize: '0.92rem', color: '#64748b', lineHeight: 1.45, margin: '0 0 24px 0', maxWidth: '340px' }}>
+              <p style={{ fontSize: '0.88rem', color: '#64748b', lineHeight: 1.4, margin: '0 0 16px 0', maxWidth: '340px' }}>
                 Join the world's largest yoga community and experience authentic wellness
               </p>
 
@@ -344,8 +339,8 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
               <form onSubmit={handlePhoneSubmit} style={{ width: '100%' }}>
                 
                 {/* INPUT GROUP WITH COUNTRY CODE */}
-                <div style={{ display: 'flex', alignItems: 'stretch', border: '1.5px solid #cbd5e1', borderRadius: '12px', background: '#ffffff', overflow: 'hidden', marginBottom: '16px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '14px 16px', background: '#ffffff', borderRight: '1.5px solid #e2e8f0', color: '#1e293b', fontWeight: 600, fontSize: '1rem', cursor: 'pointer' }}>
+                <div style={{ display: 'flex', alignItems: 'stretch', border: '1.5px solid #cbd5e1', borderRadius: '12px', background: '#ffffff', overflow: 'hidden', marginBottom: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '12px 14px', background: '#ffffff', borderRight: '1.5px solid #e2e8f0', color: '#1e293b', fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer' }}>
                     <span>{countryCode}</span>
                     <ChevronDown size={18} color="#64748b" />
                   </div>
@@ -359,8 +354,8 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                       flex: 1,
                       border: 'none',
                       outline: 'none',
-                      padding: '14px 16px',
-                      fontSize: '1rem',
+                      padding: '12px 14px',
+                      fontSize: '0.95rem',
                       color: '#1e293b',
                       background: 'transparent'
                     }}
@@ -376,12 +371,12 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                     maxWidth: '300px',
                     margin: '0 auto',
                     display: 'block',
-                    padding: '11px 18px',
+                    padding: '10px 18px',
                     borderRadius: '10px',
                     background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)',
                     color: '#ffffff',
                     fontWeight: 700,
-                    fontSize: '0.9rem',
+                    fontSize: '0.88rem',
                     border: 'none',
                     cursor: 'pointer',
                     letterSpacing: '0.4px',
@@ -394,79 +389,79 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
               </form>
 
               {/* OTP NOTICE SUBTEXT */}
-              <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '12px 0 20px 0' }}>
+              <p style={{ fontSize: '0.78rem', color: '#64748b', margin: '8px 0 12px 0' }}>
                 We will send you an OTP to verify your number
               </p>
 
               {/* OR DIVIDER */}
-              <div style={{ display: 'flex', alignItems: 'center', width: '100%', gap: '16px', margin: '0 0 12px 0' }}>
+              <div style={{ display: 'flex', alignItems: 'center', width: '100%', gap: '16px', margin: '0 0 6px 0' }}>
                 <div style={{ flex: 1, height: '1px', background: '#e2e8f0' }}></div>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.5px' }}>OR</span>
+                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.5px' }}>OR</span>
                 <div style={{ flex: 1, height: '1px', background: '#e2e8f0' }}></div>
               </div>
 
-              <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#334155', margin: '0 0 16px 0' }}>
+              <p style={{ fontSize: '0.82rem', fontWeight: 600, color: '#334155', margin: '0 0 8px 0' }}>
                 Continue with
               </p>
 
               {/* 4 SOCIAL LOGIN BUTTONS ROW */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', width: '100%', marginBottom: '22px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', width: '100%', marginBottom: '14px' }}>
                 
                 {/* GOOGLE */}
                 <button
                   type="button"
                   onClick={() => setStep('GOOGLE')}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '8px', padding: '14px 8px', borderRadius: '12px', border: '1.5px solid #e2e8f0', background: '#ffffff', cursor: 'pointer', transition: 'all 0.15s' }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '6px', padding: '10px 6px', borderRadius: '12px', border: '1.5px solid #e2e8f0', background: '#ffffff', cursor: 'pointer', transition: 'all 0.15s' }}
                 >
-                  <svg width="26" height="26" viewBox="0 0 24 24">
+                  <svg width="22" height="22" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
                     <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
                     <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
                     <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
                   </svg>
-                  <span style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>Google</span>
+                  <span style={{ fontSize: '0.75rem', color: '#1e293b', fontWeight: 600 }}>Google</span>
                 </button>
 
                 {/* FACEBOOK */}
                 <button
                   type="button"
                   onClick={() => setStep('FACEBOOK')}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '8px', padding: '14px 8px', borderRadius: '12px', border: '1.5px solid #e2e8f0', background: '#ffffff', cursor: 'pointer', transition: 'all 0.15s' }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '6px', padding: '10px 6px', borderRadius: '12px', border: '1.5px solid #e2e8f0', background: '#ffffff', cursor: 'pointer', transition: 'all 0.15s' }}
                 >
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="#1877F2">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#1877F2">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
-                  <span style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>Facebook</span>
+                  <span style={{ fontSize: '0.75rem', color: '#1e293b', fontWeight: 600 }}>Facebook</span>
                 </button>
 
                 {/* WHATSAPP */}
                 <button
                   type="button"
                   onClick={() => setStep('WHATSAPP')}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '8px', padding: '14px 8px', borderRadius: '12px', border: '1.5px solid #e2e8f0', background: '#ffffff', cursor: 'pointer', transition: 'all 0.15s' }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '6px', padding: '10px 6px', borderRadius: '12px', border: '1.5px solid #e2e8f0', background: '#ffffff', cursor: 'pointer', transition: 'all 0.15s' }}
                 >
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="#25D366">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366">
                     <path d="M12.031 0C5.396 0 .016 5.379.016 12.015c0 2.115.553 4.183 1.603 6.002L.016 24l6.148-1.613c1.75 1.008 3.754 1.54 5.867 1.54 6.634 0 12.015-5.38 12.015-12.015C24.046 5.38 18.665 0 12.031 0zm.016 21.99a9.96 9.96 0 0 1-5.077-1.385l-.364-.216-3.771.989 1.006-3.676-.237-.378a9.967 9.967 0 0 1-1.533-5.31c0-5.503 4.478-9.98 9.98-9.98 5.503 0 9.98 4.478 9.98 9.98 0 5.503-4.478 9.98-9.983 9.98zm5.474-7.464c-.3-.15-1.776-.876-2.05-.975-.276-.1-.476-.15-.676.15-.2.3-.776.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.414-1.488-.893-.796-1.496-1.78-1.671-2.08-.175-.3-.019-.462.13-.611.136-.134.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.676-1.63-.925-2.23-.243-.585-.49-.506-.675-.515-.175-.008-.375-.01-.575-.01-.2 0-.525.075-.8.375s-1.05 1.025-1.05 2.5 1.075 2.898 1.225 3.098c.15.2 2.115 3.23 5.124 4.531.716.31 1.275.495 1.71.634.719.229 1.373.197 1.89.12.577-.086 1.776-.726 2.026-1.426.25-.7.25-1.3.175-1.425-.075-.125-.275-.2-.575-.35z"/>
                   </svg>
-                  <span style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>WhatsApp</span>
+                  <span style={{ fontSize: '0.75rem', color: '#1e293b', fontWeight: 600 }}>WhatsApp</span>
                 </button>
 
                 {/* EMAIL */}
                 <button
                   type="button"
                   onClick={() => setStep('EMAIL')}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '8px', padding: '14px 8px', borderRadius: '12px', border: '1.5px solid #e2e8f0', background: '#ffffff', cursor: 'pointer', transition: 'all 0.15s' }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '6px', padding: '10px 6px', borderRadius: '12px', border: '1.5px solid #e2e8f0', background: '#ffffff', cursor: 'pointer', transition: 'all 0.15s' }}
                 >
-                  <div style={{ width: '26px', height: '26px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1e293b' }}>
-                    <Mail size={22} strokeWidth={2.2} />
+                  <div style={{ width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1e293b' }}>
+                    <Mail size={20} strokeWidth={2.2} />
                   </div>
-                  <span style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>Email</span>
+                  <span style={{ fontSize: '0.75rem', color: '#1e293b', fontWeight: 600 }}>Email</span>
                 </button>
 
               </div>
 
               {/* DIVIDER LINE BEFORE SUBSCRIBER ROW */}
-              <div style={{ width: '100%', height: '1px', background: '#e2e8f0', marginBottom: '16px' }}></div>
+              <div style={{ width: '100%', height: '1px', background: '#e2e8f0', marginBottom: '10px' }}></div>
 
               {/* I'VE ALREADY SUBSCRIBED ROW */}
               <button
@@ -477,23 +472,23 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '12px 14px',
-                  borderRadius: '12px',
+                  padding: '8px 10px',
+                  borderRadius: '10px',
                   border: 'none',
                   background: 'transparent',
                   cursor: 'pointer',
-                  marginBottom: '16px'
+                  marginBottom: '10px'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div style={{ color: '#f97316', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <User size={22} strokeWidth={2.2} />
+                    <User size={18} strokeWidth={2.2} />
                   </div>
-                  <span style={{ fontSize: '0.98rem', fontWeight: 600, color: '#1e293b' }}>
+                  <span style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1e293b' }}>
                     I've Already Subscribed!
                   </span>
                 </div>
-                <ChevronRight size={20} color="#64748b" />
+                <ChevronRight size={18} color="#64748b" />
               </button>
             </>
           )}
@@ -835,7 +830,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
           )}
 
           {/* DIVIDER LINE BEFORE FOOTER */}
-          <div style={{ width: '100%', height: '1px', background: '#f1f5f9', margin: '20px 0 16px 0' }}></div>
+          <div style={{ width: '100%', height: '1px', background: '#f1f5f9', margin: '10px 0 10px 0' }}></div>
 
           {/* TERMS & PRIVACY FOOTER NOTE */}
           <p style={{ fontSize: '0.78rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
