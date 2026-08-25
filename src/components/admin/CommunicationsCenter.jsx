@@ -79,7 +79,7 @@ export const CommunicationsCenter = () => {
       {/* TEMPLATE PREVIEW DRAWER */}
       {selectedTouchpoint && (
         <div className="drawer-overlay">
-          <div className="drawer-content" style={{ maxWidth: '640px' }}>
+          <div className="drawer-content" style={{ maxWidth: '640px', overflowY: 'auto', maxHeight: '100vh' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid #e2e8f0', paddingBottom: '16px' }}>
               <div>
                 <span className="badge badge-info">{selectedTouchpoint.phase}</span>
