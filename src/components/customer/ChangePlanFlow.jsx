@@ -168,7 +168,7 @@ export const ChangePlanFlow = () => {
         {/* Technical Flow Disclosure Note */}
         <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', padding: '14px 18px', borderRadius: '12px', fontSize: '0.8rem', color: '#64748b', marginBottom: '24px' }}>
           <ShieldCheck size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} />
-          Executing this plan change revokes mandate <strong>{currentSub.mandateId}</strong> and launches a new Juspay mandate authentication session for ₹{selectedTargetPlan.price}.
+          Executing this plan change updates your subscription plan to <strong>{selectedTargetPlan.name}</strong> for ₹{selectedTargetPlan.price}.
         </div>
 
         {/* Action Button */}
