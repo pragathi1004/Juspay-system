@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { PLAN_SPECS } from '../../data/planSpecs';
 import { DailyYogaAuthModal } from './DailyYogaAuthModal';
-import { Check, X, ChevronDown, Sparkles, Globe, Search, ArrowRight, ShieldCheck, User } from 'lucide-react';
+import { Check, X, ChevronDown, Sparkles, Globe, Search, ArrowRight, ShieldCheck, User, Users, Calendar, Heart } from 'lucide-react';
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const PublicLandingPage = () => {
@@ -364,6 +364,163 @@ export const PublicLandingPage = () => {
               </button>
             </div>
 
+          </div>
+
+        </div>
+      </section>
+
+      {/* 4. OUR MEMBERS STORIES SECTION (MATCHING SCREENSHOT 2) */}
+      <section style={{ padding: '60px 40px 80px 40px', background: '#fffcf7', borderTop: '1px solid #fed7aa' }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
+          
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: '#1e293b', marginBottom: '12px' }}>
+              Our Members Stories
+            </h2>
+            <p style={{ color: '#ea580c', fontSize: '1.05rem', fontWeight: 600, margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+              ❤️ Real people. Real transformation through Yoga.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', marginBottom: '48px' }}>
+            
+            {/* Quote 1 */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #f1f5f9', padding: '28px 24px', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+              <span style={{ color: '#f97316', fontSize: '3.5rem', fontFamily: 'Georgia, serif', lineHeight: 1, position: 'absolute', top: '4px', left: '16px', userSelect: 'none', opacity: 0.2 }}>“</span>
+              <div style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6, marginBottom: '20px', zIndex: 1, position: 'relative' }}>
+                Yoga has improved my posture and flexibility. My back pain is gone and I feel light and energetic every day.
+              </div>
+              <div>
+                <div style={{ width: '32px', height: '2px', background: '#fed7aa', marginBottom: '12px' }} />
+                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem' }}>Jamuna Sharma</div>
+                <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px' }}>Homemaker</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Pune</div>
+              </div>
+            </div>
+
+            {/* Quote 2 */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #f1f5f9', padding: '28px 24px', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+              <span style={{ color: '#f97316', fontSize: '3.5rem', fontFamily: 'Georgia, serif', lineHeight: 1, position: 'absolute', top: '4px', left: '16px', userSelect: 'none', opacity: 0.2 }}>“</span>
+              <div style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6, marginBottom: '20px', zIndex: 1, position: 'relative' }}>
+                After yoga, my energy levels are up and I can manage my work and home much more peacefully.
+              </div>
+              <div>
+                <div style={{ width: '32px', height: '2px', background: '#fed7aa', marginBottom: '12px' }} />
+                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem' }}>Manoj Verma</div>
+                <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px' }}>Business Owner</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Delhi</div>
+              </div>
+            </div>
+
+            {/* Quote 3 */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #f1f5f9', padding: '28px 24px', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+              <span style={{ color: '#f97316', fontSize: '3.5rem', fontFamily: 'Georgia, serif', lineHeight: 1, position: 'absolute', top: '4px', left: '16px', userSelect: 'none', opacity: 0.2 }}>“</span>
+              <div style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6, marginBottom: '20px', zIndex: 1, position: 'relative' }}>
+                I sleep better, feel calmer and my mind is more focused since I started daily yoga practice.
+              </div>
+              <div>
+                <div style={{ width: '32px', height: '2px', background: '#fed7aa', marginBottom: '12px' }} />
+                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem' }}>Minakshi Iyer</div>
+                <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px' }}>Working Professional</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Bengaluru</div>
+              </div>
+            </div>
+
+            {/* Quote 4 */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #f1f5f9', padding: '28px 24px', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+              <span style={{ color: '#f97316', fontSize: '3.5rem', fontFamily: 'Georgia, serif', lineHeight: 1, position: 'absolute', top: '4px', left: '16px', userSelect: 'none', opacity: 0.2 }}>“</span>
+              <div style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6, marginBottom: '20px', zIndex: 1, position: 'relative' }}>
+                Yoga helped me manage my weight and stay active even with a busy lifestyle.
+              </div>
+              <div>
+                <div style={{ width: '32px', height: '2px', background: '#fed7aa', marginBottom: '12px' }} />
+                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem' }}>Seema Patil</div>
+                <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px' }}>Teacher</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Mumbai</div>
+              </div>
+            </div>
+
+            {/* Quote 5 */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #f1f5f9', padding: '28px 24px', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+              <span style={{ color: '#f97316', fontSize: '3.5rem', fontFamily: 'Georgia, serif', lineHeight: 1, position: 'absolute', top: '4px', left: '16px', userSelect: 'none', opacity: 0.2 }}>“</span>
+              <div style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6, marginBottom: '20px', zIndex: 1, position: 'relative' }}>
+                My flexibility and stamina have improved so much. I'm able to play with my kids without getting tired.
+              </div>
+              <div>
+                <div style={{ width: '32px', height: '2px', background: '#fed7aa', marginBottom: '12px' }} />
+                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem' }}>Anil Kumar</div>
+                <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px' }}>IT Professional</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Hyderabad</div>
+              </div>
+            </div>
+
+            {/* Quote 6 */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #f1f5f9', padding: '28px 24px', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+              <span style={{ color: '#f97316', fontSize: '3.5rem', fontFamily: 'Georgia, serif', lineHeight: 1, position: 'absolute', top: '4px', left: '16px', userSelect: 'none', opacity: 0.2 }}>“</span>
+              <div style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6, marginBottom: '20px', zIndex: 1, position: 'relative' }}>
+                Yoga brings me inner peace and helps me handle stress and challenges with a positive mindset.
+              </div>
+              <div>
+                <div style={{ width: '32px', height: '2px', background: '#fed7aa', marginBottom: '12px' }} />
+                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem' }}>Rashmi Nair</div>
+                <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px' }}>Bank Employee</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Kochi</div>
+              </div>
+            </div>
+
+            {/* Quote 7 */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #f1f5f9', padding: '28px 24px', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+              <span style={{ color: '#f97316', fontSize: '3.5rem', fontFamily: 'Georgia, serif', lineHeight: 1, position: 'absolute', top: '4px', left: '16px', userSelect: 'none', opacity: 0.2 }}>“</span>
+              <div style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6, marginBottom: '20px', zIndex: 1, position: 'relative' }}>
+                I feel stronger, healthier and more confident. Yoga is now a part of my daily life.
+              </div>
+              <div>
+                <div style={{ width: '32px', height: '2px', background: '#fed7aa', marginBottom: '12px' }} />
+                <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem' }}>Suresh Rao</div>
+                <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px' }}>Retired Government Officer</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Chennai</div>
+              </div>
+            </div>
+
+            {/* Quote 8 - Special CTA */}
+            <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #f1f5f9', padding: '28px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#fff7ed', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px', border: '1px solid #ffedd5' }}>
+                <span style={{ fontSize: '1.4rem' }}>🧘</span>
+              </div>
+              <p style={{ fontSize: '0.95rem', fontWeight: 700, color: '#1e293b', lineHeight: 1.5, margin: '0 0 16px 0' }}>
+                Join thousands of members transforming their lives with Yoga every day.
+              </p>
+              <span style={{ fontSize: '1.25rem', color: '#ef4444' }}>❤️</span>
+            </div>
+
+          </div>
+
+          {/* Footer Trust Banner (Grid of 4 items) */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.02)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ background: '#eff6ff', padding: '8px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Users size={20} color="#3b82f6" />
+              </div>
+              <span style={{ fontSize: '0.85rem', color: '#1e293b', fontWeight: 600 }}>Trusted by 50,000+ members</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ background: '#fef2f2', padding: '8px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Calendar size={20} color="#ef4444" />
+              </div>
+              <span style={{ fontSize: '0.85rem', color: '#1e293b', fontWeight: 600 }}>Daily live classes with expert teachers</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ background: '#f0fdf4', padding: '8px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Sparkles size={20} color="#22c55e" />
+              </div>
+              <span style={{ fontSize: '0.85rem', color: '#1e293b', fontWeight: 600 }}>Transform your mind, body & lifestyle</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ background: '#fff7ed', padding: '8px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Heart size={20} color="#f97316" />
+              </div>
+              <span style={{ fontSize: '0.85rem', color: '#1e293b', fontWeight: 600 }}>Be part of a conscious and supportive community</span>
+            </div>
           </div>
 
         </div>
