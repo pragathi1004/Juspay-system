@@ -370,7 +370,7 @@ export const PublicLandingPage = () => {
       </section>
 
       {/* 4. OUR MEMBERS STORIES SECTION (MATCHING SCREENSHOT 2) */}
-      <section style={{ padding: '60px 40px 80px 40px', background: '#fffcf7', borderTop: '1px solid #fed7aa' }}>
+      <section style={{ padding: '60px 40px 80px 40px' }}>
         <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
           
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
