@@ -171,9 +171,14 @@ export const PublicLandingPage = () => {
 
       {/* 3. MEMBERSHIP PLANS COMPARISON SECTION (MATCHING SCREENSHOT 3 & 4) */}
       <section id="membership-plans" style={{ padding: '80px 40px', maxWidth: '1240px', margin: '0 auto' }}>
-        <h2 style={{ fontSize: '2.4rem', fontWeight: 900, color: '#1e293b', textAlign: 'center', marginBottom: '48px' }}>
-          Membership Plans
-        </h2>
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 style={{ fontSize: '2.4rem', fontWeight: 900, color: '#1e293b', marginBottom: '8px' }}>
+            Membership Plans
+          </h2>
+          <p style={{ color: '#64748b', fontSize: '1.05rem', fontWeight: 500, margin: 0 }}>
+            Choose a plan that fits your journey to daily wellness
+          </p>
+        </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '28px' }}>
           
@@ -196,7 +201,7 @@ export const PublicLandingPage = () => {
 
               {/* FEATURES CHECKLIST */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px', fontSize: '0.9rem', color: '#334155' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Unlimited Classes</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Unlimited Live Yoga Classes</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Monthly Sunday Masterclass</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Bonus E-Books</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> 3 Mini Programs</div>
@@ -235,7 +240,7 @@ export const PublicLandingPage = () => {
               <button
                 type="button"
                 onClick={() => handleSelectPlanForLead(PLAN_SPECS.find(p => p.code === 'YOGA_12M'))}
-                style={{ width: '100%', padding: '14px', borderRadius: '9999px', background: '#ffffff', color: '#64748b', fontWeight: 700, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: '1rem' }}
+                style={{ width: '100%', padding: '14px', borderRadius: '9999px', background: '#16a34a', color: '#ffffff', fontWeight: 700, border: 'none', cursor: 'pointer', fontSize: '1rem' }}
               >
                 Get started now
               </button>
@@ -256,7 +261,7 @@ export const PublicLandingPage = () => {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px', fontSize: '0.9rem', color: '#334155' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Unlimited Classes</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Unlimited Live Yoga Classes</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Monthly Sunday Masterclass</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Bonus E-Books</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> 3 Mini Programs</div>
@@ -315,7 +320,7 @@ export const PublicLandingPage = () => {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px', fontSize: '0.9rem', color: '#334155' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Unlimited Classes</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Unlimited Live Yoga Classes</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Monthly Sunday Masterclass</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Bonus E-Books</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', textDecoration: 'line-through' }}><X size={18} color="#ef4444" /> 3 Mini Programs</div>
