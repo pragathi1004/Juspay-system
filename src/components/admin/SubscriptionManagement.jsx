@@ -116,6 +116,7 @@ export const SubscriptionManagement = () => {
               <th>Amount</th>
               <th>Autopay Status</th>
               <th>Next Renewal</th>
+              <th>Subscription End Date</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -148,6 +149,7 @@ export const SubscriptionManagement = () => {
                   </span>
                 </td>
                 <td style={{ fontSize: '0.8rem', fontWeight: 600 }}>{sub.nextRenewal}</td>
+                <td style={{ fontSize: '0.8rem', fontWeight: 600, color: '#475569' }}>{sub.endDate || 'N/A'}</td>
                 <td>
                   <button
                     onClick={(e) => {
