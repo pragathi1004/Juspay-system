@@ -5,7 +5,7 @@ import { PaymentHistoryModal } from './PaymentHistoryModal';
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const CustomerDashboard = () => {
-  const { customer, setCustomerScreen, setIsPaymentHistoryOpen, isPaymentHistoryOpen, handleTurnOnAutoRenewalSubmit, setSimulatedState } = useApp();
+  const { customer, setCustomerScreen, setIsPaymentHistoryOpen, isPaymentHistoryOpen, handleTurnOnAutoRenewalSubmit, setSimulatedState, handleResumeSubscriptionSubmit } = useApp();
   const sub = customer.subscription;
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
@@ -186,6 +186,44 @@ export const CustomerDashboard = () => {
           </div>
         )}
 
+        {/* ============================================================ */}
+        {/* PAUSED SUBSCRIPTION BANNER                                   */}
+        {/* ============================================================ */}
+        {sub.status === 'PAUSED' && (
+          <div style={{ background: '#fffbeb', border: '2px solid #f59e0b', borderRadius: '16px', padding: '20px 24px', boxShadow: '0 4px 12px rgba(245, 158, 11, 0.15)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#f59e0b', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <AlertTriangle size={24} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#78350f' }}>
+                    ⏸️ Your Subscription is Paused
+                  </div>
+                  <div style={{ fontSize: '0.875rem', color: '#92400e', marginTop: '2px' }}>
+                    Paused for <strong>{sub.pauseDuration} days</strong> starting {sub.pausedAt}. Daily class access & auto-billing are suspended.<br />
+                    <span style={{ fontWeight: 700 }}>New subscription expiry: {sub.endDate}. Resume anytime — unused pause days are refunded.</span>
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => handleResumeSubscriptionSubmit()}
+                  style={{ background: '#f59e0b', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', border: 'none', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
+                >
+                  ▶ Resume Now
+                </button>
+                <button
+                  onClick={() => setCustomerScreen('MANAGE_HUB')}
+                  style={{ background: '#ffffff', border: '1px solid #d97706', color: '#92400e', padding: '10px 16px', borderRadius: '8px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
+                >
+                  Manage Subscription
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* 1. ORIENTATION BANNER */}
         <button
           type="button"
@@ -292,7 +330,7 @@ export const CustomerDashboard = () => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#111827' }}>Membership Details</h3>
-                <span className="badge badge-active" style={{ background: sub.status === 'EXPIRED' ? '#64748b' : '#059669', color: '#ffffff', border: 'none', padding: '4px 12px', fontSize: '0.75rem', fontWeight: 700 }}>
+                <span className="badge badge-active" style={{ background: sub.status === 'EXPIRED' ? '#64748b' : sub.status === 'PAUSED' ? '#f59e0b' : '#059669', color: '#ffffff', border: 'none', padding: '4px 12px', fontSize: '0.75rem', fontWeight: 700 }}>
                   {sub.status || 'Active'}
                 </span>
               </div>

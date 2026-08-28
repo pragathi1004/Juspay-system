@@ -12,10 +12,13 @@ import {
   ChevronRight,
   RefreshCw,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  Clock,
+  PlayCircle
 } from 'lucide-react';
 import { PaymentHistoryModal } from './PaymentHistoryModal';
 import { CancelSubscriptionFlow } from './CancelSubscriptionFlow';
+import { PauseSubscriptionModal } from './PauseSubscriptionModal';
 
 export const ManageSubscriptionHub = () => {
   const {
@@ -25,7 +28,9 @@ export const ManageSubscriptionHub = () => {
     setIsPaymentHistoryOpen,
     handleTurnOffAutoRenewalSubmit,
     handleTurnOnAutoRenewalSubmit,
-    setIsTurnOffRenewalModalOpen
+    setIsTurnOffRenewalModalOpen,
+    setIsPauseModalOpen,
+    handleResumeSubscriptionSubmit
   } = useApp();
 
   const sub = customer.subscription;
@@ -267,6 +272,40 @@ export const ManageSubscriptionHub = () => {
             </div>
           </div>
 
+          {/* ACTION 5: PAUSE / RESUME SUBSCRIPTION */}
+          <div
+            onClick={() => sub.isPaused ? handleResumeSubscriptionSubmit() : setIsPauseModalOpen(true)}
+            style={{
+              background: sub.isPaused ? '#fffbeb' : '#ffffff',
+              border: sub.isPaused ? '1.5px solid #f59e0b' : '1px solid #cbd5e1',
+              borderRadius: '20px',
+              padding: '24px',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}
+          >
+            <div>
+              <div style={{ background: sub.isPaused ? '#fef3c7' : '#fff7ed', width: '44px', height: '44px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: sub.isPaused ? '#d97706' : '#ea580c', marginBottom: '16px' }}>
+                {sub.isPaused ? <PlayCircle size={22} /> : <Clock size={22} />}
+              </div>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: '4px', color: sub.isPaused ? '#92400e' : '#1e293b' }}>
+                {sub.isPaused ? 'Resume Subscription' : 'Pause Subscription'}
+              </h3>
+              <p style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '20px', lineHeight: 1.4 }}>
+                {sub.isPaused
+                  ? `Your subscription is paused for ${sub.pauseDuration} days. Resume early to refund unused pause days back to your pool.`
+                  : `Temporarily suspend classes & billing. You have ${sub.pauseDaysRemaining !== undefined ? sub.pauseDaysRemaining : 15} pause days available.`
+                }
+              </p>
+            </div>
+            <div style={{ color: sub.isPaused ? '#d97706' : '#ea580c', fontWeight: 700, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              {sub.isPaused ? 'Resume Now' : 'Pause Subscription'} <ChevronRight size={16} />
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -274,6 +313,7 @@ export const ManageSubscriptionHub = () => {
       {/* PAYMENT HISTORY & CANCELLATION MODALS */}
       <PaymentHistoryModal />
       <CancelSubscriptionFlow />
+      <PauseSubscriptionModal />
     </div>
   );
 };

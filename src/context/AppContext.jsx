@@ -30,6 +30,7 @@ export const AppProvider = ({ children }) => {
   const [selectedPlanForCheckout, setSelectedPlanForCheckout] = useState(PLAN_SPECS[0]); // 3 Months default ₹1,499
   const [selectedAdminSubDetail, setSelectedAdminSubDetail] = useState(null);
   const [selectedWebhookLog, setSelectedWebhookLog] = useState(null);
+  const [isPauseModalOpen, setIsPauseModalOpen] = useState(false);
 
   // Customer Data & State Simulation
   const [customer, setCustomer] = useState(INITIAL_CUSTOMER);
@@ -84,6 +85,9 @@ export const AppProvider = ({ children }) => {
         updatedSub.renewalAmount = 1499;
         updatedSub.retryAttempt = 0;
         updatedSub.failureReason = null;
+        updatedSub.isPaused = false;
+        updatedSub.pausedAt = null;
+        updatedSub.pauseDuration = 0;
         setCustomerScreen('DASHBOARD');
         break;
       case 'AUTOPAY_OFF':
@@ -111,6 +115,9 @@ export const AppProvider = ({ children }) => {
         updatedSub.nextRenewalDate = '14 Apr 2027';
         updatedSub.autopayStatus = 'ACTIVE';
         updatedSub.renewalAmount = 1499;
+        updatedSub.isPaused = false;
+        updatedSub.pausedAt = null;
+        updatedSub.pauseDuration = 0;
         // Add new payment entry
         const newRenewPayment = {
           id: 'PAY_' + Math.floor(100000 + Math.random() * 900000),
@@ -228,6 +235,121 @@ export const AppProvider = ({ children }) => {
       }
     };
     setWebhookLogs((prev) => [enableEvent, ...prev]);
+  };
+
+  // Safe Date Math Helpers
+  const addDays = (dateStr, days) => {
+    try {
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) return dateStr;
+      date.setDate(date.getDate() + parseInt(days));
+      const d = date.getDate();
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const m = months[date.getMonth()];
+      const y = date.getFullYear();
+      return `${d} ${m} ${y}`;
+    } catch (e) {
+      return dateStr;
+    }
+  };
+
+  const handlePauseSubscriptionSubmit = (pauseDays) => {
+    const sub = customer.subscription;
+    const oldEndDate = sub.endDate || '13 Jan 2027';
+    const oldNextRenewalDate = sub.nextRenewalDate || '14 Jan 2027';
+
+    const newEndDate = addDays(oldEndDate, pauseDays);
+    const newNextRenewalDate = addDays(oldNextRenewalDate, pauseDays);
+
+    const updatedSub = {
+      ...sub,
+      status: 'PAUSED',
+      isPaused: true,
+      pausedAt: new Date().toISOString().split('T')[0],
+      pauseDuration: parseInt(pauseDays),
+      prevEndDate: oldEndDate,
+      prevNextRenewalDate: oldNextRenewalDate,
+      endDate: newEndDate,
+      nextRenewalDate: newNextRenewalDate,
+      pauseDaysRemaining: Math.max(0, (sub.pauseDaysRemaining || 15) - parseInt(pauseDays))
+    };
+
+    setCustomer((prev) => ({
+      ...prev,
+      subscription: updatedSub
+    }));
+    setIsPauseModalOpen(false);
+
+    // Webhook log
+    const pauseEvent = {
+      id: 'EVT_' + Math.floor(100000 + Math.random() * 900000),
+      timestamp: new Date().toLocaleString(),
+      eventType: 'MANDATE_UPDATED',
+      orderId: 'ORD_PAUSE_' + Math.floor(1000 + Math.random() * 9000),
+      customerId: customer.id,
+      subscriptionId: sub.id,
+      mandateId: sub.mandateId,
+      status: 'PROCESSED',
+      payload: {
+        event: 'MANDATE_SUSPENDED',
+        paused_for_days: pauseDays,
+        resumes_on: newNextRenewalDate
+      }
+    };
+    setWebhookLogs((prev) => [pauseEvent, ...prev]);
+  };
+
+  const handleResumeSubscriptionSubmit = () => {
+    const sub = customer.subscription;
+    if (!sub.isPaused) return;
+
+    const pausedAtDate = new Date(sub.pausedAt);
+    const today = new Date();
+    const msDiff = today.getTime() - pausedAtDate.getTime();
+    const daysPausedActual = Math.max(1, Math.ceil(msDiff / (1000 * 60 * 60 * 24)));
+
+    const unusedDays = Math.max(0, sub.pauseDuration - daysPausedActual);
+    const updatedPauseDaysRemaining = (sub.pauseDaysRemaining || 0) + unusedDays;
+
+    const prevEndDate = sub.prevEndDate || '13 Jan 2027';
+    const prevNextRenewalDate = sub.prevNextRenewalDate || '14 Jan 2027';
+
+    const finalEndDate = addDays(prevEndDate, daysPausedActual);
+    const finalNextRenewalDate = addDays(prevNextRenewalDate, daysPausedActual);
+
+    const updatedSub = {
+      ...sub,
+      status: 'ACTIVE',
+      isPaused: false,
+      pausedAt: null,
+      pauseDuration: 0,
+      endDate: finalEndDate,
+      nextRenewalDate: finalNextRenewalDate,
+      pauseDaysRemaining: updatedPauseDaysRemaining
+    };
+
+    setCustomer((prev) => ({
+      ...prev,
+      subscription: updatedSub
+    }));
+
+    // Webhook log
+    const resumeEvent = {
+      id: 'EVT_' + Math.floor(100000 + Math.random() * 900000),
+      timestamp: new Date().toLocaleString(),
+      eventType: 'MANDATE_UPDATED',
+      orderId: 'ORD_RESUME_' + Math.floor(1000 + Math.random() * 9000),
+      customerId: customer.id,
+      subscriptionId: sub.id,
+      mandateId: sub.mandateId,
+      status: 'PROCESSED',
+      payload: {
+        event: 'MANDATE_RESUMED',
+        actual_days_paused: daysPausedActual,
+        new_renewal_date: finalNextRenewalDate
+      }
+    };
+    setWebhookLogs((prev) => [resumeEvent, ...prev]);
   };
 
   // Flow handlers
@@ -466,7 +588,11 @@ export const AppProvider = ({ children }) => {
         handlePlanChangeSubmit,
         handleEditPaymentSubmit,
         handleTurnOffAutoRenewalSubmit,
-        handleTurnOnAutoRenewalSubmit
+        handleTurnOnAutoRenewalSubmit,
+        isPauseModalOpen,
+        setIsPauseModalOpen,
+        handlePauseSubscriptionSubmit,
+        handleResumeSubscriptionSubmit
       }}
     >
       {children}

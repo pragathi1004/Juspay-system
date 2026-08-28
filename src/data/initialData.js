@@ -32,7 +32,11 @@ export const INITIAL_CUSTOMER = {
     gracePeriodEndDate: null,
     cancelledAt: null,
     cancelReason: null,
-    cancellationAccessUntil: null
+    cancellationAccessUntil: null,
+    pauseDaysRemaining: 15,
+    isPaused: false,
+    pausedAt: null,
+    pauseDuration: 0
   }
 };
 

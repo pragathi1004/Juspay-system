@@ -37,7 +37,7 @@ export const SubscriptionDetailDrawer = () => {
 
         {/* Status Badge Strip */}
         <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', flexWrap: 'wrap' }}>
-          <span className={`badge ${sub.status === 'ACTIVE' ? 'badge-active' : sub.status === 'RENEWAL_FAILED' ? 'badge-danger' : 'badge-warning'}`}>
+          <span className={`badge ${sub.status === 'ACTIVE' ? 'badge-active' : sub.status === 'RENEWAL_FAILED' ? 'badge-danger' : sub.status === 'PAUSED' ? 'badge-warning' : 'badge-warning'}`}>
             Status: {sub.status}
           </span>
           <span className={`badge ${sub.autopayStatus === 'ACTIVE' ? 'badge-active' : 'badge-danger'}`}>
@@ -139,6 +139,17 @@ export const SubscriptionDetailDrawer = () => {
             </div>
 
             {/* Admin Operations Buttons */}
+            {sub.isPaused && (
+              <div style={{ background: '#fffbeb', border: '1px solid #fef08a', padding: '16px', borderRadius: '14px', marginBottom: '20px' }}>
+                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#854d0e', marginBottom: '8px' }}>⏸️ Subscription Pause Status</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '0.85rem' }}>
+                  <div><span style={{ color: '#92400e' }}>Paused At:</span> <strong>{sub.pausedAt}</strong></div>
+                  <div><span style={{ color: '#92400e' }}>Duration:</span> <strong>{sub.pauseDuration} Days</strong></div>
+                  <div><span style={{ color: '#92400e' }}>Pause Days Remaining:</span> <strong>{sub.pauseDaysRemaining}</strong></div>
+                  <div><span style={{ color: '#92400e' }}>New End Date:</span> <strong>{sub.endDate}</strong></div>
+                </div>
+              </div>
+            )}
             <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '20px', marginTop: '20px' }}>
               <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0f172a', marginBottom: '12px' }}>
                 Administrative Actions
