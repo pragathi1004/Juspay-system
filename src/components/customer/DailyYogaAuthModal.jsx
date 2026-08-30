@@ -10,6 +10,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
   const [countryCode, setCountryCode] = useState('+91');
   const [emailInput, setEmailInput] = useState(regForm?.email || 'pragathi@gmail.com');
   const [whatsAppNumber, setWhatsAppNumber] = useState(regForm?.phone || '9920656992');
+  const [nameInput, setNameInput] = useState(regForm?.name || 'PRAGATHI');
   
   // Existing subscriber login fields (Matching Screenshot 2)
   const [registeredName, setRegisteredName] = useState(regForm?.name || 'PRAGATHI');
@@ -60,9 +61,13 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
       alert('Please enter a valid 10-digit mobile number');
       return;
     }
+    if (!nameInput.trim()) {
+      alert('Please enter your name to continue');
+      return;
+    }
     setPendingAuth({
       type: 'Mobile OTP',
-      extraDetails: { phone: phoneNumber }
+      extraDetails: { phone: phoneNumber, name: nameInput.trim() }
     });
     setTimer(30);
     setStep('OTP');
@@ -155,15 +160,8 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
         setVerifiedSuccess(false);
         setStep('PHONE');
         onClose();
-        // Redirect new lead to landing page membership plans
-        setCustomerScreen('PUBLIC_LANDING');
-        
-        setTimeout(() => {
-          const plansEl = document.getElementById('membership-plans');
-          if (plansEl) {
-            plansEl.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
+        // Redirect new lead directly to the Registration form (pre-filled)
+        setCustomerScreen('CRM_FORM');
       }, 700);
     }, 700);
   };
@@ -408,7 +406,30 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
 
               {/* PHONE INPUT FORM */}
               <form onSubmit={handlePhoneSubmit} style={{ width: '100%' }}>
-                
+
+                {/* NAME INPUT */}
+                <div style={{ marginBottom: '12px', textAlign: 'left' }}>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#475569', marginBottom: '6px' }}>Your Name</label>
+                  <input
+                    type="text"
+                    value={nameInput}
+                    onChange={(e) => setNameInput(e.target.value)}
+                    placeholder="Enter your full name"
+                    style={{
+                      width: '100%',
+                      border: '1.5px solid #cbd5e1',
+                      borderRadius: '12px',
+                      padding: '12px 14px',
+                      fontSize: '0.95rem',
+                      color: '#1e293b',
+                      background: '#ffffff',
+                      boxSizing: 'border-box',
+                      outline: 'none'
+                    }}
+                    required
+                  />
+                </div>
+
                 {/* INPUT GROUP WITH COUNTRY CODE */}
                 <div style={{ display: 'flex', alignItems: 'stretch', border: '1.5px solid #cbd5e1', borderRadius: '12px', background: '#ffffff', overflow: 'hidden', marginBottom: '12px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '12px 14px', background: '#ffffff', borderRight: '1.5px solid #e2e8f0', color: '#1e293b', fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer' }}>

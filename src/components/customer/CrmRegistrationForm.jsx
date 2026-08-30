@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { ShieldCheck, Calendar, PhoneCall, Check, ArrowLeft, RefreshCw, AlertCircle, X } from 'lucide-react';
+import { ShieldCheck, Calendar, PhoneCall, Check, ArrowLeft, RefreshCw, AlertCircle, X, Lock, ChevronDown } from 'lucide-react';
 
 export const CrmRegistrationForm = () => {
-  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout, setIsJuspayModalOpen, setIsTermsModalOpen } = useApp();
+  const { regForm, setRegForm, setCustomerScreen, selectedPlanForCheckout, setIsJuspayModalOpen, setIsTermsModalOpen, selectedLanguage, setSelectedLanguage } = useApp();
 
   const [termsAgreed, setTermsAgreed] = useState(regForm.termsAgreed);
   const [optOutAgreed, setOptOutAgreed] = useState(regForm.optOutAgreed);
   const [showError, setShowError] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const languages = ['English / Hindi', 'Malayalam', 'Gujarati', 'Kannada'];
 
   const currentPrice = selectedPlanForCheckout?.price || 1499;
   const currentPlanName = selectedPlanForCheckout?.name || '3 Months Plan';
@@ -109,46 +111,34 @@ export const CrmRegistrationForm = () => {
 
             <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '660px' }}>
               
-              {/* First Name & Last Name */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                    First Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={regForm.firstName}
-                    onChange={(e) => setRegForm({ ...regForm, firstName: e.target.value })}
-                    style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem' }}
-                    required
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                    Last Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={regForm.lastName}
-                    onChange={(e) => setRegForm({ ...regForm, lastName: e.target.value })}
-                    style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem' }}
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* WhatsApp Number */}
+              {/* Name (single field, pre-filled from OTP login) */}
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                  WhatsApp Number *
+                  Name *
                 </label>
                 <input
-                  type="tel"
-                  value={regForm.phone}
-                  onChange={(e) => setRegForm({ ...regForm, phone: e.target.value })}
-                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem' }}
+                  type="text"
+                  value={regForm.name || regForm.firstName || ''}
+                  onChange={(e) => setRegForm({ ...regForm, name: e.target.value, firstName: e.target.value })}
+                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem', boxSizing: 'border-box' }}
                   required
                 />
+              </div>
+
+              {/* WhatsApp / Phone Number (read-only — verified via OTP) */}
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
+                  WhatsApp Number * <span style={{ color: '#16a34a', fontSize: '0.75rem', fontWeight: 500 }}>(verified ✓)</span>
+                </label>
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="tel"
+                    value={regForm.phone}
+                    readOnly
+                    style={{ width: '100%', padding: '12px 14px 12px 40px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f3f4f6', fontSize: '0.95rem', color: '#6b7280', cursor: 'not-allowed', boxSizing: 'border-box' }}
+                  />
+                  <Lock size={14} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af' }} />
+                </div>
               </div>
 
               {/* Email */}
@@ -204,6 +194,34 @@ export const CrmRegistrationForm = () => {
                     {regForm.cityState}
                   </div>
                 </div>
+              </div>
+
+              {/* Language Preference (moved from plan cards) */}
+              <div style={{ position: 'relative' }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
+                  Class Language *
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem', color: selectedLanguage ? '#111827' : '#9ca3af', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', boxSizing: 'border-box' }}
+                >
+                  <span>{selectedLanguage || 'Select a language'}</span>
+                  <ChevronDown size={18} color="#9ca3af" />
+                </button>
+                {langDropdownOpen && (
+                  <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, background: '#ffffff', border: '1px solid #d1d5db', borderRadius: '6px', boxShadow: '0 8px 20px rgba(0,0,0,0.12)', overflow: 'hidden', zIndex: 30 }}>
+                    {languages.map((lang) => (
+                      <div
+                        key={lang}
+                        onClick={() => { setSelectedLanguage(lang); setLangDropdownOpen(false); }}
+                        style={{ padding: '11px 14px', fontSize: '0.9rem', fontWeight: selectedLanguage === lang ? 700 : 500, color: selectedLanguage === lang ? '#ea580c' : '#374151', background: selectedLanguage === lang ? '#fff7ed' : '#ffffff', cursor: 'pointer', borderBottom: '1px solid #f3f4f6' }}
+                      >
+                        {lang}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* EXISTING CONSENT CHECKBOXES */}

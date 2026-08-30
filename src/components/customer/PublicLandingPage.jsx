@@ -9,13 +9,14 @@ export const PublicLandingPage = () => {
   const { setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, selectedLanguage, setSelectedLanguage } = useApp();
 
   const [activeDropdown, setActiveDropdown] = useState(false);
-  const [openLangCard, setOpenLangCard] = useState(null); // plan code for open dropdown
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(true); // Open OTP login on entry
+  // Login modal is NOT auto-opened; it opens only when user selects a plan
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const handleSelectPlanForLead = (plan) => {
+    // Store the selected plan in context, then open login/OTP modal
     setSelectedPlanForCheckout(plan);
     setUserFlow('NEW_LEAD');
-    setCustomerScreen('CRM_FORM');
+    setIsAuthModalOpen(true);
   };
 
   const handleAlreadySubscribed = () => {
@@ -28,8 +29,6 @@ export const PublicLandingPage = () => {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  const languages = ['English / Hindi', 'Malayalam', 'Gujarati', 'Kannada'];
 
   return (
     <div style={{ background: '#FFF8E8', minHeight: '100vh', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -211,32 +210,8 @@ export const PublicLandingPage = () => {
               </div>
             </div>
 
-            {/* LANGUAGE SELECTOR & GET STARTED BUTTON (MATCHING SCREENSHOT 4) */}
+            {/* GET STARTED BUTTON — opens login/OTP modal */}
             <div>
-              <div style={{ position: 'relative', marginBottom: '12px' }}>
-                <button
-                  type="button"
-                  onClick={() => setOpenLangCard(openLangCard === 'YOGA_12M' ? null : 'YOGA_12M')}
-                  style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #a7f3d0', background: '#ffffff', fontSize: '0.9rem', fontWeight: 600, color: '#15803d', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', cursor: 'pointer' }}
-                >
-                  Select Language: <strong>{selectedLanguage}</strong> <ChevronDown size={16} />
-                </button>
-
-                {openLangCard === 'YOGA_12M' && (
-                  <div style={{ position: 'absolute', bottom: '100%', left: 0, right: 0, background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', overflow: 'hidden', zIndex: 20 }}>
-                    {languages.map((lang) => (
-                      <div
-                        key={lang}
-                        onClick={() => { setSelectedLanguage(lang); setOpenLangCard(null); }}
-                        style={{ padding: '10px 16px', fontSize: '0.9rem', fontWeight: selectedLanguage === lang ? 700 : 500, color: selectedLanguage === lang ? '#2563eb' : '#334155', background: selectedLanguage === lang ? '#eff6ff' : '#ffffff', cursor: 'pointer' }}
-                      >
-                        {lang}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
               <button
                 type="button"
                 onClick={() => handleSelectPlanForLead(PLAN_SPECS.find(p => p.code === 'YOGA_12M'))}
@@ -271,31 +246,8 @@ export const PublicLandingPage = () => {
               </div>
             </div>
 
+            {/* CHOOSE PLAN BUTTON — opens login/OTP modal */}
             <div>
-              <div style={{ position: 'relative', marginBottom: '12px' }}>
-                <button
-                  type="button"
-                  onClick={() => setOpenLangCard(openLangCard === 'YOGA_6M' ? null : 'YOGA_6M')}
-                  style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #cbd5e1', background: '#ffffff', fontSize: '0.9rem', fontWeight: 600, color: '#475569', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', cursor: 'pointer' }}
-                >
-                  Select Language: <strong>{selectedLanguage}</strong> <ChevronDown size={16} />
-                </button>
-
-                {openLangCard === 'YOGA_6M' && (
-                  <div style={{ position: 'absolute', bottom: '100%', left: 0, right: 0, background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', overflow: 'hidden', zIndex: 20 }}>
-                    {languages.map((lang) => (
-                      <div
-                        key={lang}
-                        onClick={() => { setSelectedLanguage(lang); setOpenLangCard(null); }}
-                        style={{ padding: '10px 16px', fontSize: '0.9rem', fontWeight: selectedLanguage === lang ? 700 : 500, color: selectedLanguage === lang ? '#2563eb' : '#334155', background: selectedLanguage === lang ? '#eff6ff' : '#ffffff', cursor: 'pointer' }}
-                      >
-                        {lang}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
               <button
                 type="button"
                 onClick={() => handleSelectPlanForLead(PLAN_SPECS.find(p => p.code === 'YOGA_6M'))}
@@ -315,8 +267,9 @@ export const PublicLandingPage = () => {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '20px' }}>
-                <span style={{ fontSize: '2.5rem', fontWeight: 900, color: '#1e293b' }}>₹1,499</span>
-                <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '9999px' }}>Best Value</span>
+                <span style={{ fontSize: '2.5rem', fontWeight: 900, color: '#1e293b' }}>₹2,999</span>
+                <span style={{ fontSize: '1rem', color: '#94a3b8', textDecoration: 'line-through' }}>₹7,999</span>
+                <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '9999px' }}>0% off</span>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px', fontSize: '0.9rem', color: '#334155' }}>
@@ -330,31 +283,8 @@ export const PublicLandingPage = () => {
               </div>
             </div>
 
+            {/* CHOOSE PLAN BUTTON — opens login/OTP modal */}
             <div>
-              <div style={{ position: 'relative', marginBottom: '12px' }}>
-                <button
-                  type="button"
-                  onClick={() => setOpenLangCard(openLangCard === 'YOGA_3M' ? null : 'YOGA_3M')}
-                  style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #cbd5e1', background: '#ffffff', fontSize: '0.9rem', fontWeight: 600, color: '#475569', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', cursor: 'pointer' }}
-                >
-                  Select Language: <strong>{selectedLanguage}</strong> <ChevronDown size={16} />
-                </button>
-
-                {openLangCard === 'YOGA_3M' && (
-                  <div style={{ position: 'absolute', bottom: '100%', left: 0, right: 0, background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', overflow: 'hidden', zIndex: 20 }}>
-                    {languages.map((lang) => (
-                      <div
-                        key={lang}
-                        onClick={() => { setSelectedLanguage(lang); setOpenLangCard(null); }}
-                        style={{ padding: '10px 16px', fontSize: '0.9rem', fontWeight: selectedLanguage === lang ? 700 : 500, color: selectedLanguage === lang ? '#2563eb' : '#334155', background: selectedLanguage === lang ? '#eff6ff' : '#ffffff', cursor: 'pointer' }}
-                      >
-                        {lang}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
               <button
                 type="button"
                 onClick={() => handleSelectPlanForLead(PLAN_SPECS.find(p => p.code === 'YOGA_3M'))}
