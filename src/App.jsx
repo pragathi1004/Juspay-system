@@ -26,6 +26,7 @@ import { PlansManagement } from './components/admin/PlansManagement';
 import { PaymentsMandates } from './components/admin/PaymentsMandates';
 import { CommunicationsCenter } from './components/admin/CommunicationsCenter';
 import { JuspayWebhookLogs } from './components/admin/JuspayWebhookLogs';
+import { YogaChallengeScreen } from './components/customer/YogaChallengeScreen';
 
 export default function App() {
   const { appVersion, activeApp, customerScreen, adminTab } = useApp();
@@ -39,6 +40,7 @@ export default function App() {
         /* EXPERIENCE A: CUSTOMER / YOGA PARTICIPANT JOURNEY */
         <div>
           {customerScreen === 'PUBLIC_LANDING' && <PublicLandingPage />}
+          {customerScreen === 'CHALLENGE' && <YogaChallengeScreen />}
           {customerScreen === 'LANDING' && <LandingPage />}
           {customerScreen === 'MANAGE_SUB' && <RegistrationModal />}
           {customerScreen === 'CRM_FORM' && (appVersion === 'v2' ? <CrmRegistrationFormV2 /> : <CrmRegistrationForm />)}

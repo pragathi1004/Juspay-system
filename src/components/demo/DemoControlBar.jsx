@@ -130,7 +130,8 @@ export const DemoControlBar = () => {
                 }
               }}
             >
-              <option value="PUBLIC_LANDING">0. Public Landing Page (OTP Lead Capture)</option>
+              <option value="PUBLIC_LANDING">0. Public Landing Page (AoL Main)</option>
+              <option value="CHALLENGE">0.1 14-Day Free Yoga Challenge (challenge.srisriyoga.in)</option>
               <option value="CRM_FORM">1. Registration & Consent (₹1,499)</option>
               <option value="JUSPAY">2. Juspay Payment Gateway (Mock)</option>
               <option value="PREPARATION">3. Payment Success & Dashboard Prep</option>

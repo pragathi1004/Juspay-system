@@ -66,6 +66,9 @@ export const AppProvider = ({ children }) => {
       case 'PUBLIC_LANDING':
         setCustomerScreen('PUBLIC_LANDING');
         return;
+      case 'CHALLENGE':
+        setCustomerScreen('CHALLENGE');
+        return;
       case 'CRM_FORM':
         setCustomerScreen('CRM_FORM');
         return;

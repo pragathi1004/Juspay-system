@@ -105,32 +105,18 @@ export const CrmRegistrationFormV2 = () => {
 
             <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '660px' }}>
               
-              {/* First Name & Last Name */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                    First Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={regForm.firstName}
-                    onChange={(e) => setRegForm({ ...regForm, firstName: e.target.value })}
-                    style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem' }}
-                    required
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                    Last Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={regForm.lastName}
-                    onChange={(e) => setRegForm({ ...regForm, lastName: e.target.value })}
-                    style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem' }}
-                    required
-                  />
-                </div>
+              {/* Name (single field) */}
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
+                  Name *
+                </label>
+                <input
+                  type="text"
+                  value={regForm.name || regForm.firstName || ''}
+                  onChange={(e) => setRegForm({ ...regForm, name: e.target.value, firstName: e.target.value })}
+                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem', boxSizing: 'border-box' }}
+                  required
+                />
               </div>
 
               {/* WhatsApp Number */}
@@ -200,6 +186,23 @@ export const CrmRegistrationFormV2 = () => {
                     {regForm.cityState}
                   </div>
                 </div>
+              </div>
+
+              {/* Class Language Preference */}
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
+                  Class Language *
+                </label>
+                <select
+                  value={regForm.language || 'English / Hindi'}
+                  onChange={(e) => setRegForm({ ...regForm, language: e.target.value })}
+                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem', cursor: 'pointer' }}
+                >
+                  <option value="English / Hindi">English / Hindi</option>
+                  <option value="Malayalam">Malayalam</option>
+                  <option value="Gujarati">Gujarati</option>
+                  <option value="Kannada">Kannada</option>
+                </select>
               </div>
 
               {/* Concise Payment Redirect Notice */}

@@ -123,7 +123,7 @@ export const PublicLandingPage = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <button
                 type="button"
-                onClick={scrollToPlans}
+                onClick={() => setCustomerScreen('CHALLENGE')}
                 style={{
                   padding: '16px 36px',
                   borderRadius: '9999px',
@@ -137,7 +137,7 @@ export const PublicLandingPage = () => {
                   transition: 'transform 0.15s ease'
                 }}
               >
-                Explore Membership Plans ↓
+                Try for Free →
               </button>
 
               <button
