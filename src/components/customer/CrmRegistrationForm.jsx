@@ -82,7 +82,7 @@ export const CrmRegistrationForm = () => {
 
           {/* Automatic Renewal Badge Info */}
           <div style={{ fontSize: '0.9rem', color: '#64748b', marginTop: '16px', lineHeight: 1.5 }}>
-            You'll be charged ₹{currentPrice.toLocaleString('en-IN')} once every {selectedPlanForCheckout?.durationMonths || 3} months until you cancel
+            You'll be charged ₹{currentPrice.toLocaleString('en-IN')} once every {selectedPlanForCheckout?.durationMonths || 3} months until you cancel. You can <button type="button" onClick={() => setIsTermsModalOpen(true)} style={{ background: 'none', border: 'none', padding: 0, color: '#2563eb', textDecoration: 'underline', cursor: 'pointer', fontSize: 'inherit', fontWeight: 600 }}>cancel anytime</button>.
           </div>
 
           {/* Contact Support */}
