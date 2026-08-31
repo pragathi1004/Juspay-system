@@ -9,8 +9,8 @@ export const PublicLandingPage = () => {
   const { regForm, setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, selectedLanguage, setSelectedLanguage } = useApp();
 
   const [activeDropdown, setActiveDropdown] = useState(false);
-  // Login modal is NOT auto-opened; it opens only when user selects a plan
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalInitialStep, setAuthModalInitialStep] = useState('PHONE');
 
   const handleSelectPlanForLead = (plan) => {
     setSelectedPlanForCheckout(plan);
@@ -18,11 +18,13 @@ export const PublicLandingPage = () => {
     if (regForm?.phoneVerified) {
       setCustomerScreen('CRM_FORM');
     } else {
+      setAuthModalInitialStep('PHONE');
       setIsAuthModalOpen(true);
     }
   };
 
   const handleAlreadySubscribed = () => {
+    setAuthModalInitialStep('ALREADY_SUBSCRIBED');
     setIsAuthModalOpen(true);
   };
 
@@ -40,6 +42,7 @@ export const PublicLandingPage = () => {
       <DailyYogaAuthModal 
         isOpen={isAuthModalOpen} 
         onClose={() => setIsAuthModalOpen(false)} 
+        initialStep={authModalInitialStep}
       />
 
       {/* 1. TOP GLOBAL NAVIGATION BAR (MATCHING SCREENSHOT 1 & 2) */}

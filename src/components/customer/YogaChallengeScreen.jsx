@@ -9,6 +9,7 @@ export const YogaChallengeScreen = () => {
   const { setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, regForm, setRegForm } = useApp();
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalInitialStep, setAuthModalInitialStep] = useState('PHONE');
   const [formName, setFormName] = useState('');
   const [formPhone, setFormPhone] = useState('');
   const [formCity, setFormCity] = useState('');
@@ -56,6 +57,7 @@ export const YogaChallengeScreen = () => {
     if (regForm?.phoneVerified) {
       setCustomerScreen('CRM_FORM');
     } else {
+      setAuthModalInitialStep('PHONE');
       setIsAuthModalOpen(true);
     }
   };
@@ -72,6 +74,7 @@ export const YogaChallengeScreen = () => {
       <DailyYogaAuthModal 
         isOpen={isAuthModalOpen} 
         onClose={() => setIsAuthModalOpen(false)} 
+        initialStep={authModalInitialStep}
       />
 
       {/* TOP GLOBAL NAVIGATION BAR */}

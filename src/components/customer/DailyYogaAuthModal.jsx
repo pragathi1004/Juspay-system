@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { X, ChevronDown, User, ChevronRight, Mail, ArrowLeft, CheckCircle2, RefreshCw, KeyRound, Check } from 'lucide-react';
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
-export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
+export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) => {
   const { regForm, setRegForm, setCustomerScreen, setUserFlow, setIsTermsModalOpen, setIsPrivacyModalOpen } = useApp();
   
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -18,7 +18,13 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
   const [alreadySubCountryCode, setAlreadySubCountryCode] = useState('+91');
   
   // Modal Steps: 'PHONE' | 'OTP' | 'GOOGLE' | 'WHATSAPP' | 'EMAIL' | 'FACEBOOK' | 'ALREADY_SUBSCRIBED'
-  const [step, setStep] = useState('PHONE');
+  const [step, setStep] = useState(initialStep);
+
+  useEffect(() => {
+    if (isOpen) {
+      setStep(initialStep);
+    }
+  }, [isOpen, initialStep]);
   const [otp, setOtp] = useState(['4', '8', '2', '9']);
   const [timer, setTimer] = useState(30);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -935,7 +941,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                 Sri Sri Yoga Daily Class
               </h2>
               <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#ea8c38', fontFamily: 'Georgia, serif, system-ui', margin: '0 0 24px 0', letterSpacing: '0.2px' }}>
-                Get Daily Link
+                Go to Dashboard
               </h3>
 
               {/* FORM */}
