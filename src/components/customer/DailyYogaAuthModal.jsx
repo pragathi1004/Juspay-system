@@ -6,15 +6,15 @@ import aolLogoSwans from '../../assets/aol_logo_swans.png';
 export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
   const { regForm, setRegForm, setCustomerScreen, setUserFlow, setIsTermsModalOpen, setIsPrivacyModalOpen } = useApp();
   
-  const [phoneNumber, setPhoneNumber] = useState(regForm?.phone || '9920656992');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [countryCode, setCountryCode] = useState('+91');
-  const [emailInput, setEmailInput] = useState(regForm?.email || 'pragathi@gmail.com');
-  const [whatsAppNumber, setWhatsAppNumber] = useState(regForm?.phone || '9920656992');
-  const [nameInput, setNameInput] = useState(regForm?.name || 'PRAGATHI');
+  const [emailInput, setEmailInput] = useState('');
+  const [whatsAppNumber, setWhatsAppNumber] = useState('');
+  const [nameInput, setNameInput] = useState('');
   
-  // Existing subscriber login fields (Matching Screenshot 2)
-  const [registeredName, setRegisteredName] = useState(regForm?.name || 'PRAGATHI');
-  const [registeredPhone, setRegisteredPhone] = useState(regForm?.phone || '9920656992');
+  // Existing subscriber login fields
+  const [registeredName, setRegisteredName] = useState('');
+  const [registeredPhone, setRegisteredPhone] = useState('');
   const [alreadySubCountryCode, setAlreadySubCountryCode] = useState('+91');
   
   // Modal Steps: 'PHONE' | 'OTP' | 'GOOGLE' | 'WHATSAPP' | 'EMAIL' | 'FACEBOOK' | 'ALREADY_SUBSCRIBED'

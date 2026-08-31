@@ -9,9 +9,9 @@ export const YogaChallengeScreen = () => {
   const { setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, regForm, setRegForm } = useApp();
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [formName, setFormName] = useState(regForm.name || 'Pragathi');
-  const [formPhone, setFormPhone] = useState(regForm.phone || '7780672142');
-  const [formCity, setFormCity] = useState(regForm.cityState || 'Bengaluru');
+  const [formName, setFormName] = useState('');
+  const [formPhone, setFormPhone] = useState('');
+  const [formCity, setFormCity] = useState('');
 
   // Challenge Flow Stages: 'LANDING' | 'WHATSAPP_CONFIRM' | 'WHATSAPP_REDIRECT'
   const [challengeStage, setChallengeStage] = useState('LANDING');
