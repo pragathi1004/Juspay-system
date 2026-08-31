@@ -668,10 +668,10 @@ export const DailyYogaAuthModal = ({ isOpen, onClose }) => {
                     </>
                   ) : verifiedSuccess ? (
                     <>
-                      <CheckCircle2 size={16} /> Verified! Opening Plans...
+                      <CheckCircle2 size={16} /> Verified! Continuing...
                     </>
                   ) : (
-                    'VERIFY & CONTINUE TO PLANS'
+                    'VERIFY & CONTINUE'
                   )}
                 </button>
               </form>
