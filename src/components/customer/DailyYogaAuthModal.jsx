@@ -166,8 +166,8 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
         setVerifiedSuccess(false);
         setStep('PHONE');
         onClose();
-        // Redirect new lead to the Registration page after OTP verification
-        setCustomerScreen('CRM_FORM');
+        // Redirect new lead to the 3-question Onboarding Survey after OTP verification
+        setCustomerScreen('ONBOARDING_SURVEY');
       }, 700);
     }, 700);
   };

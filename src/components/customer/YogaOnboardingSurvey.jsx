@@ -40,7 +40,7 @@ export const YogaOnboardingSurvey = () => {
     if (currentStep < 3) {
       setCurrentStep(prev => prev + 1);
     } else {
-      // Save survey answers to context and proceed to Membership Plans view
+      // Save survey answers to context and proceed to Registration page
       setRegForm(prev => ({
         ...prev,
         surveyAnswers: {
@@ -49,11 +49,7 @@ export const YogaOnboardingSurvey = () => {
           dailyTime: selectedTime
         }
       }));
-      setCustomerScreen('PUBLIC_LANDING');
-      setTimeout(() => {
-        const el = document.getElementById('membership-plans');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      setCustomerScreen('CRM_FORM');
     }
   };
 
@@ -61,11 +57,8 @@ export const YogaOnboardingSurvey = () => {
     if (currentStep < 3) {
       setCurrentStep(prev => prev + 1);
     } else {
-      setCustomerScreen('PUBLIC_LANDING');
-      setTimeout(() => {
-        const el = document.getElementById('membership-plans');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      // Skip survey but still go to Registration page
+      setCustomerScreen('CRM_FORM');
     }
   };
 
