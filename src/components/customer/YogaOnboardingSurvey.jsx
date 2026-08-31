@@ -311,7 +311,7 @@ export const YogaOnboardingSurvey = () => {
               transition: 'all 0.15s ease'
             }}
           >
-            {currentStep === 3 ? 'Continue to Plans' : 'Continue'}
+            Continue
           </button>
 
           <button
