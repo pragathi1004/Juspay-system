@@ -38,7 +38,11 @@ export const YogaChallengeScreen = () => {
   const handleSelectPlanForLead = (plan) => {
     setSelectedPlanForCheckout(plan);
     setUserFlow('NEW_LEAD');
-    setIsAuthModalOpen(true);
+    if (regForm?.phoneVerified) {
+      setCustomerScreen('CRM_FORM');
+    } else {
+      setIsAuthModalOpen(true);
+    }
   };
 
   const scrollToPlans = () => {

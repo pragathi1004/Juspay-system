@@ -40,7 +40,7 @@ export const YogaOnboardingSurvey = () => {
     if (currentStep < 3) {
       setCurrentStep(prev => prev + 1);
     } else {
-      // Save survey answers to context and proceed to CRM registration form
+      // Save survey answers to context and proceed to Membership Plans view
       setRegForm(prev => ({
         ...prev,
         surveyAnswers: {
@@ -49,7 +49,11 @@ export const YogaOnboardingSurvey = () => {
           dailyTime: selectedTime
         }
       }));
-      setCustomerScreen('CRM_FORM');
+      setCustomerScreen('PUBLIC_LANDING');
+      setTimeout(() => {
+        const el = document.getElementById('membership-plans');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
   };
 
@@ -57,7 +61,11 @@ export const YogaOnboardingSurvey = () => {
     if (currentStep < 3) {
       setCurrentStep(prev => prev + 1);
     } else {
-      setCustomerScreen('CRM_FORM');
+      setCustomerScreen('PUBLIC_LANDING');
+      setTimeout(() => {
+        const el = document.getElementById('membership-plans');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
   };
 
@@ -310,7 +318,7 @@ export const YogaOnboardingSurvey = () => {
               transition: 'all 0.15s ease'
             }}
           >
-            {currentStep === 3 ? 'Continue to Registration' : 'Continue'}
+            {currentStep === 3 ? 'Continue to Plans' : 'Continue'}
           </button>
 
           <button

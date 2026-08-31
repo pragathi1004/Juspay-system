@@ -6,17 +6,20 @@ import { Check, X, ChevronDown, Sparkles, Globe, Search, ArrowRight, ShieldCheck
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const PublicLandingPage = () => {
-  const { setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, selectedLanguage, setSelectedLanguage } = useApp();
+  const { regForm, setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, selectedLanguage, setSelectedLanguage } = useApp();
 
   const [activeDropdown, setActiveDropdown] = useState(false);
   // Login modal is NOT auto-opened; it opens only when user selects a plan
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const handleSelectPlanForLead = (plan) => {
-    // Store the selected plan in context, then open login/OTP modal
     setSelectedPlanForCheckout(plan);
     setUserFlow('NEW_LEAD');
-    setIsAuthModalOpen(true);
+    if (regForm?.phoneVerified) {
+      setCustomerScreen('CRM_FORM');
+    } else {
+      setIsAuthModalOpen(true);
+    }
   };
 
   const handleAlreadySubscribed = () => {
