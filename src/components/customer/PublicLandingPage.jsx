@@ -224,7 +224,7 @@ export const PublicLandingPage = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Progress Tracking</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Community Support</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> 1 Month Access to AOL App</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 700 }}><Check size={18} color="#16a34a" /> Start free for 14 days. Then ₹4,999/year. Cancel anytime.</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Start free for 14 days. Then ₹4,999/year. Cancel anytime.</div>
               </div>
             </div>
 
@@ -266,7 +266,7 @@ export const PublicLandingPage = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Progress Tracking</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Community Support</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', textDecoration: 'line-through' }}><X size={18} color="#ef4444" /> 1 Month Access to AOL App</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155', fontWeight: 700 }}><Check size={18} color="#16a34a" /> Start free for 14 days. Then ₹3,999/6 months. Cancel anytime.</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Start free for 14 days. Then ₹3,999/6 months. Cancel anytime.</div>
               </div>
             </div>
 
@@ -309,7 +309,7 @@ export const PublicLandingPage = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Progress Tracking</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', textDecoration: 'line-through' }}><X size={18} color="#ef4444" /> Community Support</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', textDecoration: 'line-through' }}><X size={18} color="#ef4444" /> 1 Month Access to AOL App</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155', fontWeight: 700 }}><Check size={18} color="#16a34a" /> Start free for 14 days. Then ₹2,999/3 months. Cancel anytime.</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Start free for 14 days. Then ₹2,999/3 months. Cancel anytime.</div>
               </div>
             </div>
 
