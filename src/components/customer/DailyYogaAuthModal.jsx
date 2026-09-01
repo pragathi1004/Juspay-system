@@ -531,37 +531,6 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
                 </button>
 
               </div>
-
-              {/* DIVIDER LINE BEFORE SUBSCRIBER ROW */}
-              <div style={{ width: '100%', height: '1px', background: '#e2e8f0', marginBottom: '10px' }}></div>
-
-              {/* I'VE ALREADY SUBSCRIBED ROW */}
-              <button
-                type="button"
-                onClick={handleAlreadySubscribedClick}
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '8px 10px',
-                  borderRadius: '10px',
-                  border: 'none',
-                  background: 'transparent',
-                  cursor: 'pointer',
-                  marginBottom: '10px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ color: '#f97316', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <User size={18} strokeWidth={2.2} />
-                  </div>
-                  <span style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1e293b' }}>
-                    I've Already Subscribed!
-                  </span>
-                </div>
-                <ChevronRight size={18} color="#64748b" />
-              </button>
             </>
           )}
 

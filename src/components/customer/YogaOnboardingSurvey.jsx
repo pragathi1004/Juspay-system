@@ -49,8 +49,8 @@ export const YogaOnboardingSurvey = () => {
           dailyTime: selectedTime
         }
       }));
-      // FREE_TRIAL → 14-day challenge form; NEW_LEAD → registration page
-      setCustomerScreen(surveyMode === 'FREE_TRIAL' ? 'CHALLENGE' : 'CRM_FORM');
+      // Direct user to the registration page (CRM_FORM)
+      setCustomerScreen('CRM_FORM');
     }
   };
 
@@ -58,8 +58,8 @@ export const YogaOnboardingSurvey = () => {
     if (currentStep < 3) {
       setCurrentStep(prev => prev + 1);
     } else {
-      // Skip survey but still go to correct destination
-      setCustomerScreen(surveyMode === 'FREE_TRIAL' ? 'CHALLENGE' : 'CRM_FORM');
+      // Skip survey and go to registration page (CRM_FORM)
+      setCustomerScreen('CRM_FORM');
     }
   };
 
