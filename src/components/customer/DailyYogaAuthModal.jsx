@@ -381,47 +381,9 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
               <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#1e293b', margin: '4px 0 4px 0', fontFamily: 'system-ui, sans-serif' }}>
                 Welcome to Sri Sri Yoga
               </h2>
-              <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.4, margin: '0 0 16px 0', maxWidth: '340px' }}>
+              <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: 1.4, margin: '0 0 20px 0', maxWidth: '340px' }}>
                 Sign in or create your account to continue
               </p>
-
-              {/* TABS: MOBILE NUMBER | EMAIL */}
-              <div style={{ display: 'flex', width: '100%', borderBottom: '1.5px solid #e2e8f0', marginBottom: '16px' }}>
-                <button
-                  type="button"
-                  onClick={() => setStep('PHONE')}
-                  style={{
-                    flex: 1,
-                    padding: '8px 0',
-                    background: 'none',
-                    border: 'none',
-                    borderBottom: '2.5px solid #ea580c',
-                    color: '#ea580c',
-                    fontWeight: 700,
-                    fontSize: '0.88rem',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Mobile Number
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setStep('EMAIL')}
-                  style={{
-                    flex: 1,
-                    padding: '8px 0',
-                    background: 'none',
-                    border: 'none',
-                    borderBottom: '2.5px solid transparent',
-                    color: '#64748b',
-                    fontWeight: 600,
-                    fontSize: '0.88rem',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Email
-                </button>
-              </div>
 
               {/* PHONE INPUT FORM */}
               <form onSubmit={handlePhoneSubmit} style={{ width: '100%' }}>
