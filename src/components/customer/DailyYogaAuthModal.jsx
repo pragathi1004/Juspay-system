@@ -398,7 +398,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
                     type="tel"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="Enter your WhatsApp number"
+                    placeholder={userFlow === 'EXISTING_MEMBER' ? "Enter your registered number" : "Enter your WhatsApp number"}
                     style={{
                       flex: 1,
                       border: 'none',
