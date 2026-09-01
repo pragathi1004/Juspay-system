@@ -18,7 +18,7 @@ import {
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const YogaOnboardingSurvey = () => {
-  const { setCustomerScreen, setRegForm } = useApp();
+  const { setCustomerScreen, setRegForm, surveyMode } = useApp();
 
   // Current screen stage: 1 | 2 | 3
   const [currentStep, setCurrentStep] = useState(1);
@@ -40,7 +40,7 @@ export const YogaOnboardingSurvey = () => {
     if (currentStep < 3) {
       setCurrentStep(prev => prev + 1);
     } else {
-      // Save survey answers to context and proceed to Registration page
+      // Save survey answers to context
       setRegForm(prev => ({
         ...prev,
         surveyAnswers: {
@@ -49,7 +49,8 @@ export const YogaOnboardingSurvey = () => {
           dailyTime: selectedTime
         }
       }));
-      setCustomerScreen('CRM_FORM');
+      // FREE_TRIAL → 14-day challenge form; NEW_LEAD → registration page
+      setCustomerScreen(surveyMode === 'FREE_TRIAL' ? 'CHALLENGE' : 'CRM_FORM');
     }
   };
 
@@ -57,8 +58,8 @@ export const YogaOnboardingSurvey = () => {
     if (currentStep < 3) {
       setCurrentStep(prev => prev + 1);
     } else {
-      // Skip survey but still go to Registration page
-      setCustomerScreen('CRM_FORM');
+      // Skip survey but still go to correct destination
+      setCustomerScreen(surveyMode === 'FREE_TRIAL' ? 'CHALLENGE' : 'CRM_FORM');
     }
   };
 

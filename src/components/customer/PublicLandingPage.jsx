@@ -6,7 +6,7 @@ import { Check, X, ChevronDown, Sparkles, Globe, Search, ArrowRight, ShieldCheck
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const PublicLandingPage = () => {
-  const { regForm, setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, selectedLanguage, setSelectedLanguage } = useApp();
+  const { regForm, setSelectedPlanForCheckout, setCustomerScreen, setUserFlow, selectedLanguage, setSelectedLanguage, setSurveyMode } = useApp();
 
   const [activeDropdown, setActiveDropdown] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -129,7 +129,10 @@ export const PublicLandingPage = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <button
                 type="button"
-                onClick={() => setCustomerScreen('CHALLENGE')}
+                onClick={() => {
+                  setSurveyMode('FREE_TRIAL');
+                  setCustomerScreen('ONBOARDING_SURVEY');
+                }}
                 style={{
                   padding: '16px 36px',
                   borderRadius: '9999px',

@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
   const [appVersion, setAppVersion] = useState('v2'); // 'v1' | 'v2'
   const [activeApp, setActiveApp] = useState('CUSTOMER'); // 'CUSTOMER' | 'ADMIN'
   const [userFlow, setUserFlow] = useState('NEW_LEAD'); // 'NEW_LEAD' | 'EXISTING_MEMBER'
+  const [surveyMode, setSurveyMode] = useState('NEW_LEAD'); // 'NEW_LEAD' | 'FREE_TRIAL'
   const [customerScreen, setCustomerScreen] = useState('PUBLIC_LANDING'); 
   // CUSTOMER screens: 'PUBLIC_LANDING', 'PUBLIC_PLANS', 'MANAGE_SUB', 'CRM_FORM', 'CONFIRMATION', 'DASHBOARD', 'MANAGE_HUB', 'CANCEL_WIZARD', 'CHANGE_PLAN_WIZARD', 'EDIT_PAYMENT_WIZARD'
   
@@ -551,6 +552,8 @@ export const AppProvider = ({ children }) => {
         setActiveApp,
         userFlow,
         setUserFlow,
+        surveyMode,
+        setSurveyMode,
         selectedLanguage,
         setSelectedLanguage,
         customerScreen,
