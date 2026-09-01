@@ -140,7 +140,8 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
         }));
       }
 
-      if (userFlow === 'EXISTING_MEMBER' || pendingAuth?.type === 'Subscriber Login OTP') {
+      // If logging in with the registered number (9920656992), or clicked "Already Subscribed", go directly to DASHBOARD
+      if (isPragathiTestAccount || userFlow === 'EXISTING_MEMBER' || pendingAuth?.type === 'Subscriber Login OTP') {
         setUserFlow('EXISTING_MEMBER');
         setTimeout(() => {
           setVerifiedSuccess(false);
