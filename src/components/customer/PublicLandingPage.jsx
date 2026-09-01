@@ -180,17 +180,14 @@ export const PublicLandingPage = () => {
         </div>
       </section>
 
-      {/* 3. MEMBERSHIP PLANS COMPARISON SECTION (WITH 14-DAY TRIAL & RECURRING BILLING) */}
+      {/* 3. MEMBERSHIP PLANS COMPARISON SECTION */}
       <section id="membership-plans" style={{ padding: '80px 40px', maxWidth: '1240px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#dbeafe', color: '#1d4ed8', padding: '4px 14px', borderRadius: '9999px', fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', marginBottom: '10px' }}>
-            ✨ Limited Time Offer • 14-Day Free Trial
-          </div>
           <h2 style={{ fontSize: '2.4rem', fontWeight: 900, color: '#1e293b', marginBottom: '8px' }}>
             Membership Plans
           </h2>
           <p style={{ color: '#64748b', fontSize: '1.05rem', fontWeight: 500, margin: 0 }}>
-            Start with a 14-day free trial on any plan. Cancel anytime before trial ends.
+            Choose the plan that fits your practice. Cancel anytime before trial ends.
           </p>
         </div>
 
@@ -203,29 +200,20 @@ export const PublicLandingPage = () => {
             </div>
 
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{ background: '#f97316', color: '#ffffff', display: 'inline-block', padding: '6px 20px', borderRadius: '9999px', fontWeight: 800, fontSize: '1.25rem' }}>
                   12 Months
                 </div>
-                <div style={{ background: '#dcfce7', color: '#166534', border: '1px solid #86efac', padding: '4px 10px', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 700 }}>
-                  14-Day Trial: FREE
-                </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '24px' }}>
                 <span style={{ fontSize: '2.5rem', fontWeight: 900, color: '#14532d' }}>₹4,999</span>
                 <span style={{ fontSize: '1.1rem', color: '#94a3b8', textDecoration: 'line-through' }}>₹14,999</span>
                 <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '9999px' }}>67% off</span>
               </div>
 
-              {/* CALM-STYLE 14-DAY TRIAL NOTICE (MANDATORY AUTOPAY CONTEXT) */}
-              <div style={{ background: '#ffffff', border: '1px solid #bbf7d0', borderRadius: '12px', padding: '10px 14px', marginBottom: '20px', fontSize: '0.8rem', color: '#166534', lineHeight: 1.45 }}>
-                <strong>Trial Terms:</strong> Total due today is <strong>₹0.00</strong>. After your 14-day trial period ends, you will be automatically charged <strong>₹4,999/yr</strong> with all premium features and ongoing recurring access. Cancel anytime.
-              </div>
-
               {/* FEATURES CHECKLIST */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px', fontSize: '0.9rem', color: '#334155' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#15803d', fontWeight: 800 }}><Check size={18} color="#16a34a" /> 14-Day Free Trial Included</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Unlimited Live Yoga Classes</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Monthly Sunday Masterclass</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Bonus E-Books</div>
@@ -233,6 +221,7 @@ export const PublicLandingPage = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Progress Tracking</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> Community Support</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 600 }}><Check size={18} color="#16a34a" /> 1 Month Access to AOL App</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 700 }}><Check size={18} color="#16a34a" /> Start free for 14 days. Then ₹4,999/year. Cancel anytime.</div>
               </div>
             </div>
 
@@ -252,27 +241,18 @@ export const PublicLandingPage = () => {
           {/* 6 MONTHS PLAN CARD */}
           <div style={{ border: '1px solid #fed7aa', borderRadius: '24px', background: '#fffaf0', padding: '32px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{ background: '#f97316', color: '#ffffff', display: 'inline-block', padding: '6px 20px', borderRadius: '9999px', fontWeight: 800, fontSize: '1.25rem' }}>
                   6 Months
                 </div>
-                <div style={{ background: '#ffedd5', color: '#c2410c', border: '1px solid #fed7aa', padding: '4px 10px', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 700 }}>
-                  14-Day Trial: FREE
-                </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '24px' }}>
                 <span style={{ fontSize: '2.5rem', fontWeight: 900, color: '#1e293b' }}>₹3,999</span>
                 <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '9999px' }}>50% off</span>
               </div>
 
-              {/* CALM-STYLE 14-DAY TRIAL NOTICE (MANDATORY AUTOPAY CONTEXT) */}
-              <div style={{ background: '#ffffff', border: '1px solid #fed7aa', borderRadius: '12px', padding: '10px 14px', marginBottom: '20px', fontSize: '0.8rem', color: '#9a3412', lineHeight: 1.45 }}>
-                <strong>Trial Terms:</strong> Total due today is <strong>₹0.00</strong>. After your 14-day trial period ends, you will be automatically charged <strong>₹3,999 every 6 months</strong> with all included features. Cancel anytime.
-              </div>
-
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px', fontSize: '0.9rem', color: '#334155' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#15803d', fontWeight: 800 }}><Check size={18} color="#16a34a" /> 14-Day Free Trial Included</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Unlimited Live Yoga Classes</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Monthly Sunday Masterclass</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Bonus E-Books</div>
@@ -280,6 +260,7 @@ export const PublicLandingPage = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Progress Tracking</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Community Support</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', textDecoration: 'line-through' }}><X size={18} color="#ef4444" /> 1 Month Access to AOL App</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155', fontWeight: 700 }}><Check size={18} color="#16a34a" /> Start free for 14 days. Then ₹3,999/6 months. Cancel anytime.</div>
               </div>
             </div>
 
@@ -299,28 +280,19 @@ export const PublicLandingPage = () => {
           {/* 3 MONTHS PLAN CARD */}
           <div style={{ border: '1px solid #fed7aa', borderRadius: '24px', background: '#fffaf0', padding: '32px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{ background: '#f97316', color: '#ffffff', display: 'inline-block', padding: '6px 20px', borderRadius: '9999px', fontWeight: 800, fontSize: '1.25rem' }}>
                   3 Months
                 </div>
-                <div style={{ background: '#ffedd5', color: '#c2410c', border: '1px solid #fed7aa', padding: '4px 10px', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 700 }}>
-                  14-Day Trial: FREE
-                </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '24px' }}>
                 <span style={{ fontSize: '2.5rem', fontWeight: 900, color: '#1e293b' }}>₹2,999</span>
                 <span style={{ fontSize: '1rem', color: '#94a3b8', textDecoration: 'line-through' }}>₹7,999</span>
                 <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '9999px' }}>0% off</span>
               </div>
 
-              {/* CALM-STYLE 14-DAY TRIAL NOTICE (MANDATORY AUTOPAY CONTEXT) */}
-              <div style={{ background: '#ffffff', border: '1px solid #fed7aa', borderRadius: '12px', padding: '10px 14px', marginBottom: '20px', fontSize: '0.8rem', color: '#9a3412', lineHeight: 1.45 }}>
-                <strong>Trial Terms:</strong> Total due today is <strong>₹0.00</strong>. After your 14-day trial period ends, you will be automatically charged <strong>₹2,999 every 3 months</strong> with all included features. Cancel anytime.
-              </div>
-
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px', fontSize: '0.9rem', color: '#334155' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#15803d', fontWeight: 800 }}><Check size={18} color="#16a34a" /> 14-Day Free Trial Included</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Unlimited Live Yoga Classes</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Monthly Sunday Masterclass</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Bonus E-Books</div>
@@ -328,6 +300,7 @@ export const PublicLandingPage = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155' }}><Check size={18} color="#16a34a" /> Progress Tracking</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', textDecoration: 'line-through' }}><X size={18} color="#ef4444" /> Community Support</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', textDecoration: 'line-through' }}><X size={18} color="#ef4444" /> 1 Month Access to AOL App</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#334155', fontWeight: 700 }}><Check size={18} color="#16a34a" /> Start free for 14 days. Then ₹2,999/3 months. Cancel anytime.</div>
               </div>
             </div>
 
