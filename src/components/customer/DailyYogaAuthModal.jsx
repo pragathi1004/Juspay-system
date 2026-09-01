@@ -64,7 +64,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
     }
     setPendingAuth({
       type: 'Mobile OTP',
-      extraDetails: { phone: phoneNumber }
+      extraDetails: { phone: phoneNumber, name: nameInput }
     });
     setTimer(30);
     setStep('OTP');
@@ -158,8 +158,8 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
         setVerifiedSuccess(false);
         setStep('PHONE');
         onClose();
-        // Redirect new lead to the 3-question Onboarding Survey after OTP verification
-        setCustomerScreen('ONBOARDING_SURVEY');
+        // Redirect new lead to the Registration (CRM) form, pre-filled with name & phone
+        setCustomerScreen('CRM_FORM');
       }, 700);
     }, 700);
   };
@@ -387,6 +387,28 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
               {/* PHONE INPUT FORM */}
               <form onSubmit={handlePhoneSubmit} style={{ width: '100%' }}>
 
+                {/* NAME INPUT (only for new leads, not existing subscribers) */}
+                {userFlow !== 'EXISTING_MEMBER' && (
+                  <div style={{ marginBottom: '12px' }}>
+                    <input
+                      type="text"
+                      value={nameInput}
+                      onChange={(e) => setNameInput(e.target.value)}
+                      placeholder="Your full name"
+                      style={{
+                        width: '100%',
+                        border: '1.5px solid #cbd5e1',
+                        borderRadius: '12px',
+                        padding: '12px 14px',
+                        fontSize: '0.95rem',
+                        color: '#1e293b',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                        background: '#ffffff'
+                      }}
+                    />
+                  </div>
+                )}
 
                 {/* INPUT GROUP WITH COUNTRY CODE */}
                 <div style={{ display: 'flex', alignItems: 'stretch', border: '1.5px solid #cbd5e1', borderRadius: '12px', background: '#ffffff', overflow: 'hidden', marginBottom: '12px' }}>
