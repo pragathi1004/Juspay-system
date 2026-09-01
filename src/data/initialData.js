@@ -1,8 +1,8 @@
 export const INITIAL_CUSTOMER = {
   id: 'CUST_6688891',
-  name: 'PRAGATHI',
+  name: 'MANCHIT DESHPANDE',
   phone: '+91 99206 56992',
-  email: 'pragathi@gmail.com',
+  email: 'manchit.deshpande@artofliving.online',
   city: 'Bengaluru',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200',
   subscription: {

@@ -102,24 +102,24 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
     const cleanPhone = enteredPhone.replace(/\D/g, '');
     const enteredEmail = (extraDetails.email || '').toLowerCase();
 
-    // Check if the login matches the test Pragathi account (9920656992 / pragathi@gmail.com)
-    const isPragathiTestAccount = cleanPhone.includes('9920656992') || enteredEmail.includes('pragathi');
+    // Check if the login matches the registered test account (9920656992 / manchit.deshpande@artofliving.online)
+    const isRegisteredSubscriber = cleanPhone.includes('9920656992') || enteredEmail.includes('manchit') || enteredEmail.includes('pragathi');
 
     setTimeout(() => {
       setIsVerifying(false);
       setVerifiedSuccess(true);
       setSuccessMessage(`Authenticated via ${authType}!`);
 
-      if (isPragathiTestAccount) {
-        // Pre-fill test details ONLY for test Pragathi account
+      if (isRegisteredSubscriber) {
+        // Pre-fill test details for registered member Manchit Deshpande
         setRegForm(prev => ({
           ...prev,
-          firstName: extraDetails.firstName || 'PRAGATHI',
-          lastName: extraDetails.lastName || 'M',
-          name: extraDetails.name || 'PRAGATHI',
+          firstName: extraDetails.firstName || 'MANCHIT',
+          lastName: extraDetails.lastName || 'DESHPANDE',
+          name: extraDetails.name || 'MANCHIT DESHPANDE',
           phone: '9920656992',
-          email: extraDetails.email || 'pragathi@gmail.com',
-          age: '23',
+          email: extraDetails.email || 'manchit.deshpande@artofliving.online',
+          age: '28',
           postalCode: '560082',
           cityState: 'Bengaluru Urban, Karnataka',
           phoneVerified: true
@@ -141,7 +141,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
       }
 
       // If logging in with the registered number (9920656992), or clicked "Already Subscribed", go directly to DASHBOARD
-      if (isPragathiTestAccount || userFlow === 'EXISTING_MEMBER' || pendingAuth?.type === 'Subscriber Login OTP') {
+      if (isRegisteredSubscriber || userFlow === 'EXISTING_MEMBER' || pendingAuth?.type === 'Subscriber Login OTP') {
         setUserFlow('EXISTING_MEMBER');
         setTimeout(() => {
           setVerifiedSuccess(false);
