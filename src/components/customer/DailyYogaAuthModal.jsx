@@ -67,13 +67,9 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
       alert('Please enter a valid 10-digit mobile number');
       return;
     }
-    if (!nameInput.trim()) {
-      alert('Please enter your name to continue');
-      return;
-    }
     setPendingAuth({
       type: 'Mobile OTP',
-      extraDetails: { phone: phoneNumber, name: nameInput.trim() }
+      extraDetails: { phone: phoneNumber }
     });
     setTimer(30);
     setStep('OTP');
@@ -413,28 +409,6 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
               {/* PHONE INPUT FORM */}
               <form onSubmit={handlePhoneSubmit} style={{ width: '100%' }}>
 
-                {/* NAME INPUT */}
-                <div style={{ marginBottom: '12px', textAlign: 'left' }}>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#475569', marginBottom: '6px' }}>Your Name</label>
-                  <input
-                    type="text"
-                    value={nameInput}
-                    onChange={(e) => setNameInput(e.target.value)}
-                    placeholder="Enter your full name"
-                    style={{
-                      width: '100%',
-                      border: '1.5px solid #cbd5e1',
-                      borderRadius: '12px',
-                      padding: '12px 14px',
-                      fontSize: '0.95rem',
-                      color: '#1e293b',
-                      background: '#ffffff',
-                      boxSizing: 'border-box',
-                      outline: 'none'
-                    }}
-                    required
-                  />
-                </div>
 
                 {/* INPUT GROUP WITH COUNTRY CODE */}
                 <div style={{ display: 'flex', alignItems: 'stretch', border: '1.5px solid #cbd5e1', borderRadius: '12px', background: '#ffffff', overflow: 'hidden', marginBottom: '12px' }}>
@@ -447,7 +421,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
                     type="tel"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="Enter your phone number"
+                    placeholder="Enter your WhatsApp number"
                     style={{
                       flex: 1,
                       border: 'none',
@@ -532,16 +506,16 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
                   <span style={{ fontSize: '0.75rem', color: '#1e293b', fontWeight: 600 }}>Facebook</span>
                 </button>
 
-                {/* WHATSAPP */}
+                {/* APPLE */}
                 <button
                   type="button"
-                  onClick={() => setStep('WHATSAPP')}
+                  onClick={() => alert('Apple Sign-In selected')}
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '6px', padding: '10px 6px', borderRadius: '12px', border: '1.5px solid #e2e8f0', background: '#ffffff', cursor: 'pointer', transition: 'all 0.15s' }}
                 >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366">
-                    <path d="M12.031 0C5.396 0 .016 5.379.016 12.015c0 2.115.553 4.183 1.603 6.002L.016 24l6.148-1.613c1.75 1.008 3.754 1.54 5.867 1.54 6.634 0 12.015-5.38 12.015-12.015C24.046 5.38 18.665 0 12.031 0zm.016 21.99a9.96 9.96 0 0 1-5.077-1.385l-.364-.216-3.771.989 1.006-3.676-.237-.378a9.967 9.967 0 0 1-1.533-5.31c0-5.503 4.478-9.98 9.98-9.98 5.503 0 9.98 4.478 9.98 9.98 0 5.503-4.478 9.98-9.983 9.98zm5.474-7.464c-.3-.15-1.776-.876-2.05-.975-.276-.1-.476-.15-.676.15-.2.3-.776.975-.95 1.175-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.414-1.488-.893-.796-1.496-1.78-1.671-2.08-.175-.3-.019-.462.13-.611.136-.134.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.676-1.63-.925-2.23-.243-.585-.49-.506-.675-.515-.175-.008-.375-.01-.575-.01-.2 0-.525.075-.8.375s-1.05 1.025-1.05 2.5 1.075 2.898 1.225 3.098c.15.2 2.115 3.23 5.124 4.531.716.31 1.275.495 1.71.634.719.229 1.373.197 1.89.12.577-.086 1.776-.726 2.026-1.426.25-.7.25-1.3.175-1.425-.075-.125-.275-.2-.575-.35z"/>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="#000000">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                   </svg>
-                  <span style={{ fontSize: '0.75rem', color: '#1e293b', fontWeight: 600 }}>WhatsApp</span>
+                  <span style={{ fontSize: '0.75rem', color: '#1e293b', fontWeight: 600 }}>Apple</span>
                 </button>
 
                 {/* EMAIL */}
