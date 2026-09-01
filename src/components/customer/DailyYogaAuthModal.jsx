@@ -4,7 +4,7 @@ import { X, ChevronDown, User, ChevronRight, Mail, ArrowLeft, CheckCircle2, Refr
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) => {
-  const { regForm, setRegForm, setCustomerScreen, setUserFlow, setIsTermsModalOpen, setIsPrivacyModalOpen } = useApp();
+  const { regForm, setRegForm, setCustomerScreen, userFlow, setUserFlow, setIsTermsModalOpen, setIsPrivacyModalOpen } = useApp();
   
   const [phoneNumber, setPhoneNumber] = useState('');
   const [countryCode, setCountryCode] = useState('+91');
@@ -12,12 +12,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
   const [whatsAppNumber, setWhatsAppNumber] = useState('');
   const [nameInput, setNameInput] = useState('');
   
-  // Existing subscriber login fields
-  const [registeredName, setRegisteredName] = useState('');
-  const [registeredPhone, setRegisteredPhone] = useState('');
-  const [alreadySubCountryCode, setAlreadySubCountryCode] = useState('+91');
-  
-  // Modal Steps: 'PHONE' | 'OTP' | 'GOOGLE' | 'WHATSAPP' | 'EMAIL' | 'FACEBOOK' | 'ALREADY_SUBSCRIBED'
+  // Modal Steps: 'PHONE' | 'OTP' | 'GOOGLE' | 'WHATSAPP' | 'EMAIL' | 'FACEBOOK'
   const [step, setStep] = useState(initialStep);
 
   useEffect(() => {
@@ -145,7 +140,7 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
         }));
       }
 
-      if (pendingAuth?.type === 'Subscriber Login OTP') {
+      if (userFlow === 'EXISTING_MEMBER' || pendingAuth?.type === 'Subscriber Login OTP') {
         setUserFlow('EXISTING_MEMBER');
         setTimeout(() => {
           setVerifiedSuccess(false);
@@ -359,42 +354,24 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
         {/* MODAL CONTENT */}
         <div style={{ padding: '24px 28px 16px 28px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
           
-          {step === 'ALREADY_SUBSCRIBED' ? (
-            /* SRI SRI SCHOOL OF YOGA | ART OF LIVING DUAL LOGO HEADER (MATCHING SCREENSHOT 2) */
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '20px', marginTop: '6px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <span style={{ fontFamily: 'Georgia, cursive, serif', color: '#ea580c', fontSize: '1.45rem', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.5px' }}>Sri Sri</span>
-                <span style={{ fontSize: '0.6rem', fontWeight: 800, color: '#9a3412', letterSpacing: '1px', textTransform: 'uppercase' }}>School of Yoga</span>
-              </div>
-              <div style={{ width: '1.5px', height: '36px', background: '#cbd5e1' }}></div>
-              <img 
-                src={aolLogoSwans} 
-                alt="The Art of Living" 
-                style={{ height: '42px', width: 'auto', objectFit: 'contain' }} 
-              />
-            </div>
-          ) : (
-            <>
-              {/* THE ART OF LIVING EMBLEM LOGO */}
-              <div style={{ marginBottom: '8px', marginTop: '4px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <img 
-                  src={aolLogoSwans} 
-                  alt="The Art of Living" 
-                  style={{ height: '48px', width: 'auto', objectFit: 'contain' }} 
-                />
-              </div>
+          {/* THE ART OF LIVING EMBLEM LOGO */}
+          <div style={{ marginBottom: '8px', marginTop: '4px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img 
+              src={aolLogoSwans} 
+              alt="The Art of Living" 
+              style={{ height: '48px', width: 'auto', objectFit: 'contain' }} 
+            />
+          </div>
 
-              {/* LOTUS DECORATIVE DIVIDER */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', width: '100%', marginBottom: '10px' }}>
-                <div style={{ flex: 1, height: '1.5px', background: '#eab308' }}></div>
-                <svg width="26" height="18" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16 2C14 8 10 14 6 18C11 18 14 16 16 12C18 16 21 18 26 18C22 14 18 8 16 2Z" stroke="#eab308" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M16 8C13 13 8 18 2 20C7 21 12 19 16 16C20 19 25 21 30 20C24 18 19 13 16 8Z" stroke="#eab308" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                <div style={{ flex: 1, height: '1.5px', background: '#eab308' }}></div>
-              </div>
-            </>
-          )}
+          {/* LOTUS DECORATIVE DIVIDER */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', width: '100%', marginBottom: '10px' }}>
+            <div style={{ flex: 1, height: '1.5px', background: '#eab308' }}></div>
+            <svg width="26" height="18" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2C14 8 10 14 6 18C11 18 14 16 16 12C18 16 21 18 26 18C22 14 18 8 16 2Z" stroke="#eab308" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M16 8C13 13 8 18 2 20C7 21 12 19 16 16C20 19 25 21 30 20C24 18 19 13 16 8Z" stroke="#eab308" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <div style={{ flex: 1, height: '1.5px', background: '#eab308' }}></div>
+          </div>
 
           {/* ========================================================================= */}
           {/* STEP 1: MAIN ENTRY - PHONE NUMBER INPUT */}
@@ -873,146 +850,17 @@ export const DailyYogaAuthModal = ({ isOpen, onClose, initialStep = 'PHONE' }) =
           {/* DIVIDER LINE BEFORE FOOTER */}
           <div style={{ width: '100%', height: '1px', background: '#f1f5f9', margin: '10px 0 10px 0' }}></div>
 
-          {/* ========================================================================= */}
-          {/* STEP: ALREADY SUBSCRIBED / GET DAILY LINK / MEMBER LOGIN (MATCHING SCREENSHOT 2) */}
-          {/* ========================================================================= */}
-          {step === 'ALREADY_SUBSCRIBED' && (
-            <div style={{ width: '100%', textAlign: 'center' }}>
-              
-              {/* TITLES */}
-              <h2 style={{ fontSize: '1.65rem', fontWeight: 700, color: '#334155', fontFamily: 'Georgia, serif, system-ui', margin: '4px 0 4px 0', letterSpacing: '-0.2px' }}>
-                Sri Sri Yoga Daily Class
-              </h2>
-              <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#ea8c38', fontFamily: 'Georgia, serif, system-ui', margin: '0 0 24px 0', letterSpacing: '0.2px' }}>
-                Go to Dashboard
-              </h3>
-
-              {/* FORM */}
-              <form onSubmit={handleExistingSubscriberLogin} style={{ width: '100%', textAlign: 'left' }}>
-                
-                {/* REGISTERED NAME INPUT */}
-                <div style={{ marginBottom: '16px' }}>
-                  <input
-                    type="text"
-                    value={registeredName}
-                    onChange={(e) => setRegisteredName(e.target.value)}
-                    placeholder="Registered Name"
-                    style={{
-                      width: '100%',
-                      padding: '13px 14px',
-                      borderRadius: '8px',
-                      border: '1.5px solid #cbd5e1',
-                      fontSize: '0.95rem',
-                      color: '#1e293b',
-                      outline: 'none',
-                      boxSizing: 'border-box',
-                      background: '#ffffff'
-                    }}
-                    required
-                  />
-                </div>
-
-                {/* REGISTERED WHATSAPP NUMBER INPUT */}
-                <div style={{ display: 'flex', alignItems: 'stretch', border: '1.5px solid #cbd5e1', borderRadius: '8px', background: '#ffffff', overflow: 'hidden', marginBottom: '22px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '12px 14px', borderRight: '1.5px solid #e2e8f0', color: '#1e293b', fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer', background: '#ffffff' }}>
-                    <span>{alreadySubCountryCode}</span>
-                    <ChevronDown size={18} color="#64748b" />
-                  </div>
-
-                  <input
-                    type="tel"
-                    value={registeredPhone}
-                    onChange={(e) => setRegisteredPhone(e.target.value)}
-                    placeholder="Registered Whatsapp Number"
-                    style={{
-                      flex: 1,
-                      border: 'none',
-                      outline: 'none',
-                      padding: '12px 14px',
-                      fontSize: '0.95rem',
-                      color: '#1e293b',
-                      background: 'transparent'
-                    }}
-                    required
-                  />
-                </div>
-
-                {/* GO TO DASHBOARD (GET LINK) BUTTON */}
-                <button
-                  type="submit"
-                  style={{
-                    width: '100%',
-                    padding: '14px',
-                    borderRadius: '8px',
-                    background: '#e59b4c',
-                    color: '#ffffff',
-                    fontWeight: 700,
-                    fontSize: '1.15rem',
-                    border: 'none',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 14px rgba(229, 155, 76, 0.35)',
-                    transition: 'all 0.15s ease',
-                    textAlign: 'center',
-                    marginBottom: '16px'
-                  }}
-                >
-                  Go to Dashboard
-                </button>
-              </form>
-
-              {/* FORGOT NUMBER / LOGIN VIA OTP */}
-              <div style={{ marginBottom: '16px' }}>
-                <button
-                  type="button"
-                  onClick={handleSubscriberOtpLogin}
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    color: '#ea580c',
-                    fontSize: '0.85rem',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    textDecoration: 'underline'
-                  }}
-                >
-                  Forgot registered number? Login via OTP
-                </button>
-              </div>
-
-              {/* PRIVACY POLICY LINK */}
-              <div style={{ marginBottom: '8px' }}>
-                <button
-                  type="button"
-                  onClick={() => setIsPrivacyModalOpen(true)}
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    color: '#1e293b',
-                    fontSize: '0.88rem',
-                    textDecoration: 'underline',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Privacy Policy
-                </button>
-              </div>
-
-            </div>
-          )}
-
-          {/* TERMS & PRIVACY FOOTER NOTE (FOR MAIN PHONE & SOCIAL SCREENS) */}
-          {step !== 'ALREADY_SUBSCRIBED' && (
-            <p style={{ fontSize: '0.78rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
-              By continuing, you are agreeing to our<br />
-              <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#ea580c', fontWeight: 700, textDecoration: 'none', cursor: 'pointer', fontSize: 'inherit' }}>
-                Terms & Conditions
-              </button>
-              {' '}and{' '}
-              <button type="button" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#ea580c', fontWeight: 700, textDecoration: 'none', cursor: 'pointer', fontSize: 'inherit' }}>
-                Privacy Policy
-              </button>
-            </p>
-          )}
+          {/* TERMS & PRIVACY FOOTER NOTE */}
+          <p style={{ fontSize: '0.78rem', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+            By continuing, you are agreeing to our<br />
+            <button type="button" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#ea580c', fontWeight: 700, textDecoration: 'none', cursor: 'pointer', fontSize: 'inherit' }}>
+              Terms & Conditions
+            </button>
+            {' '}and{' '}
+            <button type="button" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }} style={{ background: 'none', border: 'none', padding: 0, color: '#ea580c', fontWeight: 700, textDecoration: 'none', cursor: 'pointer', fontSize: 'inherit' }}>
+              Privacy Policy
+            </button>
+          </p>
 
         </div>
 

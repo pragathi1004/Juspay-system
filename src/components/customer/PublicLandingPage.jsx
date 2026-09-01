@@ -24,7 +24,8 @@ export const PublicLandingPage = () => {
   };
 
   const handleAlreadySubscribed = () => {
-    setAuthModalInitialStep('ALREADY_SUBSCRIBED');
+    setUserFlow('EXISTING_MEMBER');
+    setAuthModalInitialStep('PHONE');
     setIsAuthModalOpen(true);
   };
 
