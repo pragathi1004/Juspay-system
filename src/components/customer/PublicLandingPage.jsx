@@ -130,12 +130,7 @@ export const PublicLandingPage = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <button
                 type="button"
-                onClick={() => {
-                  const el = document.getElementById('membership-plans');
-                  if (el) {
-                    el.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => setCustomerScreen('ONBOARDING_SURVEY')}
                 style={{
                   padding: '16px 36px',
                   borderRadius: '9999px',
@@ -149,7 +144,7 @@ export const PublicLandingPage = () => {
                   transition: 'transform 0.15s ease'
                 }}
               >
-                Try for Free →
+                Sign me up!
               </button>
 
               <button
