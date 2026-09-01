@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { PLAN_SPECS } from '../../data/planSpecs';
+import { CrmAnnounceProgram } from './CrmAnnounceProgram';
+import { CrmPortalDashboard } from './CrmPortalDashboard';
 import { 
   BookOpen, 
   Search, 
@@ -20,10 +22,13 @@ import {
   Trash2,
   Save,
   CheckSquare,
-  Sparkles
+  Sparkles,
+  LayoutDashboard
 } from 'lucide-react';
 
 export const PlansManagement = () => {
+  const [activeView, setActiveView] = useState('CATALOG'); // 'CATALOG' | 'CRM_PORTAL' | 'ANNOUNCE'
+
   // Master list of all available features across Sri Sri Yoga programs
   const defaultMasterFeatures = [
     'Unlimited Classes',
@@ -281,6 +286,13 @@ export const PlansManagement = () => {
     setTimeout(() => setShowSavedToast(false), 3000);
   };
 
+  // Handle New Announced Program from CRM
+  const handleNewProgramAnnounced = (newCourse) => {
+    setCourses(prev => [newCourse, ...prev]);
+    // Also sync to PLAN_SPECS if needed
+    triggerToast();
+  };
+
   // Filtered Courses List
   const filteredCourses = courses.filter(c => {
     if (selectedCourseType !== 'ALL' && !c.name.toLowerCase().includes(selectedCourseType.toLowerCase())) {
@@ -319,66 +331,156 @@ export const PlansManagement = () => {
             animation: 'fadeIn 0.3s ease'
           }}
         >
-          <CheckCircle2 size={18} /> Course Price & Features Saved Successfully!
+          <CheckCircle2 size={18} /> Operation Successful! Courses & Mandates Synced.
         </div>
       )}
 
-      {/* PAGE HEADER */}
-      <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <BookOpen size={28} color="#d97706" /> Courses List & Pricing Catalog
-          </h1>
-          <p style={{ color: '#64748b', fontSize: '0.875rem', marginTop: '4px' }}>
-            Art of Living CRM Course Registry — Edit Course Prices, Features & Juspay Mandate Mapping
-          </p>
+      {/* TOP SUB-NAV TABS FOR CRM VIEWS */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid #e2e8f0', paddingBottom: '12px' }}>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button
+            type="button"
+            onClick={() => setActiveView('CATALOG')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '8px',
+              border: 'none',
+              background: activeView === 'CATALOG' ? '#0f172a' : '#f1f5f9',
+              color: activeView === 'CATALOG' ? '#ffffff' : '#475569',
+              fontWeight: 700,
+              fontSize: '0.875rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            <BookOpen size={16} /> Courses Catalog & Mandates
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveView('CRM_PORTAL')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '8px',
+              border: 'none',
+              background: activeView === 'CRM_PORTAL' ? '#0f172a' : '#f1f5f9',
+              color: activeView === 'CRM_PORTAL' ? '#ffffff' : '#475569',
+              fontWeight: 700,
+              fontSize: '0.875rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            <LayoutDashboard size={16} /> Art of Living CRM Portal
+          </button>
         </div>
 
-        <div style={{ background: '#fef3c7', border: '1px solid #fde68a', borderRadius: '10px', padding: '6px 14px', fontSize: '0.8rem', fontWeight: 700, color: '#92400e', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <ShieldCheck size={16} /> CRM Source of Truth
-        </div>
+        <button
+          type="button"
+          onClick={() => setActiveView('ANNOUNCE')}
+          style={{
+            padding: '8px 18px',
+            borderRadius: '8px',
+            border: 'none',
+            background: '#ea580c',
+            color: '#ffffff',
+            fontWeight: 800,
+            fontSize: '0.875rem',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            boxShadow: '0 2px 8px rgba(234, 88, 12, 0.3)'
+          }}
+        >
+          <Plus size={16} /> Announce Program (CRM)
+        </button>
       </div>
 
-      {/* BACKEND ARCHITECTURE INFO BANNER */}
-      <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '14px', padding: '16px 20px', marginBottom: '24px', boxShadow: '0 2px 8px rgba(2, 132, 199, 0.05)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#0369a1', fontWeight: 800, fontSize: '0.925rem', marginBottom: '6px' }}>
-          <Info size={18} /> Backend Mandate Architecture: CRM Course ➔ Juspay Plan Mapping
-        </div>
-        <p style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: '#334155', lineHeight: 1.5 }}>
-          Click the <strong>Edit</strong> button on any course row below to edit its <strong>Price</strong> and <strong>Features List</strong> (add custom benefits like <i>Physiotherapy</i>, toggle included/excluded features, etc.).
-        </p>
+      {/* VIEW: ANNOUNCE PROGRAM FORM */}
+      {activeView === 'ANNOUNCE' && (
+        <CrmAnnounceProgram
+          onCancel={() => setActiveView('CATALOG')}
+          onProgramAnnounced={(newCourse) => {
+            handleNewProgramAnnounced(newCourse);
+            setActiveView('CATALOG');
+          }}
+        />
+      )}
 
-        {/* STEP DIAGRAM */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', fontSize: '0.78rem', fontWeight: 700 }}>
-          <span style={{ background: '#ffffff', border: '1px solid #93c5fd', color: '#1e40af', padding: '4px 12px', borderRadius: '6px' }}>
-            1. Select Course & Click Edit
-          </span>
-          <ArrowRight size={14} color="#0284c7" />
-          <span style={{ background: '#ffffff', border: '1px solid #93c5fd', color: '#1e40af', padding: '4px 12px', borderRadius: '6px' }}>
-            2. Edit Price & Features Checklist
-          </span>
-          <ArrowRight size={14} color="#0284c7" />
-          <span style={{ background: '#ffffff', border: '1px solid #93c5fd', color: '#1e40af', padding: '4px 12px', borderRadius: '6px' }}>
-            3. Map Plan to Course
-          </span>
-          <ArrowRight size={14} color="#0284c7" />
-          <span style={{ background: '#dcfce7', border: '1px solid #86efac', color: '#166534', padding: '4px 12px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <Check size={14} /> 4. Recurring Mandate Ready
-          </span>
-        </div>
-      </div>
+      {/* VIEW: AOL CRM PORTAL HOME */}
+      {activeView === 'CRM_PORTAL' && (
+        <CrmPortalDashboard
+          onNavigateToAnnounce={() => setActiveView('ANNOUNCE')}
+          courses={courses}
+        />
+      )}
 
-      {/* CRM-STYLE SEARCH & FILTER AREA */}
-      <div 
-        style={{ 
-          background: '#fffdf5', 
-          border: '1px solid #fef08a', 
-          borderRadius: '16px', 
-          padding: '20px 24px', 
-          marginBottom: '20px', 
-          boxShadow: '0 2px 10px rgba(217, 119, 6, 0.04)' 
-        }}
-      >
+      {/* VIEW: COURSES CATALOG & JUSPAY MAPPING */}
+      {activeView === 'CATALOG' && (
+        <>
+          {/* PAGE HEADER */}
+          <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <BookOpen size={28} color="#d97706" /> Courses List & Pricing Catalog
+              </h1>
+              <p style={{ color: '#64748b', fontSize: '0.875rem', marginTop: '4px' }}>
+                Art of Living CRM Course Registry — Edit Course Prices, Features & Juspay Mandate Mapping
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <div style={{ background: '#fef3c7', border: '1px solid #fde68a', borderRadius: '10px', padding: '6px 14px', fontSize: '0.8rem', fontWeight: 700, color: '#92400e', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <ShieldCheck size={16} /> CRM Source of Truth
+              </div>
+            </div>
+          </div>
+
+          {/* BACKEND ARCHITECTURE INFO BANNER */}
+          <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '14px', padding: '16px 20px', marginBottom: '24px', boxShadow: '0 2px 8px rgba(2, 132, 199, 0.05)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#0369a1', fontWeight: 800, fontSize: '0.925rem', marginBottom: '6px' }}>
+              <Info size={18} /> Backend Mandate Architecture: CRM Course ➔ Juspay Plan Mapping
+            </div>
+            <p style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: '#334155', lineHeight: 1.5 }}>
+              Click the <strong>Edit</strong> button on any course row below to edit its <strong>Price</strong> and <strong>Features List</strong> (add custom benefits like <i>Physiotherapy</i>, toggle included/excluded features, etc.). Or click <strong>Announce Program (CRM)</strong> to announce a new course.
+            </p>
+
+            {/* STEP DIAGRAM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', fontSize: '0.78rem', fontWeight: 700 }}>
+              <span style={{ background: '#ffffff', border: '1px solid #93c5fd', color: '#1e40af', padding: '4px 12px', borderRadius: '6px' }}>
+                1. Announce / Select Course
+              </span>
+              <ArrowRight size={14} color="#0284c7" />
+              <span style={{ background: '#ffffff', border: '1px solid #93c5fd', color: '#1e40af', padding: '4px 12px', borderRadius: '6px' }}>
+                2. Edit Price & Features Checklist
+              </span>
+              <ArrowRight size={14} color="#0284c7" />
+              <span style={{ background: '#ffffff', border: '1px solid #93c5fd', color: '#1e40af', padding: '4px 12px', borderRadius: '6px' }}>
+                3. Map Plan to Course
+              </span>
+              <ArrowRight size={14} color="#0284c7" />
+              <span style={{ background: '#dcfce7', border: '1px solid #86efac', color: '#166534', padding: '4px 12px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <Check size={14} /> 4. Recurring Mandate Ready
+              </span>
+            </div>
+          </div>
+
+          {/* CRM-STYLE SEARCH & FILTER AREA */}
+          <div 
+            style={{ 
+              background: '#fffdf5', 
+              border: '1px solid #fef08a', 
+              borderRadius: '16px', 
+              padding: '20px 24px', 
+              marginBottom: '20px', 
+              boxShadow: '0 2px 10px rgba(217, 119, 6, 0.04)' 
+            }}
+          >
         {/* RADIO SEARCH OPTIONS */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '16px', fontSize: '0.875rem', fontWeight: 700, color: '#78350f' }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}>
@@ -690,6 +792,8 @@ export const PlansManagement = () => {
         </div>
 
       </div>
+      </>
+      )}
 
       {/* COURSE DETAIL & FULL EDIT DRAWER (PRICE, FEATURES INCLUDED/EXCLUDED, NAME, TEACHERS) */}
       {isDetailDrawerOpen && selectedCourse && (
