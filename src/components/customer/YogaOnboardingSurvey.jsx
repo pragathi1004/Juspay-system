@@ -24,10 +24,10 @@ export const YogaOnboardingSurvey = () => {
   // Current screen stage: 1 | 2 | 3
   const [currentStep, setCurrentStep] = useState(1);
 
-  // User survey selections
-  const [selectedBrings, setSelectedBrings] = useState(['flexibility', 'stress']);
-  const [selectedExperience, setSelectedExperience] = useState('some');
-  const [selectedTime, setSelectedTime] = useState('30-45');
+  // User survey selections (start empty for lead to select)
+  const [selectedBrings, setSelectedBrings] = useState([]);
+  const [selectedExperience, setSelectedExperience] = useState('');
+  const [selectedTime, setSelectedTime] = useState('');
 
   const toggleBringOption = (optionId) => {
     if (selectedBrings.includes(optionId)) {
