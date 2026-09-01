@@ -76,7 +76,7 @@ export const CrmRegistrationFormV2 = () => {
 
           {/* Automatic Renewal Badge Info */}
           <div style={{ fontSize: '0.9rem', color: '#64748b', marginTop: '16px', lineHeight: 1.5 }}>
-            You'll be charged ₹{currentPrice.toLocaleString('en-IN')} once every {selectedPlanForCheckout?.durationMonths || 3} months until you cancel. You can <button type="button" onClick={() => setIsTermsModalOpen(true)} style={{ background: 'none', border: 'none', padding: 0, color: '#2563eb', textDecoration: 'underline', cursor: 'pointer', fontSize: 'inherit', fontWeight: 600 }}>cancel anytime</button>.
+            You'll be charged ₹{currentPrice.toLocaleString('en-IN')} once every {selectedPlanForCheckout?.durationMonths || 3} months until you cancel. You can cancel anytime.
           </div>
 
           {/* Contact Support */}
@@ -105,18 +105,32 @@ export const CrmRegistrationFormV2 = () => {
 
             <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '660px' }}>
               
-              {/* Name (single field) */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  value={regForm.name || regForm.firstName || ''}
-                  onChange={(e) => setRegForm({ ...regForm, name: e.target.value, firstName: e.target.value })}
-                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem', boxSizing: 'border-box' }}
-                  required
-                />
+              {/* First Name + Last Name */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
+                    First Name *
+                  </label>
+                  <input
+                    type="text"
+                    value={regForm.firstName || ''}
+                    onChange={(e) => setRegForm({ ...regForm, firstName: e.target.value, name: `${e.target.value} ${regForm.lastName || ''}`.trim() })}
+                    style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem', boxSizing: 'border-box' }}
+                    required
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
+                    Last Name *
+                  </label>
+                  <input
+                    type="text"
+                    value={regForm.lastName || ''}
+                    onChange={(e) => setRegForm({ ...regForm, lastName: e.target.value, name: `${regForm.firstName || ''} ${e.target.value}`.trim() })}
+                    style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem', boxSizing: 'border-box' }}
+                    required
+                  />
+                </div>
               </div>
 
               {/* WhatsApp Number */}
