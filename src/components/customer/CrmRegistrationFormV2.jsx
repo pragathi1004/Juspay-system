@@ -108,7 +108,7 @@ export const CrmRegistrationFormV2 = () => {
               {/* Class Language — shown FIRST so user picks language upfront */}
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                  Class Language *
+                  Language *
                 </label>
                 <select
                   value={regForm.language || 'English / Hindi'}
