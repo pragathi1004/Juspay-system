@@ -200,10 +200,13 @@ export const PublicLandingPage = () => {
             </div>
 
             <div>
-              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
                 <div style={{ background: '#f97316', color: '#ffffff', display: 'inline-block', padding: '6px 20px', borderRadius: '9999px', fontWeight: 800, fontSize: '1.25rem' }}>
                   12 Months
                 </div>
+                <span style={{ background: '#dcfce7', color: '#15803d', fontSize: '0.85rem', fontWeight: 700, padding: '6px 14px', borderRadius: '9999px', border: '1px solid #86efac' }}>
+                  14-Day Trial: FREE
+                </span>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '24px' }}>
@@ -241,10 +244,13 @@ export const PublicLandingPage = () => {
           {/* 6 MONTHS PLAN CARD */}
           <div style={{ border: '1px solid #fed7aa', borderRadius: '24px', background: '#fffaf0', padding: '32px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
-              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
                 <div style={{ background: '#f97316', color: '#ffffff', display: 'inline-block', padding: '6px 20px', borderRadius: '9999px', fontWeight: 800, fontSize: '1.25rem' }}>
                   6 Months
                 </div>
+                <span style={{ background: '#ffedd5', color: '#c2410c', fontSize: '0.85rem', fontWeight: 700, padding: '6px 14px', borderRadius: '9999px', border: '1px solid #fed7aa' }}>
+                  14-Day Trial: FREE
+                </span>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '24px' }}>
@@ -280,10 +286,13 @@ export const PublicLandingPage = () => {
           {/* 3 MONTHS PLAN CARD */}
           <div style={{ border: '1px solid #fed7aa', borderRadius: '24px', background: '#fffaf0', padding: '32px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
-              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
                 <div style={{ background: '#f97316', color: '#ffffff', display: 'inline-block', padding: '6px 20px', borderRadius: '9999px', fontWeight: 800, fontSize: '1.25rem' }}>
                   3 Months
                 </div>
+                <span style={{ background: '#ffedd5', color: '#c2410c', fontSize: '0.85rem', fontWeight: 700, padding: '6px 14px', borderRadius: '9999px', border: '1px solid #fed7aa' }}>
+                  14-Day Trial: FREE
+                </span>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '24px' }}>
