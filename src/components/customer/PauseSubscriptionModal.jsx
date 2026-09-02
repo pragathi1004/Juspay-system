@@ -204,11 +204,7 @@ export const PauseSubscriptionModal = () => {
               >
                 <ArrowLeft size={18} />
               </button>
-            ) : (
-              <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#ffedd5', color: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <Clock size={20} />
-              </div>
-            )}
+            ) : null}
             <div>
               <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#1e293b', margin: 0 }}>
                 {step === 'CONFIG' ? 'Pause Subscription' : 'Review your pause'}
@@ -232,15 +228,7 @@ export const PauseSubscriptionModal = () => {
         {step === 'CONFIG' && (
           <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px', maxHeight: '75vh', overflowY: 'auto' }}>
             
-            {/* HERO MOTIVATION BANNER */}
-            <div style={{ background: 'linear-gradient(135deg, #fff7ed 0%, #fffbf2 100%)', border: '1.5px solid #fed7aa', borderRadius: '18px', padding: '18px 20px' }}>
-              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#9a3412', marginBottom: '4px' }}>
-                Taking a break from yoga?
-              </div>
-              <p style={{ fontSize: '0.85rem', color: '#7c2d12', margin: 0, lineHeight: 1.45 }}>
-                Pause your subscription and save your remaining membership days for later.
-              </p>
-            </div>
+
 
             {/* PAUSE ENTITLEMENT DISPLAY */}
             <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '18px', padding: '18px 20px' }}>
