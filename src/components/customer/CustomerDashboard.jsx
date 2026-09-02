@@ -1,12 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
-import { PlayCircle, Play, ChevronRight, Award, Lock, Target, BookOpen, MessageCircle, ShieldCheck, RefreshCw, Calendar, CheckCircle, FileText, AlertTriangle, AlertCircle, RefreshCcw, User } from 'lucide-react';
+import { 
+  PlayCircle, 
+  Play, 
+  ChevronRight, 
+  Award, 
+  Lock, 
+  Target, 
+  BookOpen, 
+  MessageCircle, 
+  ShieldCheck, 
+  RefreshCw, 
+  Calendar, 
+  CheckCircle, 
+  FileText, 
+  AlertTriangle, 
+  AlertCircle, 
+  RefreshCcw, 
+  User,
+  Clock,
+  CalendarDays
+} from 'lucide-react';
 import { PaymentHistoryModal } from './PaymentHistoryModal';
+import { PauseSubscriptionModal } from './PauseSubscriptionModal';
+import { ResumeSubscriptionModal } from './ResumeSubscriptionModal';
+import { PausedBookingModal } from './PausedBookingModal';
 import aolLogoSwans from '../../assets/aol_logo_swans.png';
 
 export const CustomerDashboard = () => {
-  const { customer, setCustomerScreen, setIsPaymentHistoryOpen, isPaymentHistoryOpen, handleTurnOnAutoRenewalSubmit, setSimulatedState, handleResumeSubscriptionSubmit } = useApp();
+  const { 
+    customer, 
+    setCustomerScreen, 
+    setIsPaymentHistoryOpen, 
+    isPaymentHistoryOpen, 
+    handleTurnOnAutoRenewalSubmit, 
+    setSimulatedState, 
+    setIsPauseModalOpen,
+    setIsResumeModalOpen,
+    setIsBlockedSessionModalOpen
+  } = useApp();
+
   const sub = customer.subscription;
+  const isPaused = sub.status === 'PAUSED' || sub.isPaused;
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
   // Countdown timer simulation
@@ -28,6 +63,24 @@ export const CustomerDashboard = () => {
 
   const isAutoPayActive = sub.autopayStatus === 'ACTIVE';
   const amountDisplay = sub.amount ? sub.amount.toLocaleString('en-IN') : '1,499';
+
+  const planCode = sub.planCode || 'YOGA_3M';
+  const getPlanMaxPauseDays = (code) => {
+    if (code === 'YOGA_12M') return 45;
+    if (code === 'YOGA_6M') return 30;
+    return 15;
+  };
+  const maxPausePool = sub.totalPauseDays || getPlanMaxPauseDays(planCode);
+  const remainingPauseDays = sub.pauseDaysRemaining !== undefined ? sub.pauseDaysRemaining : maxPausePool;
+
+  // Intercept session clicks when paused
+  const handleSessionClick = (sessionName) => {
+    if (isPaused) {
+      setIsBlockedSessionModalOpen(true);
+    } else {
+      alert(`Opening ${sessionName}`);
+    }
+  };
 
   return (
     <div style={{ background: '#FFF8E8', minHeight: '100vh', paddingBottom: '60px', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -58,166 +111,104 @@ export const CustomerDashboard = () => {
                 <div style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', background: '#fafaf9' }}>
                   <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#1e293b' }}>{customer.name}</div>
                   <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{customer.email}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '4px' }}>{customer.phone}</div>
                 </div>
-                <button
-                  onClick={() => { setProfileDropdownOpen(false); setCustomerScreen('MANAGE_HUB'); }}
-                  style={{ width: '100%', padding: '10px 16px', border: 'none', background: 'none', textAlign: 'left', fontSize: '0.85rem', fontWeight: 600, color: '#334155', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-                >
-                  ⚙️ Manage Subscription
-                </button>
-                <button
-                  onClick={() => { setProfileDropdownOpen(false); setIsPaymentHistoryOpen(true); }}
-                  style={{ width: '100%', padding: '10px 16px', border: 'none', background: 'none', textAlign: 'left', fontSize: '0.85rem', fontWeight: 600, color: '#334155', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-                >
-                  🧾 View Payment History
-                </button>
+
+                <div style={{ padding: '8px 0' }}>
+                  <button
+                    onClick={() => { setProfileDropdownOpen(false); setCustomerScreen('MANAGE_HUB'); }}
+                    style={{ width: '100%', padding: '8px 16px', background: 'transparent', border: 'none', textAlign: 'left', fontSize: '0.85rem', color: '#334155', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+                  >
+                    <ShieldCheck size={14} /> Manage Subscription
+                  </button>
+                  <button
+                    onClick={() => { setProfileDropdownOpen(false); isPaused ? setIsResumeModalOpen(true) : setIsPauseModalOpen(true); }}
+                    style={{ width: '100%', padding: '8px 16px', background: 'transparent', border: 'none', textAlign: 'left', fontSize: '0.85rem', color: isPaused ? '#d97706' : '#334155', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+                  >
+                    {isPaused ? <PlayCircle size={14} color="#d97706" /> : <Clock size={14} />} {isPaused ? 'Resume Subscription' : 'Pause Subscription'}
+                  </button>
+                  <button
+                    onClick={() => { setProfileDropdownOpen(false); setIsPaymentHistoryOpen(true); }}
+                    style={{ width: '100%', padding: '8px 16px', background: 'transparent', border: 'none', textAlign: 'left', fontSize: '0.85rem', color: '#334155', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+                  >
+                    <FileText size={14} /> Payment History
+                  </button>
+                </div>
               </div>
             )}
           </div>
         </div>
       </header>
 
-      {/* MAIN CONTENT AREA */}
-      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-
+      {/* MAIN CONTAINER */}
+      <main style={{ maxWidth: '1100px', margin: '0 auto', padding: '24px 20px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        
         {/* ============================================================ */}
-        {/* SCREEN 10: RENEWAL REMINDER BANNER (1 DAY BEFORE RENEWAL)   */}
+        {/* PAUSED SUBSCRIPTION BANNER (PRODUCTION QUALITY)               */}
         {/* ============================================================ */}
-        {sub.status === 'RENEWAL_DUE' && (
-          <div style={{ background: '#fffbeb', border: '2px solid #f59e0b', borderRadius: '16px', padding: '20px 24px', boxShadow: '0 4px 12px rgba(245, 158, 11, 0.15)' }}>
+        {isPaused && (
+          <div style={{ background: '#fffbeb', border: '2px solid #f59e0b', borderRadius: '20px', padding: '24px', boxShadow: '0 8px 24px rgba(245, 158, 11, 0.15)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#f59e0b', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <RefreshCw size={24} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: '#f59e0b', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px rgba(245, 158, 11, 0.3)' }}>
+                  <AlertTriangle size={26} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#78350f' }}>
-                    🔔 Your Sri Sri Yoga subscription renews tomorrow!
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                    <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#78350f' }}>
+                      ⏸️ Your Subscription is Paused
+                    </span>
+                    <span style={{ background: '#fef3c7', color: '#92400e', border: '1px solid #fde68a', fontSize: '0.75rem', fontWeight: 800, padding: '2px 8px', borderRadius: '9999px' }}>
+                      {sub.pauseDuration} Days Paused
+                    </span>
                   </div>
-                  <div style={{ fontSize: '0.875rem', color: '#92400e', marginTop: '2px' }}>
-                    Your subscription will automatically renew at <strong>₹{amountDisplay}</strong> on <strong>14 Jan 2027</strong> using your registered payment method ({sub.maskedPaymentDetail || 'UPI ••••1234'}).
+                  
+                  <div style={{ fontSize: '0.88rem', color: '#92400e', marginTop: '4px', lineHeight: 1.5 }}>
+                    {sub.pauseReason ? <>Reason: <strong>{sub.pauseReason}</strong> • </> : ''}
+                    Resumes on <strong>{sub.pauseEndDate || sub.endDate}</strong>. Subscription expiry extended to <strong>{sub.endDate}</strong>.<br />
+                    <span style={{ color: '#15803d', fontWeight: 700 }}>
+                      Pause days remaining: {remainingPauseDays} / {maxPausePool} days. Resume early anytime — unused days are refunded.
+                    </span>
                   </div>
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: '10px' }}>
+
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <button
+                  type="button"
+                  onClick={() => setIsResumeModalOpen(true)}
+                  style={{
+                    background: '#ea580c',
+                    color: '#ffffff',
+                    padding: '12px 24px',
+                    borderRadius: '12px',
+                    border: 'none',
+                    fontWeight: 800,
+                    fontSize: '0.9rem',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 12px rgba(234, 88, 12, 0.3)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px'
+                  }}
+                >
+                  <PlayCircle size={18} /> Resume Subscription
+                </button>
+                <button
+                  type="button"
                   onClick={() => setCustomerScreen('MANAGE_HUB')}
-                  style={{ background: '#ea580c', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', border: 'none', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
+                  style={{
+                    background: '#ffffff',
+                    border: '1.5px solid #d97706',
+                    color: '#92400e',
+                    padding: '12px 18px',
+                    borderRadius: '12px',
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
+                    cursor: 'pointer'
+                  }}
                 >
-                  Manage Subscription
-                </button>
-                <button
-                  onClick={() => setIsTurnOffRenewalModalOpen(true)}
-                  style={{ background: '#ffffff', border: '1px solid #dc2626', color: '#dc2626', padding: '10px 16px', borderRadius: '8px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
-                >
-                  Cancel Subscription
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ============================================================ */}
-        {/* SCREEN 12: RENEWAL FAILED BANNER                            */}
-        {/* ============================================================ */}
-        {sub.status === 'RENEWAL_FAILED' && (
-          <div style={{ background: '#fef2f2', border: '2px solid #ef4444', borderRadius: '16px', padding: '20px 24px', boxShadow: '0 4px 12px rgba(239, 68, 68, 0.15)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#ef4444', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <AlertTriangle size={24} />
-                </div>
-                <div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#991b1b' }}>
-                    ⚠️ We couldn't renew your subscription
-                  </div>
-                  <div style={{ fontSize: '0.875rem', color: '#7f1d1d', marginTop: '2px' }}>
-                    Amount: ₹{amountDisplay} • Attempt 1 of 3 Failed ({sub.failureReason || 'Bank declined debit'})<br />
-                    <span style={{ fontWeight: 700 }}>Grace Period Active: Your yoga class access continues until {sub.gracePeriodEndDate || '19 Jan 2027'}.</span>
-                  </div>
-                </div>
-              </div>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <button
-                  onClick={() => setSimulatedState('RENEWAL_SUCCESS')}
-                  style={{ background: '#dc2626', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', border: 'none', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
-                >
-                  Retry Payment Now
-                </button>
-                <button
-                  onClick={() => setCustomerScreen('EDIT_PAYMENT_WIZARD')}
-                  style={{ background: '#ffffff', border: '1px solid #dc2626', color: '#991b1b', padding: '10px 16px', borderRadius: '8px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
-                >
-                  Update Payment Method
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ============================================================ */}
-        {/* SCREEN 13: EXPIRED SUBSCRIPTION BANNER                      */}
-        {/* ============================================================ */}
-        {sub.status === 'EXPIRED' && (
-          <div style={{ background: '#f8fafc', border: '2px solid #94a3b8', borderRadius: '16px', padding: '24px', textAlign: 'center' }}>
-            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: '#64748b', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px auto' }}>
-              <AlertCircle size={28} />
-            </div>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#1e293b', marginBottom: '6px' }}>
-              Your Yoga Subscription Has Expired
-            </h2>
-            <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '16px' }}>
-              Previous Plan: 3 Months Sri Sri Yoga • Expired On: {sub.endDate || '13 Jan 2027'}
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
-              <button
-                onClick={() => setCustomerScreen('CRM_FORM')}
-                style={{ background: '#f97316', color: '#ffffff', padding: '12px 28px', borderRadius: '24px', border: 'none', fontWeight: 800, fontSize: '0.95rem', cursor: 'pointer' }}
-              >
-                Subscribe Again
-              </button>
-              <button
-                onClick={() => setIsPaymentHistoryOpen(true)}
-                style={{ background: '#ffffff', border: '1px solid #cbd5e1', color: '#334155', padding: '12px 20px', borderRadius: '24px', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer' }}
-              >
-                View Past Payment History
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* ============================================================ */}
-        {/* PAUSED SUBSCRIPTION BANNER                                   */}
-        {/* ============================================================ */}
-        {sub.status === 'PAUSED' && (
-          <div style={{ background: '#fffbeb', border: '2px solid #f59e0b', borderRadius: '16px', padding: '20px 24px', boxShadow: '0 4px 12px rgba(245, 158, 11, 0.15)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#f59e0b', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <AlertTriangle size={24} />
-                </div>
-                <div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#78350f' }}>
-                    ⏸️ Your Subscription is Paused
-                  </div>
-                  <div style={{ fontSize: '0.875rem', color: '#92400e', marginTop: '2px' }}>
-                    Paused for <strong>{sub.pauseDuration} days</strong> starting {sub.pausedAt}. Daily class access & auto-billing are suspended.<br />
-                    <span style={{ fontWeight: 700 }}>New subscription expiry: {sub.endDate}. Resume anytime — unused pause days are refunded.</span>
-                  </div>
-                </div>
-              </div>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <button
-                  onClick={() => handleResumeSubscriptionSubmit()}
-                  style={{ background: '#f59e0b', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', border: 'none', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
-                >
-                  ▶ Resume Now
-                </button>
-                <button
-                  onClick={() => setCustomerScreen('MANAGE_HUB')}
-                  style={{ background: '#ffffff', border: '1px solid #d97706', color: '#92400e', padding: '10px 16px', borderRadius: '8px', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
-                >
-                  Manage Subscription
+                  Manage Details
                 </button>
               </div>
             </div>
@@ -227,7 +218,7 @@ export const CustomerDashboard = () => {
         {/* 1. ORIENTATION BANNER */}
         <button
           type="button"
-          onClick={() => alert('Opening Orientation Video')}
+          onClick={() => handleSessionClick('Orientation Video')}
           style={{
             width: '100%',
             display: 'flex',
@@ -256,7 +247,14 @@ export const CustomerDashboard = () => {
         </button>
 
         {/* 2. LIVE SESSION TILE */}
-        <div style={{ borderRadius: '20px', background: 'linear-gradient(to right, #f0fdf4, #f0fdfa)', border: '2px solid #99f6e4', padding: '24px', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
+        <div style={{ borderRadius: '20px', background: 'linear-gradient(to right, #f0fdf4, #f0fdfa)', border: '2px solid #99f6e4', padding: '24px', boxShadow: '0 4px 12px rgba(0,0,0,0.04)', position: 'relative' }}>
+          
+          {isPaused && (
+            <div style={{ position: 'absolute', top: '16px', right: '16px', background: '#fef3c7', border: '1px solid #fde68a', color: '#b45309', fontSize: '0.78rem', fontWeight: 800, padding: '4px 12px', borderRadius: '9999px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              ⏸️ Paused Mode (Resume to Join)
+            </div>
+          )}
+
           <div style={{ textAlign: 'center', marginBottom: '16px' }}>
             <p style={{ fontSize: '1rem', color: '#374151', fontWeight: 600, marginBottom: '6px' }}>
               Next Live Session begins at 5:00 AM IST
@@ -267,16 +265,19 @@ export const CustomerDashboard = () => {
             <p style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '2px' }}>Hours : Minutes : Seconds</p>
           </div>
 
-          {/* YouTube Video Player Mock */}
+          {/* YouTube Video Player Mock with Paused Click Interceptor */}
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
-            <div style={{ width: '100%', maxWidth: '720px', aspectRatio: '16/9', borderRadius: '16px', overflow: 'hidden', position: 'relative', background: '#000', boxShadow: '0 8px 24px rgba(0,0,0,0.15)' }}>
+            <div 
+              onClick={() => handleSessionClick('Daily Live Yoga Session')}
+              style={{ width: '100%', maxWidth: '720px', aspectRatio: '16/9', borderRadius: '16px', overflow: 'hidden', position: 'relative', background: '#000', boxShadow: '0 8px 24px rgba(0,0,0,0.15)', cursor: 'pointer' }}
+            >
               <img 
                 src="https://i.ytimg.com/vi/x1dl_JqKeoY/hqdefault.jpg" 
                 alt="Sri Sri Yoga Live Session" 
                 style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }} 
               />
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.25)', cursor: 'pointer' }}>
-                <div style={{ width: '70px', height: '70px', borderRadius: '50%', background: '#dc2626', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 25px rgba(220,38,38,0.5)' }}>
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.25)' }}>
+                <div style={{ width: '70px', height: '70px', borderRadius: '50%', background: isPaused ? '#ea580c' : '#dc2626', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 25px rgba(220,38,38,0.5)' }}>
                   <Play size={36} color="#fff" style={{ marginLeft: '4px' }} />
                 </div>
               </div>
@@ -303,35 +304,47 @@ export const CustomerDashboard = () => {
             <p style={{ fontSize: '0.85rem', color: '#6b7280', marginBottom: '16px' }}>We have some upcoming exciting sessions for you.</p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '14px', padding: '16px', display: 'flex', alignItems: 'center', gap: '14px' }}>
-                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: '#fef3c7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d97706', flexShrink: 0 }}>
-                  <BookOpen size={20} />
+              <div 
+                onClick={() => handleSessionClick('Masterclass - Dental Health')}
+                style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '14px', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', transition: 'all 0.15s' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: '#fef3c7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d97706', flexShrink: 0 }}>
+                    <BookOpen size={20} />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#111827' }}>Masterclass - Dental Health</div>
+                    <div style={{ fontSize: '0.8rem', color: '#6b7280' }}>30th Aug, 2026 • 5pm IST</div>
+                  </div>
                 </div>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#111827' }}>Masterclass - Dental Health</div>
-                  <div style={{ fontSize: '0.8rem', color: '#6b7280' }}>30th Aug, 2026 • 5pm IST</div>
-                </div>
+                <ChevronRight size={18} color="#d97706" />
               </div>
 
-              <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '14px', padding: '16px', display: 'flex', alignItems: 'center', gap: '14px' }}>
-                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: '#fef3c7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d97706', flexShrink: 0 }}>
-                  <MessageCircle size={20} />
+              <div 
+                onClick={() => handleSessionClick('Weekly Q&A Session')}
+                style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '14px', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', transition: 'all 0.15s' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: '#fef3c7', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d97706', flexShrink: 0 }}>
+                    <MessageCircle size={20} />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#111827' }}>Weekly Q&A Session</div>
+                    <div style={{ fontSize: '0.8rem', color: '#6b7280' }}>Every Sunday • 5pm IST</div>
+                  </div>
                 </div>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#111827' }}>Weekly Q&A Session</div>
-                  <div style={{ fontSize: '0.8rem', color: '#6b7280' }}>Every Sunday • 5pm IST</div>
-                </div>
+                <ChevronRight size={18} color="#d97706" />
               </div>
             </div>
           </div>
 
-          {/* RIGHT: MEMBERSHIP DETAILS (PROMPT SPEC COMPLIANT CARD) */}
+          {/* RIGHT: MEMBERSHIP DETAILS CARD */}
           <div style={{ borderRadius: '20px', border: '2px solid #fef08a', background: '#ffffff', padding: '24px', boxShadow: '0 2px 8px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#111827' }}>Membership Details</h3>
-                <span className="badge badge-active" style={{ background: sub.status === 'EXPIRED' ? '#64748b' : sub.status === 'PAUSED' ? '#f59e0b' : '#059669', color: '#ffffff', border: 'none', padding: '4px 12px', fontSize: '0.75rem', fontWeight: 700 }}>
-                  {sub.status || 'Active'}
+                <span className="badge badge-active" style={{ background: sub.status === 'EXPIRED' ? '#64748b' : isPaused ? '#f59e0b' : '#059669', color: '#ffffff', border: 'none', padding: '4px 12px', fontSize: '0.75rem', fontWeight: 700 }}>
+                  {isPaused ? '⏸️ Paused' : (sub.status || 'Active')}
                 </span>
               </div>
 
@@ -347,16 +360,16 @@ export const CustomerDashboard = () => {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
-                  <span style={{ color: '#6b7280' }}>Expiry Date</span>
-                  <strong style={{ color: '#111827', fontWeight: 700 }}>{sub.endDate || '13 Jan 2027'}</strong>
+                  <span style={{ color: '#6b7280' }}>{isPaused ? 'Adjusted Expiry' : 'Expiry Date'}</span>
+                  <strong style={{ color: isPaused ? '#15803d' : '#111827', fontWeight: 700 }}>{sub.endDate || '13 Jan 2027'}</strong>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
-                  <span style={{ color: '#6b7280' }}>Days Remaining</span>
-                  <strong style={{ color: '#ea580c', fontWeight: 800 }}>{sub.daysRemaining !== undefined ? sub.daysRemaining : 55} Days</strong>
+                  <span style={{ color: '#6b7280' }}>Pause Balance</span>
+                  <strong style={{ color: '#ea580c', fontWeight: 800 }}>{remainingPauseDays} / {maxPausePool} Days</strong>
                 </div>
 
-                {/* NEXT RENEWAL DETAILS SECTION (REQUIRED BY PROMPT) */}
+                {/* NEXT RENEWAL DETAILS SECTION */}
                 <div style={{ borderTop: '1px dashed #e2e8f0', paddingTop: '12px', marginTop: '4px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
                     <span style={{ color: '#6b7280' }}>Next Renewal</span>
@@ -383,9 +396,32 @@ export const CustomerDashboard = () => {
               </div>
             </div>
 
-            {/* BUTTON & PAYMENT HISTORY ENTRY POINT */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {isAutoPayActive ? (
+            {/* BUTTON ACTIONS */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {isPaused ? (
+                <button
+                  type="button"
+                  onClick={() => setIsResumeModalOpen(true)}
+                  style={{
+                    width: '100%',
+                    padding: '14px',
+                    borderRadius: '12px',
+                    background: '#ea580c',
+                    color: '#ffffff',
+                    fontWeight: 800,
+                    fontSize: '1.05rem',
+                    border: 'none',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 14px rgba(234, 88, 12, 0.35)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px'
+                  }}
+                >
+                  <PlayCircle size={20} /> Resume Subscription
+                </button>
+              ) : (
                 <button
                   type="button"
                   onClick={() => setCustomerScreen('MANAGE_HUB')}
@@ -405,28 +441,9 @@ export const CustomerDashboard = () => {
                 >
                   Manage Subscription
                 </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={handleTurnOnAutoRenewalSubmit}
-                  style={{
-                    width: '100%',
-                    padding: '14px',
-                    borderRadius: '12px',
-                    background: '#059669',
-                    color: '#ffffff',
-                    fontWeight: 800,
-                    fontSize: '1.05rem',
-                    border: 'none',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 14px rgba(5, 150, 105, 0.3)'
-                  }}
-                >
-                  Turn Auto-Renewal On
-                </button>
               )}
 
-              {/* PAYMENT HISTORY SECONDARY LINK (PRIMARY PLACEMENT UNDER MEMBERSHIP DETAILS) */}
+              {/* PAYMENT HISTORY SECONDARY LINK */}
               <button
                 type="button"
                 onClick={() => setIsPaymentHistoryOpen(true)}
@@ -484,10 +501,12 @@ export const CustomerDashboard = () => {
 
       </main>
 
-      {/* PAYMENT HISTORY MODAL */}
+      {/* ALL MODALS */}
       <PaymentHistoryModal />
+      <PauseSubscriptionModal />
+      <ResumeSubscriptionModal />
+      <PausedBookingModal onResumeAndContinue={() => alert('Subscription resumed! Starting your daily yoga session...')} />
 
     </div>
   );
 };
-

@@ -32,6 +32,8 @@ export const AppProvider = ({ children }) => {
   const [selectedAdminSubDetail, setSelectedAdminSubDetail] = useState(null);
   const [selectedWebhookLog, setSelectedWebhookLog] = useState(null);
   const [isPauseModalOpen, setIsPauseModalOpen] = useState(false);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  const [isBlockedSessionModalOpen, setIsBlockedSessionModalOpen] = useState(false);
 
   // Customer Data & State Simulation
   const [customer, setCustomer] = useState(INITIAL_CUSTOMER);
@@ -94,7 +96,25 @@ export const AppProvider = ({ children }) => {
         updatedSub.failureReason = null;
         updatedSub.isPaused = false;
         updatedSub.pausedAt = null;
+        updatedSub.pauseEndDate = null;
         updatedSub.pauseDuration = 0;
+        updatedSub.pauseReason = null;
+        setCustomerScreen('DASHBOARD');
+        break;
+      case 'PAUSED':
+        updatedSub.status = 'PAUSED';
+        updatedSub.isPaused = true;
+        updatedSub.pausedAt = '03 Sep 2026';
+        updatedSub.pauseEndDate = '12 Sep 2026';
+        updatedSub.pauseDuration = 10;
+        updatedSub.pauseReason = 'Travelling';
+        updatedSub.prevEndDate = '13 Jan 2027';
+        updatedSub.prevNextRenewalDate = '14 Jan 2027';
+        updatedSub.endDate = '23 Jan 2027';
+        updatedSub.nextRenewalDate = '24 Jan 2027';
+        updatedSub.totalPauseDays = 15;
+        updatedSub.pauseDaysRemaining = 5;
+        updatedSub.usedPauseDays = 10;
         setCustomerScreen('DASHBOARD');
         break;
       case 'AUTOPAY_OFF':
@@ -124,6 +144,7 @@ export const AppProvider = ({ children }) => {
         updatedSub.renewalAmount = 1499;
         updatedSub.isPaused = false;
         updatedSub.pausedAt = null;
+        updatedSub.pauseEndDate = null;
         updatedSub.pauseDuration = 0;
         // Add new payment entry
         const newRenewPayment = {
@@ -138,36 +159,30 @@ export const AppProvider = ({ children }) => {
           paymentType: 'Auto-Renewal',
           method: 'UPI ••••1234',
           status: '✓ Paid',
-          mandateId: updatedSub.mandateId,
-          receiptUrl: '#',
-          details: {
-            paymentId: 'PAY_' + Math.floor(100000 + Math.random() * 900000),
-            orderId: 'ORD_AUTO_' + Math.floor(1000 + Math.random() * 9000),
-            subscriptionId: updatedSub.id,
-            date: '14 Jan 2027, 06:00 AM',
-            amount: '₹1,499',
-            paymentMethod: 'UPI ••••1234',
-            paymentType: 'Auto-Renewal',
-            status: '✓ Successful'
-          }
+          invoiceUrl: '#'
         };
-        setPaymentHistory(prev => [newRenewPayment, ...prev]);
+        setPaymentHistory((prev) => [newRenewPayment, ...prev]);
         setCustomerScreen('DASHBOARD');
         break;
       case 'RENEWAL_FAILED':
-      case 'RENEWAL_FAILED_1':
         updatedSub.status = 'RENEWAL_FAILED';
+        updatedSub.daysRemaining = 0;
+        updatedSub.nextRenewalDate = '14 Jan 2027';
         updatedSub.retryAttempt = 1;
-        updatedSub.failureReason = 'Card / Mandate Debit Declined by Bank (Insufficient Funds)';
-        updatedSub.nextRetryDate = 'In 2 days (16 Jan 2027)';
-        updatedSub.gracePeriodEndDate = '19 Jan 2027';
+        updatedSub.failureReason = 'ZA504 (Juspay Transaction Timeout at Issuer)';
+        updatedSub.nextRetryDate = '16 Jan 2027 (Retry #1 in 48h)';
+        updatedSub.gracePeriodEndDate = '21 Jan 2027 (7-Day Grace Access Active)';
         setCustomerScreen('DASHBOARD');
         break;
       case 'EXPIRED':
         updatedSub.status = 'EXPIRED';
         updatedSub.daysRemaining = 0;
-        updatedSub.autopayStatus = 'EXPIRED';
-        updatedSub.endDate = '13 Jan 2027';
+        updatedSub.nextRenewalDate = 'Expired';
+        updatedSub.autopayStatus = 'REVOKED';
+        updatedSub.retryAttempt = 3;
+        updatedSub.failureReason = 'Max Auto-Retries Exhausted. Mandate Revoked.';
+        updatedSub.isPaused = false;
+        updatedSub.pauseDaysRemaining = 0;
         setCustomerScreen('DASHBOARD');
         break;
       default:
@@ -260,25 +275,62 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const handlePauseSubscriptionSubmit = (pauseDays) => {
+  const handlePauseSubscriptionSubmit = (pauseData) => {
     const sub = customer.subscription;
+    const planTotal = sub.totalPauseDays || (sub.planCode === 'YOGA_12M' ? 45 : sub.planCode === 'YOGA_6M' ? 30 : 15);
+    const currentRemaining = sub.pauseDaysRemaining !== undefined ? sub.pauseDaysRemaining : planTotal;
+    
+    // Support both numeric argument and object argument
+    const daysToPause = typeof pauseData === 'object' 
+      ? Math.min(parseInt(pauseData.pauseDays) || 1, currentRemaining)
+      : Math.min(parseInt(pauseData) || 1, currentRemaining);
+    
+    const reason = typeof pauseData === 'object' ? pauseData.reason : 'Personal break';
+    const customReason = typeof pauseData === 'object' ? pauseData.customReason : '';
+    const startDate = typeof pauseData === 'object' ? pauseData.startDate : null;
+    const endDate = typeof pauseData === 'object' ? pauseData.endDate : null;
+
     const oldEndDate = sub.endDate || '13 Jan 2027';
     const oldNextRenewalDate = sub.nextRenewalDate || '14 Jan 2027';
 
-    const newEndDate = addDays(oldEndDate, pauseDays);
-    const newNextRenewalDate = addDays(oldNextRenewalDate, pauseDays);
+    const newEndDate = addDays(oldEndDate, daysToPause);
+    const newNextRenewalDate = addDays(oldNextRenewalDate, daysToPause);
+    const effectiveReason = reason === 'Other' && customReason ? customReason : (reason || 'Personal break');
+    
+    const d = new Date();
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const todayFormatted = `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    const startFormatted = startDate || todayFormatted;
+    const endFormatted = endDate || addDays(startFormatted, daysToPause);
+
+    const pauseRecord = {
+      id: 'PAUSE_' + Date.now(),
+      startDate: startFormatted,
+      endDate: endFormatted,
+      pauseDays: daysToPause,
+      reason: effectiveReason,
+      pausedAt: new Date().toISOString(),
+      resumedAt: null,
+      resumedEarly: false,
+      actualDaysPaused: daysToPause
+    };
 
     const updatedSub = {
       ...sub,
       status: 'PAUSED',
       isPaused: true,
-      pausedAt: new Date().toISOString().split('T')[0],
-      pauseDuration: parseInt(pauseDays),
-      prevEndDate: oldEndDate,
-      prevNextRenewalDate: oldNextRenewalDate,
+      pausedAt: startFormatted,
+      pauseEndDate: endFormatted,
+      pauseDuration: daysToPause,
+      pauseReason: effectiveReason,
+      prevEndDate: sub.prevEndDate || oldEndDate,
+      prevNextRenewalDate: sub.prevNextRenewalDate || oldNextRenewalDate,
       endDate: newEndDate,
       nextRenewalDate: newNextRenewalDate,
-      pauseDaysRemaining: Math.max(0, (sub.pauseDaysRemaining || 15) - parseInt(pauseDays))
+      totalPauseDays: planTotal,
+      usedPauseDays: (sub.usedPauseDays || 0) + daysToPause,
+      pauseDaysRemaining: Math.max(0, currentRemaining - daysToPause),
+      pauseHistory: [pauseRecord, ...(sub.pauseHistory || [])]
     };
 
     setCustomer((prev) => ({
@@ -291,16 +343,19 @@ export const AppProvider = ({ children }) => {
     const pauseEvent = {
       id: 'EVT_' + Math.floor(100000 + Math.random() * 900000),
       timestamp: new Date().toLocaleString(),
-      eventType: 'MANDATE_UPDATED',
+      eventType: 'MANDATE_PAUSED',
       orderId: 'ORD_PAUSE_' + Math.floor(1000 + Math.random() * 9000),
       customerId: customer.id,
       subscriptionId: sub.id,
       mandateId: sub.mandateId,
       status: 'PROCESSED',
       payload: {
-        event: 'MANDATE_SUSPENDED',
-        paused_for_days: pauseDays,
-        resumes_on: newNextRenewalDate
+        event: 'MANDATE_PAUSED',
+        paused_for_days: daysToPause,
+        reason: effectiveReason,
+        resumes_on: endFormatted,
+        new_expiry_date: newEndDate,
+        new_renewal_date: newNextRenewalDate
       }
     };
     setWebhookLogs((prev) => [pauseEvent, ...prev]);
@@ -310,35 +365,63 @@ export const AppProvider = ({ children }) => {
     const sub = customer.subscription;
     if (!sub.isPaused) return;
 
-    const pausedAtDate = new Date(sub.pausedAt);
-    const today = new Date();
-    const msDiff = today.getTime() - pausedAtDate.getTime();
-    const daysPausedActual = Math.max(1, Math.ceil(msDiff / (1000 * 60 * 60 * 24)));
+    let daysPausedActual = 1;
+    if (sub.pausedAt) {
+      const pausedAtDate = new Date(sub.pausedAt);
+      if (!isNaN(pausedAtDate.getTime())) {
+        const today = new Date();
+        const msDiff = today.getTime() - pausedAtDate.getTime();
+        daysPausedActual = Math.max(1, Math.ceil(msDiff / (1000 * 60 * 60 * 24)));
+      }
+    }
+    const plannedDuration = sub.pauseDuration || 1;
+    const actualDays = Math.min(daysPausedActual, plannedDuration);
+    const unusedDays = Math.max(0, plannedDuration - actualDays);
 
-    const unusedDays = Math.max(0, sub.pauseDuration - daysPausedActual);
-    const updatedPauseDaysRemaining = (sub.pauseDaysRemaining || 0) + unusedDays;
+    const planTotal = sub.totalPauseDays || (sub.planCode === 'YOGA_12M' ? 45 : sub.planCode === 'YOGA_6M' ? 30 : 15);
+    const updatedPauseDaysRemaining = Math.min(planTotal, (sub.pauseDaysRemaining || 0) + unusedDays);
+    const updatedUsedPauseDays = Math.max(0, (sub.usedPauseDays || plannedDuration) - unusedDays);
 
-    const prevEndDate = sub.prevEndDate || '13 Jan 2027';
-    const prevNextRenewalDate = sub.prevNextRenewalDate || '14 Jan 2027';
+    const baseEndDate = sub.prevEndDate || '13 Jan 2027';
+    const baseNextRenewalDate = sub.prevNextRenewalDate || '14 Jan 2027';
 
-    const finalEndDate = addDays(prevEndDate, daysPausedActual);
-    const finalNextRenewalDate = addDays(prevNextRenewalDate, daysPausedActual);
+    const finalEndDate = addDays(baseEndDate, actualDays);
+    const finalNextRenewalDate = addDays(baseNextRenewalDate, actualDays);
+
+    const updatedHistory = (sub.pauseHistory || []).map((rec, idx) => {
+      if (idx === 0) {
+        return {
+          ...rec,
+          resumedAt: new Date().toISOString(),
+          resumedEarly: unusedDays > 0,
+          actualDaysPaused: actualDays,
+          refundedPauseDays: unusedDays
+        };
+      }
+      return rec;
+    });
 
     const updatedSub = {
       ...sub,
       status: 'ACTIVE',
       isPaused: false,
       pausedAt: null,
+      pauseEndDate: null,
       pauseDuration: 0,
+      pauseReason: null,
       endDate: finalEndDate,
       nextRenewalDate: finalNextRenewalDate,
-      pauseDaysRemaining: updatedPauseDaysRemaining
+      pauseDaysRemaining: updatedPauseDaysRemaining,
+      usedPauseDays: updatedUsedPauseDays,
+      pauseHistory: updatedHistory
     };
 
     setCustomer((prev) => ({
       ...prev,
       subscription: updatedSub
     }));
+    setIsResumeModalOpen(false);
+    setIsBlockedSessionModalOpen(false);
 
     // Webhook log
     const resumeEvent = {
@@ -352,7 +435,8 @@ export const AppProvider = ({ children }) => {
       status: 'PROCESSED',
       payload: {
         event: 'MANDATE_RESUMED',
-        actual_days_paused: daysPausedActual,
+        actual_days_paused: actualDays,
+        unused_days_refunded: unusedDays,
         new_renewal_date: finalNextRenewalDate
       }
     };
@@ -600,6 +684,11 @@ export const AppProvider = ({ children }) => {
         handleTurnOnAutoRenewalSubmit,
         isPauseModalOpen,
         setIsPauseModalOpen,
+        isResumeModalOpen,
+        setIsResumeModalOpen,
+        isBlockedSessionModalOpen,
+        setIsBlockedSessionModalOpen,
+        addDays,
         handlePauseSubscriptionSubmit,
         handleResumeSubscriptionSubmit
       }}

@@ -33,10 +33,17 @@ export const INITIAL_CUSTOMER = {
     cancelledAt: null,
     cancelReason: null,
     cancellationAccessUntil: null,
+    totalPauseDays: 15,
     pauseDaysRemaining: 15,
+    usedPauseDays: 0,
     isPaused: false,
     pausedAt: null,
-    pauseDuration: 0
+    pauseEndDate: null,
+    pauseDuration: 0,
+    pauseReason: null,
+    originalExpiryDate: '13 Jan 2027',
+    originalNextRenewalDate: '14 Jan 2027',
+    pauseHistory: []
   }
 };
 
