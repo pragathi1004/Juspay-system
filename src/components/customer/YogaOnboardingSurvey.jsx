@@ -58,8 +58,8 @@ export const YogaOnboardingSurvey = () => {
     if (currentStep < 3) {
       setCurrentStep(prev => prev + 1);
     } else {
-      // Skip questions and navigate directly to Registration page (CRM_FORM)
-      setCustomerScreen('CRM_FORM');
+      // Skip questions and navigate directly to Registration page (DASHBOARD)
+      setCustomerScreen('DASHBOARD');
     }
   };
 

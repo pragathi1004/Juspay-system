@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { CheckCircle, Clock, MessageSquare, Mail, Sparkles, ArrowRight, ShieldCheck, PhoneCall, ChevronRight } from 'lucide-react';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 
 export const ConfirmationScreenV2 = () => {
   const { customer, setCustomerScreen, regForm, selectedPlanForCheckout } = useApp();
@@ -30,7 +30,7 @@ export const ConfirmationScreenV2 = () => {
   const renewalText = formatDate(renewalDate);
 
   return (
-    <div style={{ background: '#fdfbf7', minHeight: '90vh', padding: '40px 20px 80px 20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ background: '#fdfbf7', minHeight: '90vh', padding: '40px 20px 80px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <div
         style={{
           background: '#ffffff',
@@ -113,19 +113,33 @@ export const ConfirmationScreenV2 = () => {
           </div>
         </div>
 
-        {/* SUBTLE DASHBOARD PREPARATION NOTICE (V2) */}
-        <div style={{ marginTop: '32px', borderTop: '1px solid #f1f5f9', paddingTop: '24px', textAlign: 'center' }}>
-          <p style={{ fontSize: '1.05rem', color: '#1e3a8a', fontWeight: 700, marginBottom: '12px' }}>
-            ⏳ Your personalized Yoga Dashboard will be ready within 2–3 hours.
-          </p>
-          <p style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.5, marginBottom: '8px' }}>
-            We'll notify you on WhatsApp and email when it's ready.
-          </p>
-          <p style={{ fontSize: '0.9rem', color: '#047857', fontWeight: 600 }}>
-            Your subscription is active. You can begin your Yoga journey from tomorrow.
-          </p>
+        {/* ACTION CTA: COMPLETE PROFILE */}
+        <div style={{ marginTop: '30px' }}>
+          <button
+            onClick={() => setCustomerScreen('COMPLETE_PROFILE')}
+            style={{
+              width: '100%',
+              padding: '16px',
+              background: 'linear-gradient(135deg, #ea580c 0%, #f97316 100%)',
+              color: '#ffffff',
+              fontWeight: 800,
+              fontSize: '1.1rem',
+              borderRadius: '12px',
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '0 4px 15px rgba(234, 88, 12, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px'
+            }}
+          >
+            Complete Your Profile <ArrowRight size={18} />
+          </button>
+          <div style={{ textAlign: 'center', fontSize: '0.8rem', color: '#64748b', marginTop: '12px' }}>
+            It only takes 2 minutes to personalize your Yoga journey
+          </div>
         </div>
-
       </div>
 
       {/* DISCREET PROTOTYPE CONTROL */}
@@ -153,4 +167,3 @@ export const ConfirmationScreenV2 = () => {
     </div>
   );
 };
-

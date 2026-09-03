@@ -16,6 +16,7 @@ import { ChangePlanFlow } from './components/customer/ChangePlanFlow';
 import { EditPaymentFlow } from './components/customer/EditPaymentFlow';
 import { TermsAndConditionsModal } from './components/customer/TermsAndConditionsModal';
 import { PrivacyPolicyModal } from './components/customer/PrivacyPolicyModal';
+import { CompleteProfileScreen } from './components/customer/CompleteProfileScreen';
 
 import { AdminLayout } from './components/admin/AdminLayout';
 import { AdminDashboard } from './components/admin/AdminDashboard';
@@ -50,6 +51,7 @@ export default function App() {
           {customerScreen === 'PAYMENT' && <JuspayCheckoutModal />}
           {customerScreen === 'CONFIRMATION' && <ConfirmationScreen />}
           {customerScreen === 'CONFIRMATION_V2' && <ConfirmationScreenV2 />}
+          {customerScreen === 'COMPLETE_PROFILE' && <CompleteProfileScreen />}
           {customerScreen === 'DASHBOARD' && <CustomerDashboard />}
           {customerScreen === 'MANAGE_HUB' && <ManageSubscriptionHub />}
           {customerScreen === 'CANCEL_WIZARD' && <CancelSubscriptionFlow />}
