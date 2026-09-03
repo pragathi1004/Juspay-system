@@ -26,6 +26,7 @@ import { PlansManagement } from './components/admin/PlansManagement';
 import { PaymentsMandates } from './components/admin/PaymentsMandates';
 import { CommunicationsCenter } from './components/admin/CommunicationsCenter';
 import { JuspayWebhookLogs } from './components/admin/JuspayWebhookLogs';
+import { CrmPortalDashboard } from './components/admin/CrmPortalDashboard';
 import { YogaChallengeScreen } from './components/customer/YogaChallengeScreen';
 import { YogaOnboardingSurvey } from './components/customer/YogaOnboardingSurvey';
 
@@ -59,6 +60,7 @@ export default function App() {
         /* EXPERIENCE B: ADMIN / OPERATIONS CONSOLE */
         <AdminLayout>
           {adminTab === 'DASHBOARD' && <AdminDashboard />}
+          {adminTab === 'CRM' && <CrmPortalDashboard />}
           {adminTab === 'SUBSCRIPTIONS' && <SubscriptionManagement />}
           {adminTab === 'RENEWALS' && <RenewalsConsole />}
           {adminTab === 'PLANS' && <PlansManagement />}

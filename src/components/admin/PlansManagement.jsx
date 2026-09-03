@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PLAN_SPECS } from '../../data/planSpecs';
 import { CrmAnnounceProgram } from './CrmAnnounceProgram';
-import { CrmPortalDashboard } from './CrmPortalDashboard';
 import { 
   BookOpen, 
   Search, 
@@ -358,25 +357,7 @@ export const PlansManagement = () => {
             <BookOpen size={16} /> Courses Catalog & Mandates
           </button>
 
-          <button
-            type="button"
-            onClick={() => setActiveView('CRM_PORTAL')}
-            style={{
-              padding: '8px 16px',
-              borderRadius: '8px',
-              border: 'none',
-              background: activeView === 'CRM_PORTAL' ? '#0f172a' : '#f1f5f9',
-              color: activeView === 'CRM_PORTAL' ? '#ffffff' : '#475569',
-              fontWeight: 700,
-              fontSize: '0.875rem',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px'
-            }}
-          >
-            <LayoutDashboard size={16} /> Art of Living CRM Portal
-          </button>
+
         </div>
 
         <button
@@ -412,13 +393,7 @@ export const PlansManagement = () => {
         />
       )}
 
-      {/* VIEW: AOL CRM PORTAL HOME */}
-      {activeView === 'CRM_PORTAL' && (
-        <CrmPortalDashboard
-          onNavigateToAnnounce={() => setActiveView('ANNOUNCE')}
-          courses={courses}
-        />
-      )}
+
 
       {/* VIEW: COURSES CATALOG & JUSPAY MAPPING */}
       {activeView === 'CATALOG' && (

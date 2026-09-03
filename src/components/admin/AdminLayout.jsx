@@ -12,7 +12,8 @@ import {
   Search,
   Bell,
   ShieldCheck,
-  ChevronRight
+  ChevronRight,
+  Contact
 } from 'lucide-react';
 
 export const AdminLayout = ({ children }) => {
@@ -20,6 +21,7 @@ export const AdminLayout = ({ children }) => {
 
   const navItems = [
     { id: 'DASHBOARD', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'CRM', label: 'CRM Portal', icon: Contact },
     { id: 'SUBSCRIPTIONS', label: 'Subscriptions', icon: Users },
     { id: 'RENEWALS', label: 'Renewals & Failed Retries', icon: RefreshCw },
     { id: 'PLANS', label: 'Courses', icon: BookOpen },
