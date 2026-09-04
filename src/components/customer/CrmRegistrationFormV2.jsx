@@ -165,61 +165,6 @@ export const CrmRegistrationFormV2 = () => {
                 />
               </div>
 
-              {/* Email */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  value={regForm.email}
-                  onChange={(e) => setRegForm({ ...regForm, email: e.target.value })}
-                  style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#f9fafb', fontSize: '0.95rem' }}
-                  required
-                />
-              </div>
-
-              {/* Age & Postal Code */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                    Age *
-                  </label>
-                  <input
-                    type="number"
-                    value={regForm.age}
-                    onChange={(e) => setRegForm({ ...regForm, age: e.target.value })}
-                    style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '0.95rem' }}
-                    required
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '6px' }}>
-                    Postal Code *
-                  </label>
-                  <input
-                    type="text"
-                    value={regForm.postalCode}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      let computedCityState = regForm.cityState;
-                      if (val === '560082') computedCityState = 'Bengaluru Urban, Karnataka';
-                      else if (val === '110001') computedCityState = 'New Delhi, Delhi';
-                      else if (val === '400001') computedCityState = 'Mumbai, Maharashtra';
-                      else if (val.length === 6) computedCityState = 'India';
-                      else if (val.length === 0) computedCityState = '';
-                      setRegForm({ ...regForm, postalCode: val, cityState: computedCityState });
-                    }}
-                    style={{ width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid #d1d5db', fontSize: '0.95rem' }}
-                    placeholder="e.g. 560082"
-                    required
-                  />
-                  <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '4px' }}>
-                    {regForm.cityState}
-                  </div>
-                </div>
-              </div>
-
 
               {/* Concise Payment Redirect Notice */}
               <p style={{ fontSize: '0.85rem', color: '#4b5563', fontStyle: 'italic', margin: '4px 0 8px 0' }}>

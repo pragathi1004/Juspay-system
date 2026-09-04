@@ -38,24 +38,23 @@ export const YogaOnboardingSurvey = () => {
   };
 
   const handleNext = () => {
-    if (currentStep < 3) {
+    if (currentStep < 2) {
       setCurrentStep(prev => prev + 1);
     } else {
-      // Save survey answers to context and navigate directly to Registration page (CRM_FORM)
+      // Save survey answers to context and navigate directly to DASHBOARD
       setRegForm(prev => ({
         ...prev,
         surveyAnswers: {
           brings: selectedBrings,
-          experience: selectedExperience,
-          dailyTime: selectedTime
+          experience: selectedExperience
         }
       }));
-      setCustomerScreen('CRM_FORM');
+      setCustomerScreen('DASHBOARD');
     }
   };
 
   const handleSkip = () => {
-    if (currentStep < 3) {
+    if (currentStep < 2) {
       setCurrentStep(prev => prev + 1);
     } else {
       // Skip questions and navigate directly to Registration page (DASHBOARD)
@@ -155,7 +154,7 @@ export const YogaOnboardingSurvey = () => {
             style={{ height: '36px', width: 'auto', objectFit: 'contain' }} 
           />
           <div style={{ flex: 1, textAlign: 'right', fontSize: '0.9rem', fontWeight: 700, color: '#b47b2b' }}>
-            {currentStep} / 3
+            {currentStep} / 2
           </div>
         </div>
 
@@ -258,52 +257,7 @@ export const YogaOnboardingSurvey = () => {
           </div>
         )}
 
-        {/* SCREEN 3 / 3: HOW MUCH TIME CAN YOU DEDICATE TO YOGA EACH DAY? */}
-        {currentStep === 3 && (
-          <div>
-            <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '1.5rem', fontWeight: 700, color: '#1a1a1a', textAlign: 'center', marginBottom: '6px', lineHeight: 1.25 }}>
-              How much time can you dedicate to yoga each day?
-            </h1>
-            <p style={{ fontSize: '0.85rem', color: '#666666', textAlign: 'center', marginBottom: '24px', marginTop: 0 }}>
-              Choose what works best for you
-            </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '28px' }}>
-              {timeOptions.map((opt) => {
-                const isSelected = selectedTime === opt.id;
-                return (
-                  <div
-                    key={opt.id}
-                    onClick={() => setSelectedTime(opt.id)}
-                    style={{
-                      padding: '16px 20px',
-                      borderRadius: '16px',
-                      border: isSelected ? '2px solid #e07a1e' : '1px solid #f0e6d8',
-                      background: isSelected ? '#fffbf5' : '#ffffff',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '16px',
-                      transition: 'all 0.15s ease'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Clock size={22} color="#b47b2b" />
-                    </div>
-                    <span style={{ flex: 1, fontSize: '0.98rem', fontWeight: 700, color: '#1a1a1a', textAlign: 'left' }}>
-                      {opt.label}
-                    </span>
-                    {isSelected && (
-                      <div style={{ background: '#e07a1e', color: '#ffffff', borderRadius: '50%', padding: '3px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Check size={12} strokeWidth={3} />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
 
         {/* FOOTER BUTTONS: CONTINUE & SKIP FOR NOW */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>

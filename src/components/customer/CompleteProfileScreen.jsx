@@ -6,13 +6,9 @@ export const CompleteProfileScreen = () => {
   const { regForm, setRegForm, setCustomerScreen } = useApp();
 
   const [formData, setFormData] = useState({
-    firstName: regForm.firstName || '',
-    lastName: regForm.lastName || '',
-    whatsAppNumber: regForm.whatsAppNumber || regForm.phone || '',
     email: regForm.email || '',
     age: regForm.age || '',
-    postalCode: regForm.postalCode || '',
-    language: regForm.language || 'English / Hindi'
+    postalCode: regForm.postalCode || ''
   });
 
   const handleChange = (e) => {
@@ -24,8 +20,7 @@ export const CompleteProfileScreen = () => {
     e.preventDefault();
     setRegForm(prev => ({
       ...prev,
-      ...formData,
-      name: `${formData.firstName} ${formData.lastName}`.trim()
+      ...formData
     }));
     // Route to Personalization (Onboarding Survey)
     setCustomerScreen('ONBOARDING_SURVEY');
@@ -46,51 +41,7 @@ export const CompleteProfileScreen = () => {
 
         <form onSubmit={handleContinue} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#475569', marginBottom: '6px' }}>First Name</label>
-              <div style={{ position: 'relative' }}>
-                <User size={18} color="#94a3b8" style={{ position: 'absolute', left: '12px', top: '12px' }} />
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required
-                  placeholder="First Name"
-                  style={{ width: '100%', padding: '12px 12px 12px 40px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '0.95rem', boxSizing: 'border-box' }}
-                />
-              </div>
-            </div>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#475569', marginBottom: '6px' }}>Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-                placeholder="Last Name"
-                style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '0.95rem', boxSizing: 'border-box' }}
-              />
-            </div>
-          </div>
 
-          <div>
-            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#475569', marginBottom: '6px' }}>WhatsApp Number</label>
-            <div style={{ position: 'relative' }}>
-              <Phone size={18} color="#94a3b8" style={{ position: 'absolute', left: '12px', top: '12px' }} />
-              <input
-                type="tel"
-                name="whatsAppNumber"
-                value={formData.whatsAppNumber}
-                onChange={handleChange}
-                required
-                placeholder="10-digit WhatsApp number"
-                style={{ width: '100%', padding: '12px 12px 12px 40px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '0.95rem', boxSizing: 'border-box' }}
-              />
-            </div>
-          </div>
 
           <div>
             <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#475569', marginBottom: '6px' }}>Email Address</label>
@@ -138,24 +89,7 @@ export const CompleteProfileScreen = () => {
             </div>
           </div>
 
-          <div>
-            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#475569', marginBottom: '6px' }}>Preferred Language</label>
-            <div style={{ position: 'relative' }}>
-              <Globe size={18} color="#94a3b8" style={{ position: 'absolute', left: '12px', top: '12px' }} />
-              <select
-                name="language"
-                value={formData.language}
-                onChange={handleChange}
-                required
-                style={{ width: '100%', padding: '12px 12px 12px 40px', borderRadius: '10px', border: '1px solid #cbd5e1', fontSize: '0.95rem', boxSizing: 'border-box', backgroundColor: '#fff' }}
-              >
-                <option value="English / Hindi">English / Hindi</option>
-                <option value="Malayalam">Malayalam</option>
-                <option value="Gujarati">Gujarati</option>
-                <option value="Kannada">Kannada</option>
-              </select>
-            </div>
-          </div>
+
 
           <div style={{ marginTop: '16px' }}>
             <button
